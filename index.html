@@ -24,7 +24,20 @@
         .zh { font-family: 'Noto Sans SC', sans-serif; }
         
         /* Critical Fix for Visibility */
-        .hidden { display: none !important; }
+        .hidden { 
+            display: none !important; 
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        
+        /* Ensure visible elements are clickable */
+        .absolute:not(.hidden) {
+            pointer-events: auto;
+        }
+        
+        button:not(:disabled) {
+            cursor: pointer;
+        }
 
         /* Paper Effect */
         .cv-paper {
@@ -682,17 +695,36 @@
             switchView(viewId) {
                 // Ensure hidden class is applied robustly
                 ['view-dashboard', 'view-learning', 'view-quiz', 'view-result'].forEach(id => {
-                    document.getElementById(id).classList.add('hidden');
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.classList.add('hidden');
+                        el.style.pointerEvents = 'none';
+                        el.style.visibility = 'hidden';
+                    }
                 });
-                document.getElementById(viewId).classList.remove('hidden');
+                
+                const activeView = document.getElementById(viewId);
+                if (activeView) {
+                    activeView.classList.remove('hidden');
+                    activeView.style.pointerEvents = 'auto';
+                    activeView.style.visibility = 'visible';
+                }
                 window.scrollTo(0,0);
             },
 
             updateSidebar(activeId) {
                 ['sb-home', 'sb-learning', 'sb-quiz'].forEach(id => {
-                    document.getElementById(id).classList.add('hidden');
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.classList.add('hidden');
+                        el.style.pointerEvents = 'none';
+                    }
                 });
-                document.getElementById(activeId).classList.remove('hidden');
+                const activeElement = document.getElementById(activeId);
+                if (activeElement) {
+                    activeElement.classList.remove('hidden');
+                    activeElement.style.pointerEvents = 'auto';
+                }
             },
 
             // --- LEARNING LOGIC ---
