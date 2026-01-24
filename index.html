@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandarin Professional Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        /* Color Palette derived from User Request */
+        :root {
+            --primary: #6A2C3C;   /* Deep Burgundy */
+            --accent: #C0945E;    /* Warm Gold */
+            --bg-body: #e8e8d8;   /* Legacy CSS / Cream */
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-sec: #666666;
+            --border: #e0e0e0;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+        }
+        
+        h1, h2, h3, h4, .font-serif { font-family: 'Merriweather', serif; }
+        .zh { font-family: 'Noto Sans SC', sans-serif; }
+        
+        /* Document Paper Effect */
+        .cv-paper {
+            background-color: var(--bg-card);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+
+        /* Slide Transition */
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+        /* Utility Classes for Dynamic Colors */
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .text-accent { color: var(--accent); }
+        .bg-accent { background-color: var(--accent); }
+        .border-accent { border-color: var(--accent); }
+        .hover-bg-accent:hover { background-color: #a37c4d; } /* Darker Gold */
+        .hover-text-accent:hover { color: var(--accent); }
+    </style>
+</head>
+<body class="h-screen flex items-center justify-center p-0 md:p-6 overflow-hidden">
+
+    <!-- CV Container -->
+    <div class="w-full max-w-6xl h-full md:h-[90vh] bg-white md:rounded shadow-2xl overflow-hidden flex flex-col md:flex-row cv-paper relative">
+        
+        <!-- SIDEBAR (Left Column) -->
+        <aside class="w-full md:w-1/3 bg-[#6A2C3C] text-white p-6 md:p-8 flex flex-col shrink-0 z-20">
+            <!-- Profile / Header -->
+            <div class="mb-8 border-b border-white/20 pb-8">
+                <div class="w-16 h-16 bg-white text-[#6A2C3C] rounded-full flex items-center justify-center text-3xl mb-4 shadow-lg font-bold font-serif">
+                    MN
+                </div>
+                <h1 class="text-2xl md:text-3xl font-serif font-bold tracking-wide mb-1">Mandarin Naqib</h1>
+                <p class="text-[#e8e8d8] text-sm font-light uppercase tracking-widest opacity-80">Professional Course 1.1</p>
+            </div>
+
+            <!-- Stats / "Skills" Section -->
+            <div class="flex-1 space-y-8 overflow-y-auto pr-2">
+                <!-- Navigation -->
+                <div>
+                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Current Module</h3>
+                    <div id="module-indicator" class="flex items-center gap-3 text-white/90">
+                        <i data-lucide="book-open" class="w-5 h-5 text-[#C0945E]"></i>
+                        <span class="text-sm font-medium" id="current-module-text">Introduction</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div id="progress-container" class="opacity-50 transition-opacity duration-300">
+                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Course Progress</h3>
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">
+                            <span class="text-xs font-semibold inline-block text-white/70">Completion</span>
+                            <span class="text-xs font-semibold inline-block text-white/70" id="progress-text">0%</span>
+                        </div>
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-black/20">
+                            <div id="progress-bar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-[#C0945E] transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Stats (Hidden initially) -->
+                <div id="quiz-stats" class="hidden">
+                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Assessment Metrics</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex justify-between border-b border-white/10 pb-2">
+                            <span class="text-white/70">Question</span>
+                            <span class="font-mono text-white"><span id="q-current-side">1</span>/25</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/10 pb-2">
+                            <span class="text-white/70">Time Limit</span>
+                            <span class="font-mono text-[#C0945E]"><span id="timer-text-side">15</span>s</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Contact -->
+            <div class="mt-auto pt-6 text-xs text-white/50 border-t border-white/10">
+                <p>&copy; 2025 Roufan Naqib Learning System</p>
+                <p class="mt-1">Designed with Professional Flair</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT (Right Column) -->
+        <main class="flex-1 bg-white relative flex flex-col h-full overflow-hidden">
+            
+            <!-- VIEW: WELCOME (Summary Section) -->
+            <div id="view-welcome" class="absolute inset-0 z-10 bg-white p-8 md:p-12 flex flex-col justify-center overflow-y-auto">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl font-serif font-black text-[#333333] mb-6 border-l-8 border-[#6A2C3C] pl-6">Professional Summary</h2>
+                    <p class="text-[#666666] text-lg leading-relaxed mb-8 text-justify">
+                        Comprehensive Mandarin learning module designed to bridge the gap between basic greetings and professional etiquette. Focusing on <strong>hierarchical pronouns</strong>, <strong>naming conventions</strong>, and <strong>cultural nuances</strong> in formal introductions.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                        <div class="p-5 border border-[#e0e0e0] rounded-sm hover:border-[#C0945E] transition cursor-default group">
+                            <h4 class="font-bold text-[#333333] mb-2 flex items-center gap-2 group-hover:text-[#6A2C3C] transition-colors">
+                                <i data-lucide="layers" class="w-4 h-4 text-[#C0945E]"></i> Core Competencies
+                            </h4>
+                            <ul class="text-sm text-[#666666] space-y-1 list-disc list-inside">
+                                <li>Formal & Informal Greetings</li>
+                                <li>Chinese Naming Structure</li>
+                                <li>Professional Titles (Lǎo/Xiǎo)</li>
+                                <li>Cultural Etiquette</li>
+                            </ul>
+                        </div>
+                        <div class="p-5 border border-[#e0e0e0] rounded-sm hover:border-[#C0945E] transition cursor-default group">
+                            <h4 class="font-bold text-[#333333] mb-2 flex items-center gap-2 group-hover:text-[#6A2C3C] transition-colors">
+                                <i data-lucide="file-check" class="w-4 h-4 text-[#C0945E]"></i> Certification Goal
+                            </h4>
+                            <ul class="text-sm text-[#666666] space-y-1 list-disc list-inside">
+                                <li>25 Question Assessment</li>
+                                <li>Timed Response Analysis</li>
+                                <li>Proficiency Validation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button onclick="App.startModule()" class="group inline-flex items-center gap-3 px-8 py-4 bg-[#6A2C3C] text-white font-medium text-sm tracking-widest uppercase hover:bg-[#52212e] transition-all active:scale-95 shadow-md">
+                        Start Experience
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#C0945E]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- VIEW: LEARNING (Work Experience Style) -->
+            <div id="view-learning" class="hidden absolute inset-0 flex flex-col bg-white">
+                <!-- Header -->
+                <header class="px-8 py-6 border-b border-[#e0e0e0] flex justify-between items-end bg-white sticky top-0 z-10">
+                    <div>
+                        <h2 class="text-2xl font-serif font-bold text-[#333333]" id="slide-title">Module Title</h2>
+                        <p class="text-sm text-[#666666] font-light" id="slide-subtitle">Subtitle placeholder</p>
+                    </div>
+                    <div class="text-4xl text-[#e8e8d8] font-serif font-bold absolute right-8 top-4 select-none pointer-events-none" id="slide-number">01</div>
+                </header>
+
+                <!-- Content Scroll -->
+                <div id="slide-content" class="flex-1 overflow-y-auto p-8 md:px-12 md:py-8 fade-in text-[#333333]">
+                    <!-- Dynamic Content -->
+                </div>
+
+                <!-- Footer Nav -->
+                <footer class="px-8 py-5 border-t border-[#e0e0e0] flex justify-between items-center bg-[#f9f9f9]">
+                    <button onclick="App.prevSlide()" id="btn-prev" class="text-[#999999] hover:text-[#333333] text-sm font-semibold uppercase tracking-wider flex items-center gap-2 disabled:opacity-30 transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                    </button>
+                    <button onclick="App.nextSlide()" id="btn-next" class="bg-[#C0945E] hover:bg-[#a37c4d] text-white px-6 py-2 text-sm font-medium uppercase tracking-widest shadow-sm hover:shadow flex items-center gap-2 transition-all">
+                        Next Phase <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </footer>
+            </div>
+
+            <!-- VIEW: QUIZ (Assessment Style) -->
+            <div id="view-quiz" class="hidden absolute inset-0 flex flex-col justify-center items-center bg-[#f9f9f9] p-6">
+                <div class="w-full max-w-3xl bg-white shadow-xl border border-[#e0e0e0] p-8 md:p-12 relative fade-in">
+                    
+                    <!-- Timer Line -->
+                    <div class="absolute top-0 left-0 w-full h-1 bg-[#e0e0e0]">
+                        <div id="quiz-timer" class="h-full bg-[#6A2C3C] w-full transition-all duration-1000 ease-linear"></div>
+                    </div>
+
+                    <div class="mb-8">
+                        <span class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-2 block">Assessment Question</span>
+                        <h3 id="quiz-question" class="text-2xl md:text-3xl font-serif font-bold text-[#333333] leading-snug">
+                            Question text goes here?
+                        </h3>
+                    </div>
+
+                    <div id="quiz-options" class="grid grid-cols-1 gap-3">
+                        <!-- Options injected -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: RESULT (Certification Style) -->
+            <div id="view-result" class="hidden absolute inset-0 flex flex-col justify-center items-center bg-white p-8 text-center fade-in">
+                <div class="max-w-lg w-full border-4 border-double border-[#e0e0e0] p-10 outline outline-1 outline-offset-4 outline-[#f0f0f0]">
+                    <div class="w-16 h-16 mx-auto bg-[#6A2C3C] text-white rounded-full flex items-center justify-center text-2xl mb-6 shadow-lg">
+                        <i data-lucide="award" class="w-8 h-8 text-[#C0945E]"></i>
+                    </div>
+                    
+                    <h2 class="text-3xl font-serif font-bold text-[#333333] mb-1">Proficiency Report</h2>
+                    <p class="text-[#666666] text-sm uppercase tracking-widest mb-8">Mandarin 1.1 Assessment</p>
+
+                    <div class="flex justify-center items-baseline gap-2 mb-8">
+                        <span id="final-score" class="text-6xl font-black text-[#6A2C3C]">0</span>
+                        <span class="text-xl text-[#999999] font-serif">/ 100</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 border-t border-b border-[#e0e0e0] py-6 mb-8 text-left">
+                        <div>
+                            <span class="block text-xs text-[#999999] uppercase">Correct</span>
+                            <span id="correct-count" class="text-xl font-bold text-[#C0945E]">0</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-xs text-[#999999] uppercase">Incorrect</span>
+                            <span id="wrong-count" class="text-xl font-bold text-[#6A2C3C]">0</span>
+                        </div>
+                    </div>
+
+                    <button onclick="location.reload()" class="w-full py-3 border border-[#e0e0e0] text-[#666666] hover:bg-[#f9f9f9] hover:text-[#333333] hover:border-[#C0945E] font-medium uppercase text-xs tracking-widest transition-colors">
+                        Retake Assessment
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // --- DATA & CONTENT ---
+        // Same robust content as before, styled for the new layout
+        
+        const slides = [
+            // MODULE 1
+            {
+                type: 'section-header',
+                title: 'Greetings & Pronouns',
+                subtitle: 'Foundational Hierarchy',
+                number: '01',
+                html: `
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+                        <div class="prose">
+                            <h3 class="font-serif text-xl font-bold text-[#333333] mb-4">The Philosophy of "You"</h3>
+                            <p class="text-[#666666] mb-4">In Mandarin professional environments, distinguishing hierarchy is crucial. The language offers two distinct pronouns for the second person.</p>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <span class="bg-[#f0f0f0] p-1 font-serif font-bold text-[#333333] border border-[#e0e0e0] min-w-[40px] text-center">Nǐ</span>
+                                    <div>
+                                        <strong class="block text-[#333333] text-sm">Informal / Neutral</strong>
+                                        <span class="text-[#666666] text-xs">Used for peers, subordinates, or established friends.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="bg-[#6A2C3C]/10 p-1 font-serif font-bold text-[#6A2C3C] border border-[#6A2C3C]/20 min-w-[40px] text-center">Nín</span>
+                                    <div>
+                                        <strong class="block text-[#333333] text-sm">Formal / Polite</strong>
+                                        <span class="text-[#666666] text-xs">Mandatory for superiors, clients, and teachers.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#f9f9f9] p-6 border-l-4 border-[#6A2C3C]">
+                             <h4 class="font-bold text-[#333333] text-sm uppercase mb-3 border-b border-[#e0e0e0] pb-2">Etymological Breakdown</h4>
+                             <div class="text-center py-4">
+                                <div class="zh text-5xl font-black text-[#6A2C3C] mb-2">您</div>
+                                <div class="text-sm font-serif italic text-[#C0945E]">Nín (You + Heart)</div>
+                             </div>
+                             <p class="text-xs text-[#666666] leading-relaxed text-justify">
+                                The character contains <strong class="zh">心</strong> (Heart) at the bottom. This visually represents the concept of "putting the other person above your own heart."
+                             </p>
+                        </div>
+                   </div>
+                `
+            },
+            {
+                type: 'mini-quiz',
+                question: 'Which pronoun indicates professional respect?',
+                number: 'Q1',
+                options: [
+                    { text: 'Nǐ (你)', correct: false },
+                    { text: 'Nín (您)', correct: true },
+                    { text: 'Tā (他)', correct: false }
+                ],
+                feedback: 'Correct. Nín is the requisite form of address for professional respect.'
+            },
+
+            // MODULE 2
+            {
+                type: 'section-header',
+                title: 'Inquiry Protocols',
+                subtitle: 'Asking for Names',
+                number: '02',
+                html: `
+                    <div class="space-y-6">
+                        <p class="text-[#666666] text-sm border-l-2 border-[#C0945E] pl-4">There are two distinct protocols for requesting identification, contingent on the formality of the setting.</p>
+                        
+                        <div class="grid grid-cols-1 gap-4">
+                            <!-- Formal Card -->
+                            <div class="border border-[#e0e0e0] p-5 flex items-start gap-4 hover:shadow-md transition-shadow bg-white hover:border-[#6A2C3C]">
+                                <div class="bg-[#6A2C3C] text-white px-2 py-1 text-xs font-bold uppercase tracking-wider mt-1">Formal</div>
+                                <div class="flex-1">
+                                    <div class="zh text-xl font-bold text-[#333333] mb-1">请问，您贵姓？</div>
+                                    <div class="font-mono text-xs text-[#C0945E] mb-2">Qǐngwèn, nín guì xìng?</div>
+                                    <p class="text-[#666666] text-xs">Lit: "May I ask your <strong>honorable</strong> surname?"</p>
+                                </div>
+                            </div>
+
+                            <!-- Informal Card -->
+                            <div class="border border-[#e0e0e0] p-5 flex items-start gap-4 hover:shadow-md transition-shadow bg-[#f9f9f9]">
+                                <div class="bg-[#999999] text-white px-2 py-1 text-xs font-bold uppercase tracking-wider mt-1">Informal</div>
+                                <div class="flex-1">
+                                    <div class="zh text-xl font-bold text-[#333333] mb-1">你叫什么名字？</div>
+                                    <div class="font-mono text-xs text-[#666666] mb-2">Nǐ jiào shénme míngzi?</div>
+                                    <p class="text-[#666666] text-xs">Lit: "What name are you called?"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#fef2f2] p-4 border border-red-100 text-xs text-[#991b1b]">
+                            <strong>⚠️ Critical Error:</strong> Never apply the honorific <em>Guì</em> (Honorable) to yourself. 
+                            <br>Incorrect: "Wǒ guì xìng Wang." 
+                            <br>Correct: "Wǒ xìng Wang."
+                        </div>
+                    </div>
+                `
+            },
+            {
+                type: 'mini-quiz',
+                question: 'Identify the term meaning "Honorable" or "Expensive".',
+                number: 'Q2',
+                options: [
+                    { text: 'Xìng (姓)', correct: false },
+                    { text: 'Guì (贵)', correct: true },
+                    { text: 'Wèn (问)', correct: false }
+                ],
+                feedback: 'Affirmative. Guì denotes value and status.'
+            },
+
+            // MODULE 3
+            {
+                type: 'section-header',
+                title: 'Nomenclature',
+                subtitle: 'Name Structure & Titles',
+                number: '03',
+                html: `
+                    <div class="flex flex-col h-full">
+                        <div class="flex-1">
+                            <h4 class="font-serif font-bold text-[#333333] mb-6">Structural Logic</h4>
+                            
+                            <!-- Name Structure Diagram -->
+                            <div class="flex items-center mb-8 text-center font-serif">
+                                <div class="flex-1 border-b-2 border-[#6A2C3C] pb-2">
+                                    <span class="block text-xs uppercase tracking-widest text-[#999999] mb-1">Family</span>
+                                    <span class="text-2xl font-bold text-[#333333]">Surname</span>
+                                </div>
+                                <div class="px-4 text-[#C0945E] text-xl">+</div>
+                                <div class="flex-1 border-b-2 border-[#e0e0e0] pb-2">
+                                    <span class="block text-xs uppercase tracking-widest text-[#999999] mb-1">Individual</span>
+                                    <span class="text-xl text-[#666666]">Given Name</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-[#f9f9f9] p-5 border border-[#e0e0e0]">
+                                <h5 class="text-xs font-bold text-[#666666] uppercase mb-3">Professional Addressing Rule</h5>
+                                <p class="text-sm text-[#333333] mb-2">
+                                    Titles follow the surname, adhering to the "Big to Small" logic (Group -> Individual -> Title).
+                                </p>
+                                <div class="flex items-center gap-2 font-mono text-sm">
+                                    <span class="text-[#C0945E]">✔ Wáng Lǎoshī</span>
+                                    <span class="text-[#e0e0e0]">|</span>
+                                    <span class="text-[#999999] line-through">✘ Lǎoshī Wáng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            // MODULE 4
+            {
+                type: 'section-header',
+                title: 'Workplace Colloquialisms',
+                subtitle: 'The Lǎo & Xiǎo System',
+                number: '04',
+                html: `
+                    <p class="text-[#666666] mb-6 text-sm">In established professional relationships, full names may be substituted with familiarity markers based on relative age.</p>
+
+                    <div class="grid grid-cols-2 gap-0 border border-[#e0e0e0]">
+                        <div class="p-6 border-r border-[#e0e0e0] bg-[#f9f9f9]">
+                            <span class="zh text-4xl font-black text-[#e0e0e0] mb-2 block">老</span>
+                            <h4 class="font-serif font-bold text-[#333333]">Lǎo (Old)</h4>
+                            <p class="text-xs text-[#666666] mt-2">Prefix for senior colleagues.</p>
+                            <div class="mt-4 font-mono text-sm font-bold text-[#6A2C3C]">Lǎo + Surname</div>
+                        </div>
+                        <div class="p-6 bg-white">
+                            <span class="zh text-4xl font-black text-[#f0f0f0] mb-2 block">小</span>
+                            <h4 class="font-serif font-bold text-[#333333]">Xiǎo (Small)</h4>
+                            <p class="text-xs text-[#666666] mt-2">Prefix for junior colleagues.</p>
+                            <div class="mt-4 font-mono text-sm font-bold text-[#6A2C3C]">Xiǎo + Surname</div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                type: 'mini-quiz',
+                question: 'Select the appropriate address for a junior colleague named Zhang.',
+                number: 'Q4',
+                options: [
+                    { text: 'Lǎo Zhāng', correct: false },
+                    { text: 'Xiǎo Zhāng', correct: true },
+                    { text: 'Zhāng Xiǎo', correct: false }
+                ],
+                feedback: 'Correct. Xiǎo denotes junior status or younger age.'
+            },
+
+            // MODULE 5: Advanced Expressions
+            {
+                type: 'section-header',
+                title: 'Advanced Etiquette',
+                subtitle: 'Compliments & Diplomacy',
+                number: '05',
+                html: `
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-[#C0945E] pl-4 py-1">
+                            <h4 class="font-bold text-[#333333] text-sm uppercase">Complimenting a Name</h4>
+                            <p class="zh text-xl font-medium text-[#6A2C3C] mt-1">你的名字很好听</p>
+                            <p class="text-xs text-[#666666] font-mono">Nǐ de míngzi hěn hǎotīng (Your name sounds very good)</p>
+                        </div>
+
+                         <div class="border-l-4 border-[#333333] pl-4 py-1">
+                            <h4 class="font-bold text-[#333333] text-sm uppercase">Diplomatic Inquiry</h4>
+                            <p class="zh text-xl font-medium text-[#333333] mt-1">怎么称呼您？</p>
+                            <p class="text-xs text-[#666666] font-mono">Zěnme chēnghu nín? (How should I address you?)</p>
+                            <p class="text-xs text-[#999999] mt-1 italic">Used by service staff or in highly formal introductions.</p>
+                        </div>
+                    </div>
+                `
+            },
+
+            // TRANSITION
+            {
+                type: 'section-header',
+                title: 'Course Completion',
+                subtitle: 'Ready for Assessment',
+                number: 'END',
+                html: `
+                    <div class="flex flex-col items-center justify-center h-full text-center">
+                        <div class="w-20 h-20 border-2 border-[#6A2C3C] text-[#6A2C3C] rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="pen-tool" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif font-bold text-[#333333] mb-2">Didactic Phase Concluded</h3>
+                        <p class="text-[#666666] max-w-sm mb-8 text-sm">
+                            You have reviewed the modules. Proceed to the validation phase to earn your proficiency score.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 text-xs font-bold uppercase tracking-widest text-[#999999] w-full max-w-xs">
+                            <div class="border border-[#e0e0e0] py-3 rounded">25 Queries</div>
+                            <div class="border border-[#e0e0e0] py-3 rounded">Timed</div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        const quizQuestions = [
+            // Standardizing previous questions into 25 items
+            { q: 'Translate: "Nín"', opts: ['Me', 'You (Polite)', 'He', 'Teacher'], ans: 1 },
+            { q: 'Translate: "Nǐ"', opts: ['You (Polite)', 'You (Informal)', 'She', 'We'], ans: 1 },
+            { q: 'Translate: "Wǒ"', opts: ['You', 'He', 'I / Me', 'They'], ans: 2 },
+            { q: 'Formal phrase for asking a surname?', opts: ['Nǐ jiào shénme?', 'Qǐngwèn, nín guì xìng?', 'Nín hǎo.', 'Hěn gāoxìng.'], ans: 1 },
+            { q: 'Informal phrase for asking a name?', opts: ['Nín guì xìng?', 'Nǐ jiào shénme míngzi?', 'Qǐngwèn?', 'Wǒ xìng Wáng.'], ans: 1 },
+            { q: 'Meaning of "Qǐng" (请)?', opts: ['Please', 'Ask', 'Name', 'Expensive'], ans: 0 },
+            { q: 'Meaning of "Wèn" (问)?', opts: ['Please', 'Ask', 'Name', 'Answer'], ans: 1 },
+            { q: 'Meaning of "Lǎoshī" (老师)?', opts: ['Student', 'Teacher', 'Doctor', 'Friend'], ans: 1 },
+            { q: 'Address for Teacher Wang?', opts: ['Lǎoshī Wáng', 'Wáng Lǎoshī', 'Wáng Sir', 'Teacher Wáng'], ans: 1 },
+            { q: 'Chinese Name Structure?', opts: ['Given + Surname', 'Surname + Given', 'Middle + Surname', 'Given Only'], ans: 1 },
+            { q: 'Surname in "Lǐ Xiǎolóng"?', opts: ['Xiǎolóng', 'Xiǎo', 'Lǐ', 'Lóng'], ans: 2 },
+            { q: 'Meaning of "Xìng" (姓)?', opts: ['Given Name', 'Surname', 'Mister', 'Teacher'], ans: 1 },
+            { q: 'Meaning of "Guì" (贵)?', opts: ['Cheap', 'Honorable/Expensive', 'Name', 'Friend'], ans: 1 },
+            { q: 'Meaning of "Míngzi" (名字)?', opts: ['Surname', 'Name', 'Teacher', 'Hello'], ans: 1 },
+            { q: 'Meaning of "Shénme" (什么)?', opts: ['What', 'Who', 'Where', 'When'], ans: 0 },
+            { q: 'Translate: "Nice to meet you"', opts: ['Nǐ jiào shénme?', 'Wǒ xìng Pān.', 'Hěn gāoxìng rènshi nǐ.', 'Nín guì xìng?'], ans: 2 },
+            { q: 'Meaning of "Rènshi" (认识)?', opts: ['Happy', 'To Know/Meet', 'Name', 'Very'], ans: 1 },
+            { q: 'Meaning of "Gāoxìng" (高兴)?', opts: ['Sad', 'Happy/Glad', 'Angry', 'Confused'], ans: 1 },
+            { q: 'Meaning of "Yě" (也)?', opts: ['No', 'Very', 'Also', 'Good'], ans: 2 },
+            { q: 'Correct placement of "Yě"?', opts: ['End of sentence', 'Start of sentence', 'Before Verb/Adj', 'After Verb/Adj'], ans: 2 },
+            { q: 'Address for older colleague Wang?', opts: ['Xiǎo Wáng', 'Lǎo Wáng', 'Wáng Lǎo', 'Wáng Xiǎo'], ans: 1 },
+            { q: 'Meaning of "Xiǎo" (小)?', opts: ['Old', 'Small/Young', 'Teacher', 'Boss'], ans: 1 },
+            { q: '"Nǐ de míngzi hěn hǎotīng" means?', opts: ['What is your name?', 'Your name is nice', 'Write your name', 'Say your name'], ans: 1 },
+            { q: '"Zěnme chēnghu nín" is used when?', opts: ['Talking to a dog', 'Asking address politely', 'Asking time', 'Saying goodbye'], ans: 1 },
+            { q: 'Can you say "Wǒ guì xìng..."?', opts: ['Yes, always', 'No, never', 'Only to boss', 'Only to teacher'], ans: 1 }
+        ];
+
+        // --- APPLICATION ENGINE ---
+
+        const App = {
+            state: {
+                currentSlide: 0,
+                currentQuestion: 0,
+                score: 0,
+                timer: 15,
+                timerInterval: null
+            },
+
+            init() {
+                lucide.createIcons();
+                this.updateModuleIndicator();
+            },
+
+            startModule() {
+                this.showView('view-learning');
+                document.getElementById('progress-container').classList.remove('opacity-50');
+                document.getElementById('progress-container').classList.add('opacity-100');
+                this.renderSlide();
+            },
+
+            showView(viewId) {
+                ['view-welcome', 'view-learning', 'view-quiz', 'view-result'].forEach(id => {
+                    document.getElementById(id).classList.add('hidden');
+                });
+                document.getElementById(viewId).classList.remove('hidden');
+                // Hide/Show Sidebar Quiz Stats
+                if (viewId === 'view-quiz') {
+                    document.getElementById('quiz-stats').classList.remove('hidden');
+                    document.getElementById('progress-container').classList.add('hidden');
+                } else {
+                    document.getElementById('quiz-stats').classList.add('hidden');
+                    if(viewId !== 'view-welcome') document.getElementById('progress-container').classList.remove('hidden');
+                }
+            },
+
+            updateModuleIndicator() {
+                const modName = slides[this.state.currentSlide]?.title || "Assessment";
+                document.getElementById('current-module-text').innerText = modName;
+                
+                // Progress Bar
+                const pct = ((this.state.currentSlide + 1) / slides.length) * 100;
+                document.getElementById('progress-bar').style.width = `${pct}%`;
+                document.getElementById('progress-text').innerText = `${Math.round(pct)}%`;
+            },
+
+            // --- LEARNING RENDERER ---
+
+            renderSlide() {
+                const slide = slides[this.state.currentSlide];
+                const contentDiv = document.getElementById('slide-content');
+                
+                this.updateModuleIndicator();
+
+                // Set Headers
+                document.getElementById('slide-title').innerText = slide.title || "Module";
+                document.getElementById('slide-subtitle').innerText = slide.subtitle || "";
+                document.getElementById('slide-number').innerText = slide.number || "";
+
+                // Button Logic
+                const nextBtn = document.getElementById('btn-next');
+                const prevBtn = document.getElementById('btn-prev');
+                
+                prevBtn.disabled = this.state.currentSlide === 0;
+
+                if (this.state.currentSlide === slides.length - 1) {
+                    nextBtn.innerHTML = `Start Assessment <i data-lucide="file-check" class="w-4 h-4 text-[#C0945E]"></i>`;
+                } else {
+                    nextBtn.innerHTML = `Next Phase <i data-lucide="chevron-right" class="w-4 h-4 text-[#C0945E]"></i>`;
+                }
+
+                // Render HTML
+                let html = slide.html;
+                if (slide.type === 'mini-quiz') {
+                     html = `
+                        <div class="h-full flex flex-col justify-center">
+                            <div class="border-l-4 border-[#6A2C3C] pl-6 py-2 mb-8">
+                                <span class="text-xs font-bold text-[#999999] uppercase tracking-widest">Knowledge Check</span>
+                                <h3 class="text-2xl font-serif font-bold text-[#333333] mt-2">${slide.question}</h3>
+                            </div>
+                            <div class="grid grid-cols-1 gap-3">
+                                ${slide.options.map((opt, idx) => `
+                                    <button onclick="App.checkMiniQuiz(${idx})" class="group flex items-center justify-between w-full p-4 border border-[#e0e0e0] hover:border-[#6A2C3C] hover:bg-[#f9f9f9] transition text-left mq-btn" data-correct="${opt.correct}">
+                                        <span class="font-medium text-[#666666] group-hover:text-[#333333]">${opt.text}</span>
+                                        <i data-lucide="circle" class="w-4 h-4 text-[#d1d5db] group-hover:text-[#6A2C3C]"></i>
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div id="mq-feedback" class="hidden mt-6 p-4 bg-[#6A2C3C] text-white text-sm">
+                                <strong class="uppercase text-xs tracking-widest text-[#C0945E] block mb-1">Feedback</strong>
+                                ${slide.feedback}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                contentDiv.innerHTML = html;
+                lucide.createIcons();
+            },
+
+            checkMiniQuiz(idx) {
+                const slide = slides[this.state.currentSlide];
+                const btns = document.querySelectorAll('.mq-btn');
+                const selectedBtn = btns[idx];
+                const isCorrect = selectedBtn.dataset.correct === 'true';
+
+                btns.forEach(b => {
+                    b.disabled = true;
+                    if(b.dataset.correct === 'true') {
+                        b.classList.add('bg-[#6A2C3C]', 'text-white', 'border-[#6A2C3C]');
+                        b.classList.remove('hover:bg-[#f9f9f9]', 'hover:border-[#6A2C3C]');
+                        b.querySelector('span').classList.remove('group-hover:text-[#333333]', 'text-[#666666]');
+                        b.querySelector('span').classList.add('text-white');
+                        b.querySelector('i').setAttribute('data-lucide', 'check-circle');
+                        b.querySelector('i').classList.remove('text-[#d1d5db]', 'group-hover:text-[#6A2C3C]');
+                        b.querySelector('i').classList.add('text-[#C0945E]');
+                    }
+                });
+
+                if(isCorrect) {
+                     document.getElementById('mq-feedback').classList.remove('hidden');
+                     confetti({ particleCount: 30, spread: 50, origin: { x: 0.7, y: 0.6 }, colors: ['#6A2C3C', '#C0945E'] });
+                } else {
+                     selectedBtn.classList.add('border-red-500', 'text-red-600', 'bg-red-50');
+                     // Auto show correct
+                     document.getElementById('mq-feedback').classList.remove('hidden');
+                }
+                lucide.createIcons();
+            },
+
+            nextSlide() {
+                if (this.state.currentSlide < slides.length - 1) {
+                    this.state.currentSlide++;
+                    this.renderSlide();
+                } else {
+                    this.startQuiz();
+                }
+            },
+
+            prevSlide() {
+                if (this.state.currentSlide > 0) {
+                    this.state.currentSlide--;
+                    this.renderSlide();
+                }
+            },
+
+            // --- QUIZ RENDERER ---
+
+            startQuiz() {
+                this.showView('view-quiz');
+                this.state.currentQuestion = 0;
+                this.state.score = 0;
+                this.renderQuestion();
+            },
+
+            renderQuestion() {
+                const qData = quizQuestions[this.state.currentQuestion];
+                
+                // Sidebar Stats
+                document.getElementById('q-current-side').innerText = this.state.currentQuestion + 1;
+                
+                document.getElementById('quiz-question').innerText = qData.q;
+                
+                const optsContainer = document.getElementById('quiz-options');
+                optsContainer.innerHTML = qData.opts.map((opt, idx) => `
+                    <button onclick="App.handleAnswer(${idx})" class="w-full text-left p-5 border border-[#e0e0e0] hover:border-[#C0945E] hover:shadow-md transition bg-white group quiz-opt-btn flex items-center">
+                        <span class="w-8 h-8 flex items-center justify-center border border-[#d1d5db] text-[#999999] font-serif mr-4 group-hover:border-[#C0945E] group-hover:text-[#C0945E] transition-colors">${String.fromCharCode(65+idx)}</span>
+                        <span class="text-[#666666] font-medium group-hover:text-[#333333] transition-colors">${opt}</span>
+                    </button>
+                `).join('');
+
+                this.startTimer();
+            },
+
+            startTimer() {
+                clearInterval(this.state.timerInterval);
+                this.state.timer = 15;
+                const timerBar = document.getElementById('quiz-timer');
+                const timerText = document.getElementById('timer-text-side');
+                
+                timerBar.style.width = '100%';
+                timerText.innerText = 15;
+
+                this.state.timerInterval = setInterval(() => {
+                    this.state.timer--;
+                    timerText.innerText = this.state.timer;
+                    timerBar.style.width = `${(this.state.timer/15)*100}%`;
+
+                    if(this.state.timer <= 0) {
+                        this.handleAnswer(-1); 
+                    }
+                }, 1000);
+            },
+
+            handleAnswer(idx) {
+                clearInterval(this.state.timerInterval);
+                const qData = quizQuestions[this.state.currentQuestion];
+                const isCorrect = idx === qData.ans;
+                const buttons = document.querySelectorAll('.quiz-opt-btn');
+
+                buttons.forEach((btn, i) => {
+                    btn.disabled = true;
+                    if (i === qData.ans) {
+                        btn.classList.remove('border-[#e0e0e0]');
+                        btn.classList.add('border-[#C0945E]', 'bg-[#fffbf0]');
+                        btn.querySelector('span').classList.add('border-[#C0945E]', 'text-[#C0945E]', 'font-bold');
+                        btn.querySelector('span').classList.remove('border-[#d1d5db]', 'text-[#999999]');
+                    } else if (i === idx && !isCorrect) {
+                        btn.classList.remove('border-[#e0e0e0]');
+                        btn.classList.add('border-red-600', 'bg-red-50');
+                        btn.querySelector('span').classList.add('border-red-600', 'text-red-600');
+                         btn.querySelector('span').classList.remove('border-[#d1d5db]', 'text-[#999999]');
+                    } else {
+                        btn.classList.add('opacity-40');
+                    }
+                });
+
+                if (isCorrect) this.state.score++;
+
+                setTimeout(() => {
+                    if (this.state.currentQuestion < quizQuestions.length - 1) {
+                        this.state.currentQuestion++;
+                        this.renderQuestion();
+                    } else {
+                        this.showResult();
+                    }
+                }, 1200);
+            },
+
+            showResult() {
+                this.showView('view-result');
+                const finalScore = Math.round((this.state.score / quizQuestions.length) * 100);
+                
+                // Animate Score
+                let display = 0;
+                const interval = setInterval(() => {
+                    if (display < finalScore) {
+                        display++;
+                        document.getElementById('final-score').innerText = display;
+                    } else {
+                        clearInterval(interval);
+                        if (finalScore >= 80) confetti({ particleCount: 200, spread: 100, colors: ['#6A2C3C', '#C0945E'] });
+                    }
+                }, 20);
+
+                document.getElementById('correct-count').innerText = this.state.score;
+                document.getElementById('wrong-count').innerText = quizQuestions.length - this.state.score;
+            }
+        };
+
+        App.init();
+
+    </script>
+</body>
+</html>
