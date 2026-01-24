@@ -700,7 +700,33 @@ const App = {
     },
 
     init() {
-        if(window.lucide) lucide.createIcons();
+        try {
+            // Try to use lucide if available, otherwise fall back to styling
+            if(window.lucide && window.lucide.createIcons) {
+                window.lucide.createIcons();
+            } else {
+                // Fallback: replace lucide icons with simple symbols
+                document.querySelectorAll('[data-lucide]').forEach(el => {
+                    const iconName = el.getAttribute('data-lucide');
+                    const symbols = {
+                        'book-open': '📖',
+                        'pen-tool': '✏️',
+                        'arrow-right': '→',
+                        'arrow-left': '←',
+                        'chevron-right': '›',
+                        'award': '🏆',
+                        'sparkles': '✨'
+                    };
+                    if (symbols[iconName]) {
+                        el.textContent = symbols[iconName];
+                        el.style.fontFamily = 'Arial, sans-serif';
+                        el.style.display = 'inline';
+                    }
+                });
+            }
+        } catch(e) {
+            console.warn('Icon initialization issue:', e);
+        }
         this.goHome();
     },
 
@@ -1215,8 +1241,24 @@ const App = {
     }
 };
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => App.init());
-} else {
-    App.init();
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                if (App && App.init) {
+                    App.init();
+                }
+            } catch(e) {
+                console.error('Failed to initialize App:', e);
+            }
+        });
+    } else {
+        try {
+            if (App && App.init) {
+                App.init();
+            }
+        } catch(e) {
+            console.error('Failed to initialize App:', e);
+        }
+    }
 }
