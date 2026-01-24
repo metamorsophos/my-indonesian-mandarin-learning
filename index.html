@@ -179,15 +179,35 @@
                             </span>
                         </div>
 
-                        <div onclick="App.startQuiz()" class="group cursor-pointer border border-[#e0e0e0] p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-white relative">
+                        <div class="group border border-[#e0e0e0] p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-white relative">
                             <div class="w-12 h-12 bg-white border-2 border-[#6A2C3C] text-[#6A2C3C] flex items-center justify-center rounded-full mb-4 group-hover:bg-[#6A2C3C] group-hover:text-white transition-colors">
                                 <i data-lucide="pen-tool" class="w-6 h-6"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-[#333333] mb-2 font-serif group-hover:text-[#6A2C3C]">Validation Phase</h3>
-                            <p class="text-sm text-[#666666] mb-4">Timed assessment to verify your proficiency in formal introductions.</p>
-                            <span class="text-xs font-bold text-[#C0945E] uppercase tracking-widest flex items-center gap-2">
-                                Take Assessment <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </span>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-[#333333] font-serif group-hover:text-[#6A2C3C]">Assessment Arena</h3>
+                                <span class="text-[10px] font-mono bg-[#f3f3f3] px-2 py-1 rounded text-[#6A2C3C]">New Modes</span>
+                            </div>
+                            <p class="text-sm text-[#666666] mb-4">Pick a difficulty, then face mixed question types: multiple choice, drag-and-drop ordering, and matching pairs.</p>
+
+                            <div class="space-y-3 text-sm">
+                                <label class="flex items-center justify-between gap-3">
+                                    <span class="text-[#333333] font-semibold">Mode</span>
+                                    <select id="mode-select" class="border border-[#e0e0e0] rounded px-2 py-1 text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="practice">Practice (infinite)</option>
+                                        <option value="easy">Easy (5 hearts)</option>
+                                        <option value="medium">Medium (3 hearts)</option>
+                                        <option value="hard">Hard (1 heart)</option>
+                                        <option value="deathmarch">Deathmarch (1 heart, 3x streak)</option>
+                                    </select>
+                                </label>
+                                <div class="text-xs text-[#666666] leading-relaxed bg-[#fafafa] border border-[#e0e0e0] rounded p-3">
+                                    <strong class="text-[#6A2C3C]">Hearts:</strong> Lose one on a wrong answer (except Practice). In Deathmarch, keep a 3-correct streak or restart.
+                                </div>
+                            </div>
+
+                            <button onclick="App.startQuiz()" class="mt-4 inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-4 py-2 rounded shadow hover:bg-[#52212e] transition-all">
+                                Start Assessment <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -216,7 +236,17 @@
             </div>
 
             <div id="view-quiz" class="hidden absolute inset-0 flex flex-col justify-center items-center bg-[#f9f9f9] p-6">
-                <div class="w-full max-w-3xl bg-white shadow-xl border border-[#e0e0e0] p-8 md:p-12 relative fade-in rounded-sm">
+                <div class="w-full max-w-3xl bg-white shadow-xl border border-[#e0e0e0] p-8 md:p-12 relative fade-in rounded-sm space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#f0f0f0] pb-4">
+                        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#6A2C3C]">
+                            <span class="px-2 py-1 bg-[#fdf6f0] border border-[#f3e4d6] rounded" id="mode-badge">Mode: Practice</span>
+                            <span class="px-2 py-1 bg-[#eef2ff] border border-[#dfe3ff] text-[#374151] rounded" id="question-count">0 / 0</span>
+                        </div>
+                        <div class="flex items-center gap-2" id="hearts-wrap">
+                            <span class="text-xs font-semibold text-[#666666]">Hearts:</span>
+                            <div class="flex items-center gap-1" id="hearts-container"></div>
+                        </div>
+                    </div>
                     <div class="mb-8">
                         <span class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-2 block">Question <span id="q-number-quiz">1</span></span>
                         <h3 id="quiz-question" class="text-2xl md:text-3xl font-serif font-bold text-[#333333] leading-snug">
@@ -226,6 +256,10 @@
 
                     <div id="quiz-options" class="grid grid-cols-1 gap-3">
                         </div>
+                    <div id="interactive-actions" class="hidden mt-4 flex items-center justify-between gap-3">
+                        <div class="text-xs text-[#666666]" id="interactive-hint"></div>
+                        <button onclick="App.submitInteractiveAnswer()" class="px-4 py-2 bg-[#6A2C3C] text-white rounded text-xs uppercase tracking-widest hover:bg-[#52212e] transition shadow" id="interactive-submit">Submit Answer</button>
+                    </div>
                 </div>
             </div>
 
@@ -639,19 +673,37 @@
             }
         ];
 
-        const quizQuestions = [
-            { q: 'What is the formal way to say "You"?', opts: ['Nǐ (你)', 'Nín (您)', 'Tā (他)', 'Wǒ (我)'], ans: 1 },
-            { q: 'Which phrase means "May I ask your honorable surname?"', opts: ['Nǐ jiào shénme?', 'Qǐngwèn, nín guì xìng?', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
-            { q: 'What is the correct order? "I am also very happy."', opts: ['Wǒ hěn gāoxìng yě.', 'Wǒ yě hěn gāoxìng.', 'Yě wǒ hěn gāoxìng.', 'Wǒ hěn yě gāoxìng.'], ans: 1 },
-            { q: 'What does "Guì" (贵) mean literally?', opts: ['Expensive/Honorable', 'Name', 'Teacher', 'Please'], ans: 0 },
-            { q: 'How do you say "Teacher Pan"?', opts: ['Lǎoshī Pān', 'Pān Lǎoshī', 'Teacher Pān', 'Mr. Pān'], ans: 1 },
-            { q: 'Which word indicates a question or "to ask"?', opts: ['Qǐng (请)', 'Wèn (问)', 'Jiào (叫)', 'Xìng (姓)'], ans: 1 },
-            { q: 'Translate: "Hěn gāoxìng rènshi nín."', opts: ['What is your name?', 'Nice to meet you (formal)', 'Are you a teacher?', 'My surname is Pan'], ans: 1 },
-            { q: 'What is the verb "to be called"?', opts: ['Xìng', 'Jiào', 'Míngzi', 'Shénme'], ans: 1 },
-            { q: 'Can you use "Guì" (Honorable) for your own surname?', opts: ['Yes', 'No', 'Only on Sundays', 'Only to subordinates'], ans: 1 },
-            { q: 'What comes first in a Chinese name?', opts: ['Given Name', 'Middle Name', 'Surname', 'Title'], ans: 2 },
-            { q: 'The character Nín (您) contains which radical?', opts: ['Water', 'Fire', 'Heart', 'Wood'], ans: 2 },
-            { q: 'Translate: "Wǒ hěn gāoxìng"', opts: ['I am happy', 'You are happy', 'He is happy', 'We are happy'], ans: 0 }
+        const quizBank = [
+            { type: 'multi', q: 'What is the formal way to say "You"?', opts: ['Nǐ (你)', 'Nín (您)', 'Tā (他)', 'Wǒ (我)'], ans: 1 },
+            { type: 'multi', q: 'Which phrase means "May I ask your honorable surname?"', opts: ['Nǐ jiào shénme?', 'Qǐngwèn, nín guì xìng?', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
+            { type: 'multi', q: 'Correct order for "I am also very happy."', opts: ['Wǒ hěn gāoxìng yě.', 'Wǒ yě hěn gāoxìng.', 'Yě wǒ hěn gāoxìng.', 'Wǒ hěn yě gāoxìng.'], ans: 1 },
+            { type: 'multi', q: 'What does "Guì" (贵) mean literally?', opts: ['Expensive/Honorable', 'Name', 'Teacher', 'Please'], ans: 0 },
+            { type: 'multi', q: 'How do you say "Teacher Pan"?', opts: ['Lǎoshī Pān', 'Pān Lǎoshī', 'Teacher Pān', 'Mr. Pān'], ans: 1 },
+            { type: 'multi', q: 'Which word indicates a question or "to ask"?', opts: ['Qǐng (请)', 'Wèn (问)', 'Jiào (叫)', 'Xìng (姓)'], ans: 1 },
+            { type: 'multi', q: 'Translate: "Hěn gāoxìng rènshi nín."', opts: ['What is your name?', 'Nice to meet you (formal)', 'Are you a teacher?', 'My surname is Pan'], ans: 1 },
+            { type: 'multi', q: 'What is the verb "to be called"?', opts: ['Xìng', 'Jiào', 'Míngzi', 'Shénme'], ans: 1 },
+            { type: 'multi', q: 'Can you use "Guì" (Honorable) for your own surname?', opts: ['Yes', 'No', 'Only on Sundays', 'Only to subordinates'], ans: 1 },
+            { type: 'multi', q: 'What comes first in a Chinese name?', opts: ['Given Name', 'Middle Name', 'Surname', 'Title'], ans: 2 },
+            { type: 'multi', q: 'The character Nín (您) contains which radical?', opts: ['Water', 'Fire', 'Heart', 'Wood'], ans: 2 },
+            { type: 'multi', q: 'Translate: "Wǒ hěn gāoxìng"', opts: ['I am happy', 'You are happy', 'He is happy', 'We are happy'], ans: 0 },
+            { type: 'multi', q: 'Which component creates the formal Nín (您)?', opts: ['Kǒu (Mouth)', 'Xīn (Heart)', 'Mù (Eye)', 'Shǒu (Hand)'], ans: 1 },
+            { type: 'multi', q: 'Pick the polite reply to "Qǐngwèn, nín guì xìng?"', opts: ['Wǒ jiào Lǐ Míng.', 'Wǒ xìng Lǐ.', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
+            { type: 'multi', q: 'Select the correct order for a formal introduction.', opts: ['Given Name → Title → Surname', 'Surname → Title → Given Name', 'Title → Surname → Given Name', 'Title → Given Name → Surname'], ans: 1 },
+            { type: 'multi', q: 'Which adverb means "also"?', opts: ['Hěn (很)', 'Yě (也)', 'Rènshi (认识)', 'Míngzi (名字)'], ans: 1 },
+            { type: 'drag-order', q: 'Arrange the polite question: "Qǐngwèn, nín guì xìng?"', items: ['请', '问，', '您', '贵', '姓', '？'], answer: ['请', '问，', '您', '贵', '姓', '？'] },
+            { type: 'drag-order', q: 'Arrange the self-introduction: "Wǒ jiào Lǐ Míng."', items: ['我', '叫', '李', '明', '。'], answer: ['我', '叫', '李', '明', '。'] },
+            { type: 'match', q: 'Match the title to its meaning.', pairs: [
+                { left: '老师', right: 'Teacher' },
+                { left: '先生', right: 'Mr.' },
+                { left: '女士', right: 'Ms./Mrs.' },
+                { left: '同学', right: 'Classmate' }
+            ]},
+            { type: 'match', q: 'Match the Mandarin to English meaning.', pairs: [
+                { left: '认识', right: 'To meet/know' },
+                { left: '很高兴', right: 'Very happy' },
+                { left: '名字', right: 'Name' },
+                { left: '请', right: 'Please' }
+            ]}
         ];
 
         // --- ENGINE ---
@@ -663,7 +715,11 @@
                 qIdx: 0,
                 score: 0,
                 timer: 15,
-                timerInterval: null
+                timerInterval: null,
+                mode: 'practice',
+                hearts: Infinity,
+                streak: 0,
+                questions: []
             },
 
             init() {
@@ -685,10 +741,22 @@
             },
 
             startQuiz() {
-                this.switchView('view-quiz');
-                this.updateSidebar('sb-quiz');
+                const modeSelect = document.getElementById('mode-select');
+                const selectedMode = modeSelect ? modeSelect.value : 'practice';
+                const cfg = this.getModeConfig(selectedMode);
+
+                this.state.mode = selectedMode;
+                this.state.hearts = cfg.hearts;
                 this.state.qIdx = 0;
                 this.state.score = 0;
+                this.state.streak = 0;
+                this.state.questions = this.shuffle(quizBank);
+
+                this.switchView('view-quiz');
+                this.updateSidebar('sb-quiz');
+                this.updateHeartsUI();
+                this.updateModeBadge();
+                this.updateQuestionCount();
                 this.renderQuizQuestion();
             },
 
@@ -725,6 +793,55 @@
                     activeElement.classList.remove('hidden');
                     activeElement.style.pointerEvents = 'auto';
                 }
+            },
+
+            getModeConfig(mode) {
+                const modes = {
+                    practice: { hearts: Infinity, label: 'Practice' },
+                    easy: { hearts: 5, label: 'Easy' },
+                    medium: { hearts: 3, label: 'Medium' },
+                    hard: { hearts: 1, label: 'Hard' },
+                    deathmarch: { hearts: 1, label: 'Deathmarch' }
+                };
+                return modes[mode] || modes.practice;
+            },
+
+            shuffle(arr) {
+                const a = [...arr];
+                for (let i = a.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [a[i], a[j]] = [a[j], a[i]];
+                }
+                return a;
+            },
+
+            updateHeartsUI() {
+                const wrap = document.getElementById('hearts-wrap');
+                const container = document.getElementById('hearts-container');
+                if (!wrap || !container) return;
+                if (this.state.mode === 'practice') {
+                    wrap.classList.add('hidden');
+                    return;
+                }
+                wrap.classList.remove('hidden');
+                container.innerHTML = '';
+                const hearts = this.state.hearts;
+                for (let i = 0; i < hearts; i++) {
+                    const span = document.createElement('span');
+                    span.textContent = '❤';
+                    span.className = 'text-[#C0945E] text-lg';
+                    container.appendChild(span);
+                }
+            },
+
+            updateModeBadge() {
+                const badge = document.getElementById('mode-badge');
+                if (badge) badge.textContent = `Mode: ${this.getModeConfig(this.state.mode).label}`;
+            },
+
+            updateQuestionCount() {
+                const qc = document.getElementById('question-count');
+                if (qc) qc.textContent = `${this.state.qIdx + 1} / ${this.state.questions.length}`;
             },
 
             // --- LEARNING LOGIC ---
@@ -828,18 +945,64 @@
 
             // --- QUIZ LOGIC ---
             renderQuizQuestion() {
-                const q = quizQuestions[this.state.qIdx];
-                document.getElementById('q-current-side').innerText = this.state.qIdx + 1;
-                document.getElementById('quiz-question').innerText = q.q;
-                
+                const q = this.state.questions[this.state.qIdx];
                 const optsDiv = document.getElementById('quiz-options');
-                optsDiv.innerHTML = q.opts.map((opt, i) => `
-                    <button onclick="App.handleQuizAnswer(${i})" class="w-full text-left p-5 border border-[#e0e0e0] hover:border-[#C0945E] hover:shadow-md transition bg-white group quiz-opt-btn flex items-center slide-up rounded" style="animation-delay: ${i*0.05}s">
-                        <span class="w-8 h-8 flex items-center justify-center border border-[#d1d5db] text-[#999999] font-serif mr-4 group-hover:border-[#C0945E] group-hover:text-[#C0945E] transition-colors rounded-full">${String.fromCharCode(65+i)}</span>
-                        <span class="text-[#666666] font-medium group-hover:text-[#333333] transition-colors">${opt}</span>
-                    </button>
-                `).join('');
+                const actions = document.getElementById('interactive-actions');
+                const hint = document.getElementById('interactive-hint');
+                document.getElementById('q-current-side').innerText = this.state.qIdx + 1;
+                document.getElementById('q-number-quiz').innerText = this.state.qIdx + 1;
+                document.getElementById('quiz-question').innerText = q.q;
+                this.updateQuestionCount();
 
+                optsDiv.innerHTML = '';
+                actions.classList.add('hidden');
+                hint.textContent = '';
+                const submitBtn = document.getElementById('interactive-submit');
+                if (submitBtn) submitBtn.disabled = false;
+
+                if (q.type === 'multi') {
+                    optsDiv.innerHTML = q.opts.map((opt, i) => `
+                        <button onclick="App.handleQuizAnswer(${i})" class="w-full text-left p-5 border border-[#e0e0e0] hover:border-[#C0945E] hover:shadow-md transition bg-white group quiz-opt-btn flex items-center slide-up rounded" style="animation-delay: ${i*0.05}s">
+                            <span class="w-8 h-8 flex items-center justify-center border border-[#d1d5db] text-[#999999] font-serif mr-4 group-hover:border-[#C0945E] group-hover:text-[#C0945E] transition-colors rounded-full">${String.fromCharCode(65+i)}</span>
+                            <span class="text-[#666666] font-medium group-hover:text-[#333333] transition-colors">${opt}</span>
+                        </button>
+                    `).join('');
+                }
+
+                if (q.type === 'drag-order') {
+                    const shuffledItems = this.shuffle(q.items);
+                    optsDiv.innerHTML = `
+                        <div class="text-sm text-[#666666] mb-2">Drag the tiles to form the correct sentence order.</div>
+                        <div id="drag-list" class="flex flex-wrap gap-2 bg-[#f9f9f9] border border-[#e0e0e0] p-3 rounded">
+                            ${shuffledItems.map(item => `<div class="drag-item cursor-move px-3 py-2 bg-white border border-[#e0e0e0] rounded shadow-sm" draggable="true" data-key="${item}">${item}</div>`).join('')}
+                        </div>
+                    `;
+                    actions.classList.remove('hidden');
+                    hint.textContent = 'Ensure the polite structure is perfectly ordered.';
+                    this.bindDragAndDrop();
+                }
+
+                if (q.type === 'match') {
+                    const rights = this.shuffle(q.pairs.map(p => p.right));
+                    optsDiv.innerHTML = `
+                        <div class="text-sm text-[#666666] mb-3">Match each left term to its correct meaning on the right.</div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${q.pairs.map(pair => `
+                                <div class="p-3 border border-[#e0e0e0] rounded bg-[#fafafa] flex items-center justify-between gap-3">
+                                    <span class="font-serif text-[#333333]">${pair.left}</span>
+                                    <select class="match-select border border-[#d1d5db] rounded px-2 py-1 text-sm" data-left="${pair.left}">
+                                        <option value="">Select</option>
+                                        ${rights.map(r => `<option value="${r}">${r}</option>`).join('')}
+                                    </select>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    actions.classList.remove('hidden');
+                    hint.textContent = 'Every left term must map to the correct right meaning.';
+                }
+
+                this.state.currentQuestion = q;
                 this.startTimer();
             },
 
@@ -865,7 +1028,7 @@
 
             handleQuizAnswer(idx) {
                 clearInterval(this.state.timerInterval);
-                const q = quizQuestions[this.state.qIdx];
+                const q = this.state.questions[this.state.qIdx];
                 const isCorrect = idx === q.ans;
                 
                 const btns = document.querySelectorAll('.quiz-opt-btn');
@@ -882,21 +1045,124 @@
                     }
                 });
 
-                if(isCorrect) this.state.score++;
-
                 setTimeout(() => {
-                    if(this.state.qIdx < quizQuestions.length - 1) {
-                        this.state.qIdx++;
-                        this.renderQuizQuestion();
-                    } else {
-                        this.showResults();
+                    this.applyAnswerResult(isCorrect);
+                }, 800);
+            },
+
+            bindDragAndDrop() {
+                const list = document.getElementById('drag-list');
+                if (!list) return;
+                const items = list.querySelectorAll('.drag-item');
+                let dragSrc = null;
+
+                items.forEach(item => {
+                    item.addEventListener('dragstart', function (e) {
+                        dragSrc = this;
+                        this.classList.add('opacity-60');
+                        e.dataTransfer.effectAllowed = 'move';
+                    });
+                    item.addEventListener('dragover', function (e) {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                    });
+                    item.addEventListener('drop', function (e) {
+                        e.preventDefault();
+                        if (!dragSrc || dragSrc === this) return;
+                        const nodes = Array.from(list.children);
+                        const srcIndex = nodes.indexOf(dragSrc);
+                        const destIndex = nodes.indexOf(this);
+                        if (srcIndex < destIndex) {
+                            list.insertBefore(dragSrc, this.nextSibling);
+                        } else {
+                            list.insertBefore(dragSrc, this);
+                        }
+                    });
+                    item.addEventListener('dragend', function () {
+                        this.classList.remove('opacity-60');
+                    });
+                });
+            },
+
+            submitInteractiveAnswer() {
+                clearInterval(this.state.timerInterval);
+                const q = this.state.currentQuestion;
+                if (!q) return;
+
+                const submitBtn = document.getElementById('interactive-submit');
+                if (submitBtn) submitBtn.disabled = true;
+
+                if (q.type === 'drag-order') {
+                    const list = document.getElementById('drag-list');
+                    if (!list) return;
+                    const userOrder = Array.from(list.querySelectorAll('.drag-item')).map(el => el.dataset.key);
+                    const isCorrect = JSON.stringify(userOrder) === JSON.stringify(q.answer);
+                    this.applyAnswerResult(isCorrect);
+                    return;
+                }
+
+                if (q.type === 'match') {
+                    const selects = document.querySelectorAll('.match-select');
+                    const map = new Map(q.pairs.map(p => [p.left, p.right]));
+                    let isCorrect = true;
+                    selects.forEach(sel => {
+                        if (sel.value !== map.get(sel.dataset.left)) isCorrect = false;
+                    });
+                    this.applyAnswerResult(isCorrect);
+                }
+            },
+
+            applyAnswerResult(isCorrect) {
+                if (isCorrect) {
+                    this.state.score++;
+                    if (this.state.mode === 'deathmarch') {
+                        this.state.streak++;
                     }
-                }, 1200);
+                } else {
+                    this.state.streak = 0;
+                    if (this.state.mode !== 'practice') {
+                        this.state.hearts -= 1;
+                        this.updateHeartsUI();
+                        if (this.state.hearts <= 0) {
+                            this.restartQuiz('Out of hearts. Retake required.');
+                            return;
+                        }
+                    }
+                }
+
+                const atEnd = this.state.qIdx >= this.state.questions.length - 1;
+
+                if (atEnd) {
+                    if (this.state.mode === 'deathmarch' && this.state.streak < 3) {
+                        this.restartQuiz('Deathmarch requires a 3-correct streak. Restarting.');
+                        return;
+                    }
+                    this.showResults();
+                } else {
+                    this.state.qIdx++;
+                    this.updateQuestionCount();
+                    this.renderQuizQuestion();
+                }
+            },
+
+            restartQuiz(reason = 'Restarting quiz') {
+                alert(reason);
+                const cfg = this.getModeConfig(this.state.mode);
+                this.state.hearts = cfg.hearts;
+                this.state.streak = 0;
+                this.state.score = 0;
+                this.state.qIdx = 0;
+                this.state.questions = this.shuffle(quizBank);
+                this.updateHeartsUI();
+                this.updateModeBadge();
+                this.updateQuestionCount();
+                this.renderQuizQuestion();
             },
 
             showResults() {
                 this.switchView('view-result');
-                const final = Math.round((this.state.score / quizQuestions.length) * 100);
+                const total = this.state.questions.length || 1;
+                const final = Math.round((this.state.score / total) * 100);
                 
                 // Count Animation
                 let d = 0;
@@ -913,7 +1179,7 @@
                 }, 20);
 
                 document.getElementById('correct-count').innerText = this.state.score;
-                document.getElementById('wrong-count').innerText = quizQuestions.length - this.state.score;
+                document.getElementById('wrong-count').innerText = total - this.state.score;
             }
         };
 
