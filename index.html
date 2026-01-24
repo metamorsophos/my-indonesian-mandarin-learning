@@ -86,17 +86,17 @@
         .g-block { padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-0 md:p-6 overflow-x-hidden overflow-y-auto">
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-x-hidden overflow-y-auto">
 
-    <div class="w-full max-w-6xl h-auto md:h-[90vh] bg-white md:rounded shadow-2xl overflow-visible md:overflow-hidden flex flex-col md:flex-row cv-paper relative">
+    <div class="w-full h-auto md:h-[90vh] bg-white md:rounded shadow-2xl overflow-visible md:overflow-hidden flex flex-col md:flex-row cv-paper relative">
         
-        <aside class="w-full md:w-1/3 bg-[#6A2C3C] text-white p-6 md:p-8 flex flex-col shrink-0 z-50 shadow-lg relative">
-            <div class="mb-8 border-b border-white/20 pb-8">
-                <div class="w-16 h-16 bg-white text-[#6A2C3C] rounded-full flex items-center justify-center text-3xl mb-4 shadow-lg font-bold font-serif cursor-pointer hover:scale-105 transition" onclick="App.goHome()">
+        <aside class="w-full md:w-1/3 bg-[#6A2C3C] text-white p-4 sm:p-6 md:p-8 flex flex-col shrink-0 z-50 shadow-lg relative max-h-[40vh] md:max-h-none">
+            <div class="mb-4 sm:mb-6 md:mb-8 border-b border-white/20 pb-4 sm:pb-6 md:pb-8">
+                <div class="w-12 sm:w-14 h-12 sm:h-14 md:w-16 md:h-16 bg-white text-[#6A2C3C] rounded-full flex items-center justify-center text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 shadow-lg font-bold font-serif cursor-pointer hover:scale-105 transition" onclick="App.goHome()">
                     MN
                 </div>
-                <h1 class="text-2xl md:text-3xl font-serif font-bold tracking-wide mb-1">Mandarin Naqib</h1>
-                <p class="text-[#e8e8d8] text-xs font-light uppercase tracking-widest opacity-80">Module 1.2: Introduction</p>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-wide mb-1">Mandarin Naqib</h1>
+                <p class="text-[#e8e8d8] text-[10px] sm:text-xs font-light uppercase tracking-widest opacity-80">Module 1.2: Introduction</p>
             </div>
 
             <div class="flex-1 space-y-8 overflow-y-auto pr-2 relative">
@@ -159,51 +159,77 @@
 
         <main class="flex-1 bg-white relative flex flex-col h-full overflow-visible">
             
-            <div id="view-dashboard" class="absolute inset-0 bg-white p-8 md:p-16 flex flex-col justify-center overflow-y-auto fade-in">
-                <div class="max-w-3xl mx-auto w-full relative z-10">
-                    <span class="text-[#C0945E] font-bold tracking-widest uppercase text-xs mb-2 block">Professional Course 1.2</span>
-                    <h2 class="text-4xl md:text-5xl font-serif font-black text-[#333333] mb-6">Introduction & <br>Asking Names</h2>
-                    <p class="text-[#666666] text-lg leading-relaxed mb-10 max-w-xl">
+            <div id="view-dashboard" class="absolute inset-0 bg-white p-4 sm:p-6 md:p-8 lg:p-16 flex flex-col justify-center overflow-y-auto fade-in">
+                <div class="w-full relative z-10">
+                    <span class="text-[#C0945E] font-bold tracking-widest uppercase text-[10px] sm:text-xs mb-2 block">Professional Course 1.2</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-black text-[#333333] mb-4 sm:mb-6">Introduction & <br>Asking Names</h2>
+                    <p class="text-[#666666] text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 md:mb-10">
                         A structured approach to Mandarin etiquette. Learn the philosophy behind formal pronouns, essential vocabulary, sentence structure, and the hierarchy of introductions.
                     </p>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div onclick="App.startModule()" class="group cursor-pointer border border-[#e0e0e0] p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-[#fafafa] relative">
-                            <div class="w-12 h-12 bg-[#6A2C3C] text-white flex items-center justify-center rounded-full mb-4 group-hover:scale-110 transition-transform">
-                                <i data-lucide="book-open" class="w-6 h-6"></i>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                        <div class="group border border-[#e0e0e0] p-4 sm:p-5 md:p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-[#fafafa] relative rounded-sm">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#6A2C3C] text-white flex items-center justify-center rounded-full mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="book-open" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-[#333333] mb-2 font-serif group-hover:text-[#6A2C3C]">Didactic Phase</h3>
-                            <p class="text-sm text-[#666666] mb-4">Interactive slides covering etymology, vocabulary, grammar logic, and titles.</p>
-                            <div class="space-y-2 text-sm mb-4">
+                            <h3 class="text-lg sm:text-xl font-bold text-[#333333] mb-2 font-serif group-hover:text-[#6A2C3C]">Didactic Phase</h3>
+                            <p class="text-xs sm:text-sm text-[#666666] mb-3 sm:mb-4">Interactive slides covering etymology, vocabulary, grammar logic, and titles.</p>
+                            <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm mb-3 sm:mb-4">
                                 <label class="flex flex-col gap-1">
-                                    <span class="text-[#333333] font-semibold">Learning Focus</span>
-                                    <select id="learning-mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-2 text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Learning Focus</span>
+                                    <select id="learning-mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
                                         <option value="full">Comprehensive (all slides)</option>
                                         <option value="vocab">Vocabulary & Characters</option>
                                         <option value="grammar">Grammar & Word Order</option>
                                         <option value="fasttrack">Fast Track (review)</option>
                                     </select>
                                 </label>
-                                <div class="text-xs text-[#777777]">Pick a focus to reorder the lesson path. Comprehensive covers everything; Fast Track hits highlights before quizzes.</div>
+                                <label class="flex flex-col gap-1">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Pinyin Display</span>
+                                    <select id="pinyin-mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="full">All (with pinyin)</option>
+                                        <option value="some">Some (mixed)</option>
+                                        <option value="none">Challenge (no pinyin)</option>
+                                    </select>
+                                </label>
+                                <div class="text-[10px] sm:text-xs text-[#777777]">Choose your learning path and difficulty. Challenge mode tests character recognition.</div>
                             </div>
-                            <span class="text-xs font-bold text-[#C0945E] uppercase tracking-widest flex items-center gap-2">
-                                Start Learning <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </span>
+                            <button onclick="App.startModule()" class="w-full inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm shadow hover:bg-[#52212e] transition-all">
+                                <span class="hidden sm:inline">Start Learning</span><span class="sm:hidden">Start</span> <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                            </button>
                         </div>
 
-                        <div class="group border border-[#e0e0e0] p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-white relative">
-                            <div class="w-12 h-12 bg-white border-2 border-[#6A2C3C] text-[#6A2C3C] flex items-center justify-center rounded-full mb-4 group-hover:bg-[#6A2C3C] group-hover:text-white transition-colors">
-                                <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                        <div class="group border border-[#e0e0e0] p-4 sm:p-5 md:p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-white relative rounded-sm">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white border-2 border-[#6A2C3C] text-[#6A2C3C] flex items-center justify-center rounded-full mb-3 sm:mb-4 group-hover:bg-[#6A2C3C] group-hover:text-white transition-colors">
+                                <i data-lucide="pen-tool" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                             </div>
-                            <div class="flex items-center justify-between gap-2 mb-3">
-                                <h3 class="text-xl font-bold text-[#333333] font-serif group-hover:text-[#6A2C3C]">Assessment Arena</h3>
+                            <div class="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+                                <h3 class="text-lg sm:text-xl font-bold text-[#333333] font-serif group-hover:text-[#6A2C3C]">Assessment Arena</h3>
                             </div>
-                            <p class="text-sm text-[#666666] mb-4">Pick a difficulty, then face mixed question types: multiple choice, drag-and-drop ordering, and matching pairs.</p>
+                            <p class="text-xs sm:text-sm text-[#666666] mb-3 sm:mb-4">Pick a focus and difficulty level to test your knowledge with multiple choice, drag-and-drop, and matching questions.</p>
 
-                            <div class="space-y-3 text-sm">
-                                <label class="flex flex-col gap-2">
-                                    <span class="text-[#333333] font-semibold">Mode</span>
-                                    <select id="mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-2 text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                            <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                                <label class="flex flex-col gap-1 sm:gap-2">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Assessment Focus</span>
+                                    <select id="assessment-focus-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="balanced">Balanced (all types)</option>
+                                        <option value="vocab">Vocabulary & Characters</option>
+                                        <option value="grammar">Grammar & Sentences</option>
+                                    </select>
+                                </label>
+                                <label class="flex flex-col gap-1 sm:gap-2">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Question Count</span>
+                                    <select id="question-count-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="10">10 questions (Quick)</option>
+                                        <option value="15">15 questions</option>
+                                        <option value="20">20 questions (Standard)</option>
+                                        <option value="25">25 questions</option>
+                                        <option value="30">30 questions (Complete)</option>
+                                    </select>
+                                </label>
+                                <label class="flex flex-col gap-1 sm:gap-2">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Difficulty</span>
+                                    <select id="mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
                                         <option value="practice">Practice (infinite)</option>
                                         <option value="easy">Easy (5 hearts)</option>
                                         <option value="medium">Medium (3 hearts)</option>
@@ -211,65 +237,67 @@
                                         <option value="deathmarch">Deathmarch (1 heart, 3x streak)</option>
                                     </select>
                                 </label>
-                                <div class="text-xs text-[#666666] leading-relaxed bg-[#fafafa] border border-[#e0e0e0] rounded p-3">
-                                    <strong class="text-[#6A2C3C]">Hearts:</strong> Lose one on a wrong answer (except Practice). In Deathmarch, keep a 3-correct streak or restart.
+                                <div class="text-[10px] sm:text-xs text-[#777777] leading-relaxed bg-[#fafafa] border border-[#e0e0e0] rounded p-2 sm:p-3">
+                                    <strong class="text-[#6A2C3C]">Hearts:</strong> Lose one on wrong answers (except Practice). Deathmarch requires a 3-correct streak to pass.
                                 </div>
                             </div>
 
-                            <button onclick="App.startQuiz()" class="mt-4 inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-4 py-2 rounded shadow hover:bg-[#52212e] transition-all">
-                                Start Assessment <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            <button onclick="App.startQuiz()" class="mt-3 sm:mt-4 w-full inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm shadow hover:bg-[#52212e] transition-all">
+                                <span class="hidden sm:inline">Start Assessment</span><span class="sm:hidden">Start</span> <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="view-learning" class="hidden absolute inset-0 flex flex-col bg-white">
-                <header class="px-8 py-6 border-b border-[#e0e0e0] flex justify-between items-end bg-white/95 backdrop-blur z-10 sticky top-0">
+            <div id="view-learning" class="hidden absolute inset-0 flex flex-col bg-white overflow-y-auto md:overflow-hidden">
+                <header class="px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 border-b border-[#e0e0e0] flex justify-between items-end bg-white/95 backdrop-blur z-10 sticky top-0">
                     <div>
-                        <h2 class="text-2xl font-serif font-bold text-[#333333]" id="slide-title">Module Title</h2>
-                        <p class="text-sm text-[#666666] font-light italic" id="slide-subtitle">Subtitle placeholder</p>
+                        <h2 class="text-lg sm:text-2xl font-serif font-bold text-[#333333]" id="slide-title">Module Title</h2>
+                            <p class="text-xs sm:text-sm text-[#666666] font-light italic" id="slide-subtitle">Subtitle placeholder</p>
                     </div>
                     <div class="text-5xl text-[#f0f0f0] font-serif font-bold absolute right-8 top-2 select-none pointer-events-none -z-10" id="slide-number">01</div>
                 </header>
 
-                <div id="slide-content" class="flex-1 overflow-y-auto p-8 md:px-16 md:py-10 fade-in text-[#333333] relative">
+                <div id="slide-content" class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 lg:px-16 lg:py-10 fade-in text-[#333333] relative">
                     </div>
 
-                <footer class="px-8 py-5 border-t border-[#e0e0e0] flex justify-between items-center bg-[#f9f9f9] relative z-20">
-                    <button onclick="App.prevSlide()" id="btn-prev" class="text-[#999999] hover:text-[#333333] text-sm font-semibold uppercase tracking-wider flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                <footer class="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 border-t border-[#e0e0e0] flex justify-between items-center bg-[#f9f9f9] relative z-20">
+                    <button onclick="App.prevSlide()" id="btn-prev" class="text-[#999999] hover:text-[#333333] text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center gap-1 sm:gap-2 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+                        <i data-lucide="arrow-left" class="w-3 sm:w-4 h-3 sm:h-4"></i><span class="hidden sm:inline">Previous</span><span class="sm:hidden">Back</span>
                     </button>
-                    <button onclick="App.nextSlide()" id="btn-next" class="bg-[#C0945E] hover:bg-[#a37c4d] text-white px-6 py-3 text-sm font-medium uppercase tracking-widest shadow-sm hover:shadow flex items-center gap-2 transition-all rounded-sm">
-                        Next Phase <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    <button onclick="App.nextSlide()" id="btn-next" class="bg-[#C0945E] hover:bg-[#a37c4d] text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm font-medium uppercase tracking-widest shadow-sm hover:shadow flex items-center gap-1 sm:gap-2 transition-all rounded-sm">
+                        <span class="hidden sm:inline">Next Phase</span><span class="sm:hidden">Next</span> <i data-lucide="chevron-right" class="w-3 sm:w-4 h-3 sm:h-4"></i>
                     </button>
                 </footer>
             </div>
 
-            <div id="view-quiz" class="hidden absolute inset-0 flex flex-col justify-center items-center bg-[#f9f9f9] p-6">
-                <div class="w-full max-w-3xl bg-white shadow-xl border border-[#e0e0e0] p-8 md:p-12 relative fade-in rounded-sm space-y-6">
-                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#f0f0f0] pb-4">
-                        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#6A2C3C]">
-                            <span class="px-2 py-1 bg-[#fdf6f0] border border-[#f3e4d6] rounded" id="mode-badge">Mode: Practice</span>
-                            <span class="px-2 py-1 bg-[#eef2ff] border border-[#dfe3ff] text-[#374151] rounded" id="question-count">0 / 0</span>
+            <div id="view-quiz" class="hidden absolute inset-0 flex flex-col justify-center items-center bg-[#f9f9f9] p-3 sm:p-4 md:p-6">
+                <div class="w-full mx-auto max-w-2xl sm:max-w-3xl bg-white shadow-xl border border-[#e0e0e0] p-4 sm:p-6 md:p-8 lg:p-12 relative fade-in rounded-sm space-y-4 sm:space-y-5 md:space-y-6 flex flex-col max-h-[80vh] sm:max-h-[85vh]">
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-2 sm:gap-3 border-b border-[#f0f0f0] pb-3 sm:pb-4">
+                        <div class="flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-widest font-bold text-[#6A2C3C]">
+                            <span class="px-2 py-1 bg-[#fdf6f0] border border-[#f3e4d6] rounded text-[9px] sm:text-xs" id="mode-badge">Mode: Practice</span>
+                            <span class="px-2 py-1 bg-[#eef2ff] border border-[#dfe3ff] text-[#374151] rounded text-[9px] sm:text-xs" id="question-count">0 / 0</span>
                         </div>
-                        <div class="flex items-center gap-2" id="hearts-wrap">
-                            <span class="text-xs font-semibold text-[#666666]">Hearts:</span>
-                            <div class="flex items-center gap-1" id="hearts-container"></div>
+                        <div class="flex items-center gap-1 sm:gap-2" id="hearts-wrap">
+                            <span class="text-[10px] sm:text-xs font-semibold text-[#666666]\">Hearts:</span>
+                            <div class="flex items-center gap-0.5 sm:gap-1" id="hearts-container"></div>
                         </div>
                     </div>
-                    <div class="mb-8">
-                        <span class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-2 block">Question <span id="q-number-quiz">1</span></span>
-                        <h3 id="quiz-question" class="text-2xl md:text-3xl font-serif font-bold text-[#333333] leading-snug">
-                            Question text goes here?
-                        </h3>
-                    </div>
+                    <div class="flex-1 min-h-0 overflow-y-auto pr-1 space-y-4 sm:space-y-5">
+                        <div class="mb-4 sm:mb-6">
+                            <span class="text-[10px] sm:text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-1 sm:mb-2 block">Question <span id="q-number-quiz">1</span></span>
+                            <h3 id="quiz-question" class="text-lg sm:text-2xl md:text-3xl font-serif font-bold text-[#333333] leading-snug">
+                                Question text goes here?
+                            </h3>
+                        </div>
 
-                    <div id="quiz-options" class="grid grid-cols-1 gap-3">
-                        </div>
-                    <div id="interactive-actions" class="hidden mt-4 flex items-center justify-between gap-3">
-                        <div class="text-xs text-[#666666]" id="interactive-hint"></div>
-                        <button onclick="App.submitInteractiveAnswer()" class="px-4 py-2 bg-[#6A2C3C] text-white rounded text-xs uppercase tracking-widest hover:bg-[#52212e] transition shadow" id="interactive-submit">Submit Answer</button>
+                        <div id="quiz-options" class="grid grid-cols-1 gap-2 sm:gap-3">
+                            </div>
+                    </div>
+                    <div id="interactive-actions" class="hidden mt-3 sm:mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3">
+                        <div class="text-xs text-[#666666] text-center sm:text-left" id="interactive-hint"></div>
+                        <button onclick="App.submitInteractiveAnswer()" class="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 bg-[#6A2C3C] text-white rounded text-xs uppercase tracking-widest hover:bg-[#52212e] transition shadow" id="interactive-submit">Submit</button>
                     </div>
                 </div>
             </div>
@@ -836,36 +864,99 @@
         ];
 
         const quizBank = [
-            { type: 'multi', q: 'What is the formal way to say "You"?', opts: ['Nǐ (你)', 'Nín (您)', 'Tā (他)', 'Wǒ (我)'], ans: 1 },
-            { type: 'multi', q: 'Which phrase means "May I ask your honorable surname?"', opts: ['Nǐ jiào shénme?', 'Qǐngwèn, nín guì xìng?', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
-            { type: 'multi', q: 'Correct order for "I am also very happy."', opts: ['Wǒ hěn gāoxìng yě.', 'Wǒ yě hěn gāoxìng.', 'Yě wǒ hěn gāoxìng.', 'Wǒ hěn yě gāoxìng.'], ans: 1 },
-            { type: 'multi', q: 'What does "Guì" (贵) mean literally?', opts: ['Expensive/Honorable', 'Name', 'Teacher', 'Please'], ans: 0 },
-            { type: 'multi', q: 'How do you say "Teacher Pan"?', opts: ['Lǎoshī Pān', 'Pān Lǎoshī', 'Teacher Pān', 'Mr. Pān'], ans: 1 },
-            { type: 'multi', q: 'Which word indicates a question or "to ask"?', opts: ['Qǐng (请)', 'Wèn (问)', 'Jiào (叫)', 'Xìng (姓)'], ans: 1 },
-            { type: 'multi', q: 'Translate: "Hěn gāoxìng rènshi nín."', opts: ['What is your name?', 'Nice to meet you (formal)', 'Are you a teacher?', 'My surname is Pan'], ans: 1 },
-            { type: 'multi', q: 'What is the verb "to be called"?', opts: ['Xìng', 'Jiào', 'Míngzi', 'Shénme'], ans: 1 },
-            { type: 'multi', q: 'Can you use "Guì" (Honorable) for your own surname?', opts: ['Yes', 'No', 'Only on Sundays', 'Only to subordinates'], ans: 1 },
-            { type: 'multi', q: 'What comes first in a Chinese name?', opts: ['Given Name', 'Middle Name', 'Surname', 'Title'], ans: 2 },
-            { type: 'multi', q: 'The character Nín (您) contains which radical?', opts: ['Water', 'Fire', 'Heart', 'Wood'], ans: 2 },
-            { type: 'multi', q: 'Translate: "Wǒ hěn gāoxìng"', opts: ['I am happy', 'You are happy', 'He is happy', 'We are happy'], ans: 0 },
-            { type: 'multi', q: 'Which component creates the formal Nín (您)?', opts: ['Kǒu (Mouth)', 'Xīn (Heart)', 'Mù (Eye)', 'Shǒu (Hand)'], ans: 1 },
-            { type: 'multi', q: 'Pick the polite reply to "Qǐngwèn, nín guì xìng?"', opts: ['Wǒ jiào Lǐ Míng.', 'Wǒ xìng Lǐ.', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
-            { type: 'multi', q: 'Select the correct order for a formal introduction.', opts: ['Given Name → Title → Surname', 'Surname → Title → Given Name', 'Title → Surname → Given Name', 'Title → Given Name → Surname'], ans: 1 },
-            { type: 'multi', q: 'Which adverb means "also"?', opts: ['Hěn (很)', 'Yě (也)', 'Rènshi (认识)', 'Míngzi (名字)'], ans: 1 },
-            { type: 'drag-order', q: 'Arrange the polite question: "Qǐngwèn, nín guì xìng?"', items: ['请', '问，', '您', '贵', '姓', '？'], answer: ['请', '问，', '您', '贵', '姓', '？'] },
-            { type: 'drag-order', q: 'Arrange the self-introduction: "Wǒ jiào Lǐ Míng."', items: ['我', '叫', '李', '明', '。'], answer: ['我', '叫', '李', '明', '。'] },
-            { type: 'match', q: 'Match the title to its meaning.', pairs: [
+            // VOCAB: Pronouns & Titles
+            { type: 'multi', category: 'vocab', q: 'What is the formal way to say "You"?', opts: ['Nǐ (你)', 'Nín (您)', 'Tā (他)', 'Wǒ (我)'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'What does "Guì" (贵) mean literally?', opts: ['Expensive/Honorable', 'Name', 'Teacher', 'Please'], ans: 0 },
+            { type: 'multi', category: 'vocab', q: 'Which word means "Teacher"?', opts: ['老师 (Lǎoshī)', '先生 (Xiānsheng)', '女士 (Nǚshì)', '同学 (Tóngxué)'], ans: 0 },
+            { type: 'multi', category: 'vocab', q: 'Which title is used for "Mr."?', opts: ['老师', '先生', '女士', '同学'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'What does "女士" (Nǚshì) mean?', opts: ['Teacher', 'Mr.', 'Ms./Mrs.', 'Classmate'], ans: 2 },
+            { type: 'multi', category: 'vocab', q: 'Which term means "Classmate"?', opts: ['老师', '先生', '女士', '同学'], ans: 3 },
+            
+            // VOCAB: Character Components & Radicals
+            { type: 'multi', category: 'vocab', q: 'The character Nín (您) contains which radical?', opts: ['Water', 'Fire', 'Heart', 'Wood'], ans: 2 },
+            { type: 'multi', category: 'vocab', q: 'Which component creates the formal Nín (您)?', opts: ['Kǒu (Mouth)', 'Xīn (Heart)', 'Mù (Eye)', 'Shǒu (Hand)'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'The character 好 (Good) is composed of which two elements?', opts: ['Woman + Child', 'Woman + Birth', 'Mouth + Heart', 'Fire + Water'], ans: 0 },
+            { type: 'multi', category: 'vocab', q: 'The character 姓 (Surname) originally meant:', opts: ['To ask', 'Born of woman', 'To speak', 'To know'], ans: 1 },
+            
+            // VOCAB: Core Verbs & Actions
+            { type: 'multi', category: 'vocab', q: 'What is the verb "to be called"?', opts: ['Xìng', 'Jiào', 'Míngzi', 'Shénme'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'Which word indicates "to ask" a question?', opts: ['Qǐng (请)', 'Wèn (问)', 'Jiào (叫)', 'Xìng (姓)'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'What verb means "to know" or "to meet"?', opts: ['认识 (Rènshi)', '叫 (Jiào)', '姓 (Xìng)', '请 (Qǐng)'], ans: 0 },
+            { type: 'multi', category: 'vocab', q: 'The verb 姓 (Xìng) primarily means:', opts: ['To ask', 'To know', 'To be surnamed', 'To call'], ans: 2 },
+            
+            // VOCAB: Modifiers & Emotions
+            { type: 'multi', category: 'vocab', q: 'Which word means "very"?', opts: ['也 (Yě)', '很 (Hěn)', '高兴 (Gāoxìng)', '认识 (Rènshi)'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'What does "高兴" (Gāoxìng) mean?', opts: ['Teacher', 'Happy', 'Name', 'Please'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'Which adverb means "also" or "too"?', opts: ['Hěn (很)', 'Yě (也)', 'Rènshi (认识)', 'Míngzi (名字)'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: '"非常高兴" (Fēicháng gāoxìng) emphasizes:', opts: ['Politeness', 'Very much happiness', 'Surprise', 'Formality'], ans: 1 },
+            
+            // VOCAB: Nouns
+            { type: 'multi', category: 'vocab', q: 'What does "名字" (Míngzi) mean?', opts: ['Surname', 'Teacher', 'Name', 'Please'], ans: 2 },
+            { type: 'multi', category: 'vocab', q: 'Which noun refers to "honorable surname"?', opts: ['名字', '贵姓', '老师', '同学'], ans: 1 },
+            { type: 'multi', category: 'vocab', q: 'What is the interrogative pronoun "what"?', opts: ['谁 (Shuí)', '什么 (Shénme)', '哪个 (Nǎge)', '如何 (Rúhé)'], ans: 1 },
+            
+            // GRAMMAR: Word Order
+            { type: 'multi', category: 'grammar', q: 'Correct order for "I am also very happy."', opts: ['Wǒ hěn gāoxìng yě.', 'Wǒ yě hěn gāoxìng.', 'Yě wǒ hěn gāoxìng.', 'Wǒ hěn yě gāoxìng.'], ans: 1 },
+            { type: 'multi', category: 'grammar', q: 'Which sentence correctly uses 也 (also)?', opts: ['我也很高兴', '我很也高兴', '也我很高兴', '很我也高兴'], ans: 0 },
+            { type: 'multi', category: 'grammar', q: 'In the sentence "我很高兴", where does the adverb go?', opts: ['After subject', 'Before adjective', 'After adjective', 'At the end'], ans: 1 },
+            
+            // GRAMMAR: Formal Phrases
+            { type: 'multi', category: 'grammar', q: 'Which phrase means "May I ask your honorable surname?"', opts: ['Nǐ jiào shénme?', 'Qǐngwèn, nín guì xìng?', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
+            { type: 'multi', category: 'grammar', q: 'Translate: "Hěn gāoxìng rènshi nín."', opts: ['What is your name?', 'Nice to meet you (formal)', 'Are you a teacher?', 'My surname is Pan'], ans: 1 },
+            { type: 'multi', category: 'grammar', q: 'Pick the polite reply to "Qǐngwèn, nín guì xìng?"', opts: ['Wǒ jiào Lǐ Míng.', 'Wǒ xìng Lǐ.', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
+            
+            // GRAMMAR: Title Placement
+            { type: 'multi', category: 'grammar', q: 'How do you say "Teacher Pan"?', opts: ['Lǎoshī Pān', 'Pān Lǎoshī', 'Teacher Pān', 'Mr. Pān'], ans: 1 },
+            { type: 'multi', category: 'grammar', q: 'In professional address, order is:', opts: ['Given Name → Title → Surname', 'Surname → Title → Given Name', 'Title → Surname → Given Name', 'Title → Given Name → Surname'], ans: 1 },
+            { type: 'multi', category: 'grammar', q: 'Correct way to address someone formally:', opts: ['Title Surname', 'Surname Title', 'Given Name Title', 'Title Given Name'], ans: 0 },
+            
+            // GRAMMAR: Name Order
+            { type: 'multi', category: 'grammar', q: 'What comes first in a Chinese name?', opts: ['Given Name', 'Middle Name', 'Surname', 'Title'], ans: 2 },
+            { type: 'multi', category: 'grammar', q: 'Chinese name structure is:', opts: ['Given + Surname', 'Surname + Given', 'Title + Surname', 'Surname + Title'], ans: 1 },
+            { type: 'multi', category: 'grammar', q: 'Select the correct order for a formal introduction.', opts: ['Given Name → Title → Surname', 'Surname → Title → Given Name', 'Title → Surname → Given Name', 'Title → Given Name → Surname'], ans: 1 },
+            
+            // GRAMMAR: Question Formation
+            { type: 'multi', category: 'grammar', q: 'How to ask someone\'s name informally?', opts: ['你贵姓?', '你叫什么名字?', '你好吗?', '你是谁?'], ans: 1 },
+            { type: 'multi', category: 'grammar', q: 'What is the sentence structure for asking a name?', opts: ['Subject + Verb + Object', 'Verb + Subject + Object', 'Object + Subject + Verb', 'Adverb + Subject + Verb'], ans: 0 },
+            
+            // MATCHING: Titles
+            { type: 'match', category: 'vocab', q: 'Match the title to its meaning.', pairs: [
                 { left: '老师', right: 'Teacher' },
                 { left: '先生', right: 'Mr.' },
                 { left: '女士', right: 'Ms./Mrs.' },
                 { left: '同学', right: 'Classmate' }
             ]},
-            { type: 'match', q: 'Match the Mandarin to English meaning.', pairs: [
+            
+            // MATCHING: Vocabulary
+            { type: 'match', category: 'vocab', q: 'Match the Mandarin to English meaning.', pairs: [
                 { left: '认识', right: 'To meet/know' },
                 { left: '很高兴', right: 'Very happy' },
                 { left: '名字', right: 'Name' },
                 { left: '请', right: 'Please' }
-            ]}
+            ]},
+            
+            // MATCHING: Verbs & Actions
+            { type: 'match', category: 'vocab', q: 'Match the action verb to its meaning.', pairs: [
+                { left: '叫', right: 'To be called' },
+                { left: '姓', right: 'To be surnamed' },
+                { left: '问', right: 'To ask' },
+                { left: '认识', right: 'To know/meet' }
+            ]},
+            
+            // DRAG-ORDER: Formal Inquiry
+            { type: 'drag-order', category: 'grammar', q: 'Arrange the polite question: "Qǐngwèn, nín guì xìng?"', items: ['请', '问，', '您', '贵', '姓', '？'], answer: ['请', '问，', '您', '贵', '姓', '？'] },
+            
+            // DRAG-ORDER: Self-Introduction
+            { type: 'drag-order', category: 'grammar', q: 'Arrange the self-introduction: "Wǒ jiào Lǐ Míng."', items: ['我', '叫', '李', '明', '。'], answer: ['我', '叫', '李', '明', '。'] },
+            
+            // DRAG-ORDER: Greeting
+            { type: 'drag-order', category: 'grammar', q: 'Arrange: "Very happy to meet you."', items: ['很', '高兴', '认识', '你', '。'], answer: ['很', '高兴', '认识', '你', '。'] },
+            
+            // DRAG-ORDER: Formal Reply
+            { type: 'drag-order', category: 'grammar', q: 'Arrange: "My surname is Wang."', items: ['我', '姓', '王', '。'], answer: ['我', '姓', '王', '。'] },
+            
+            // DRAG-ORDER: Polite Greeting Reply
+            { type: 'drag-order', category: 'grammar', q: 'Arrange: "Meeting you, I am also very happy."', items: ['认识', '你', '我', '也', '很', '高兴', '。'], answer: ['认识', '你', '我', '也', '很', '高兴', '。'] }
         ];
 
         // --- ENGINE ---
@@ -883,6 +974,8 @@
                 streak: 0,
                 questions: [],
                 learningMode: 'full',
+                pinyin: 'full',
+                assessmentFocus: 'balanced',
                 slideOrder: slides.map((_, i) => i)
             },
 
@@ -897,13 +990,17 @@
                 this.updateSidebar('sb-home');
                 this.state.slideIdx = 0;
                 this.state.learningMode = 'full';
+                this.state.pinyin = 'full';
                 this.state.slideOrder = slides.map((_, i) => i);
             },
 
             startModule() {
-                const sel = document.getElementById('learning-mode-select');
-                const mode = sel ? sel.value : 'full';
+                const selMode = document.getElementById('learning-mode-select');
+                const selPinyin = document.getElementById('pinyin-mode-select');
+                const mode = selMode ? selMode.value : 'full';
+                const pinyin = selPinyin ? selPinyin.value : 'full';
                 this.state.learningMode = mode;
+                this.state.pinyin = pinyin;
                 this.state.slideOrder = this.getLearningPath(mode);
                 this.state.slideIdx = 0;
                 this.switchView('view-learning');
@@ -913,15 +1010,22 @@
 
             startQuiz() {
                 const modeSelect = document.getElementById('mode-select');
+                const focusSelect = document.getElementById('assessment-focus-select');
+                const countSelect = document.getElementById('question-count-select');
                 const selectedMode = modeSelect ? modeSelect.value : 'practice';
+                const selectedFocus = focusSelect ? focusSelect.value : 'balanced';
+                const selectedCount = countSelect ? parseInt(countSelect.value) : 20;
                 const cfg = this.getModeConfig(selectedMode);
 
                 this.state.mode = selectedMode;
+                this.state.assessmentFocus = selectedFocus;
                 this.state.hearts = cfg.hearts;
                 this.state.qIdx = 0;
                 this.state.score = 0;
                 this.state.streak = 0;
-                this.state.questions = this.shuffle(quizBank);
+                this.state.questions = this.shuffle(this.getFilteredQuizBank(selectedFocus))
+                    .slice(0, selectedCount)
+                    .map(q => this.applyPinyinFilter(q));
 
                 this.switchView('view-quiz');
                 this.updateSidebar('sb-quiz');
@@ -1022,6 +1126,33 @@
                 const fasttrack = [0,2,8,9,11,12];
                 const map = { full, vocab, grammar, fasttrack };
                 return map[mode] || full;
+            },
+
+            applyPinyinFilter(q) {
+                const pinyin = this.state.pinyin;
+                if (pinyin === 'full') return q;
+                if (pinyin === 'none') {
+                    const qCopy = JSON.parse(JSON.stringify(q));
+                    if (qCopy.opts) {
+                        qCopy.opts = qCopy.opts.map(opt => opt.replace(/[áǎàāéěèēíǐìīóǒòōúǔùūǘǚǜü]/g, '').replace(/\([^)]*\)/g, ''));
+                    }
+                    return qCopy;
+                }
+                if (pinyin === 'some') {
+                    const qCopy = JSON.parse(JSON.stringify(q));
+                    if (qCopy.opts && Math.random() > 0.5) {
+                        qCopy.opts = qCopy.opts.map(opt => opt.replace(/[áǎàāéěèēíǐìīóǒòōúǔùūǘǚǜü]/g, '').replace(/\([^)]*\)/g, ''));
+                    }
+                    return qCopy;
+                }
+                return q;
+            },
+
+            getFilteredQuizBank(focus) {
+                if (focus === 'balanced') return quizBank;
+                if (focus === 'vocab') return quizBank.filter(q => q.category === 'vocab');
+                if (focus === 'grammar') return quizBank.filter(q => q.category === 'grammar');
+                return quizBank;
             },
 
             // --- LEARNING LOGIC ---
