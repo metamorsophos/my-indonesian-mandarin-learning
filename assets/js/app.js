@@ -1216,7 +1216,7 @@ const App = {
 };
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', App.init);
+    document.addEventListener('DOMContentLoaded', () => App.init());
 } else {
     App.init();
 }
