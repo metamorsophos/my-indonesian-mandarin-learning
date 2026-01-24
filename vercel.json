@@ -1,15 +1,18 @@
 {
   "version": 2,
-  "builds": [
+  "buildCommand": "echo 'Static site deployment'",
+  "outputDirectory": ".",
+  "public": true,
+  "cleanUrls": false,
+  "headers": [
     {
-      "src": "*.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     }
   ]
 }
