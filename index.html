@@ -86,9 +86,9 @@
         .g-block { padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; }
     </style>
 </head>
-<body class="h-screen flex items-center justify-center p-0 md:p-6 overflow-hidden">
+<body class="min-h-screen flex items-center justify-center p-0 md:p-6 overflow-x-hidden overflow-y-auto">
 
-    <div class="w-full max-w-6xl h-full md:h-[90vh] bg-white md:rounded shadow-2xl overflow-hidden flex flex-col md:flex-row cv-paper relative">
+    <div class="w-full max-w-6xl h-auto md:h-[90vh] bg-white md:rounded shadow-2xl overflow-visible md:overflow-hidden flex flex-col md:flex-row cv-paper relative">
         
         <aside class="w-full md:w-1/3 bg-[#6A2C3C] text-white p-6 md:p-8 flex flex-col shrink-0 z-50 shadow-lg relative">
             <div class="mb-8 border-b border-white/20 pb-8">
@@ -185,14 +185,13 @@
                             </div>
                             <div class="flex items-center justify-between gap-2 mb-3">
                                 <h3 class="text-xl font-bold text-[#333333] font-serif group-hover:text-[#6A2C3C]">Assessment Arena</h3>
-                                <span class="text-[10px] font-mono bg-[#f3f3f3] px-2 py-1 rounded text-[#6A2C3C]">New Modes</span>
                             </div>
                             <p class="text-sm text-[#666666] mb-4">Pick a difficulty, then face mixed question types: multiple choice, drag-and-drop ordering, and matching pairs.</p>
 
                             <div class="space-y-3 text-sm">
-                                <label class="flex items-center justify-between gap-3">
+                                <label class="flex flex-col gap-2">
                                     <span class="text-[#333333] font-semibold">Mode</span>
-                                    <select id="mode-select" class="border border-[#e0e0e0] rounded px-2 py-1 text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                    <select id="mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-2 text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
                                         <option value="practice">Practice (infinite)</option>
                                         <option value="easy">Easy (5 hearts)</option>
                                         <option value="medium">Medium (3 hearts)</option>
@@ -670,6 +669,157 @@
                     { text: 'Rén (Person) - 人', correct: false }
                 ],
                 feedback: 'Correct. Putting the other person "above your heart" creates the formal Nín.'
+            },
+
+            // Slide 8: Core Vocabulary Reference
+            {
+                title: 'Core Vocabulary',
+                subtitle: 'Mapped to Quiz Items',
+                number: '07',
+                html: `
+                    <div class="space-y-6">
+                        <p class="text-[#666666]">These are the exact items you will see in assessments. Review characters, pinyin, and meanings.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div class="border border-[#e0e0e0] rounded p-4 bg-white">
+                                <h4 class="text-xs uppercase tracking-widest text-[#6A2C3C] mb-3 font-bold">People & Titles</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between"><span class="zh font-semibold">你 / 您</span><span>Nǐ / Nín — you / polite you</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">我</span><span>Wǒ — I / me</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">老师</span><span>Lǎoshī — teacher</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">先生 / 女士</span><span>Xiānsheng / Nǚshì — Mr. / Ms.</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">同学</span><span>Tóngxué — classmate</span></li>
+                                </ul>
+                            </div>
+                            <div class="border border-[#e0e0e0] rounded p-4 bg-white">
+                                <h4 class="text-xs uppercase tracking-widest text-[#6A2C3C] mb-3 font-bold">Actions & Essentials</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between"><span class="zh font-semibold">叫</span><span>Jiào — to be called</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">姓 / 贵姓</span><span>Xìng / Guìxìng — surname / honorable surname</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">认识</span><span>Rènshi — to meet / know</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">请 / 问</span><span>Qǐng / Wèn — please / to ask</span></li>
+                                    <li class="flex justify-between"><span class="zh font-semibold">很 / 也</span><span>Hěn / Yě — very / also</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            // Slide 9: Key Sentences
+            {
+                title: 'Key Sentences',
+                subtitle: 'Informal vs Formal',
+                number: '08',
+                html: `
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-[#6A2C3C] pl-4">
+                            <h4 class="font-serif font-bold text-[#333333] mb-2">Informal (Peers / Friends)</h4>
+                            <p class="zh text-xl font-semibold text-[#6A2C3C] mb-1">你叫什么名字？</p>
+                            <p class="text-sm text-[#666666] mb-2">Nǐ jiào shénme míngzi? — What is your name?</p>
+                            <p class="text-xs text-[#777777]">Structure: Subject + 叫 + 什么名字 (you are called what name).</p>
+                        </div>
+                        <div class="border-l-4 border-[#C0945E] pl-4">
+                            <h4 class="font-serif font-bold text-[#333333] mb-2">Formal (Elders / Teachers / Clients)</h4>
+                            <p class="zh text-xl font-semibold text-[#6A2C3C] mb-1">请问，您贵姓？</p>
+                            <p class="text-sm text-[#666666] mb-2">Qǐngwèn, nín guì xìng? — May I ask, what is your honorable surname?</p>
+                            <ul class="text-xs text-[#777777] space-y-1">
+                                <li>请问 = may I ask (polite opener)</li>
+                                <li>贵 = honorable; never used to describe your own surname</li>
+                                <li>Answer pattern: 我姓 + Surname (e.g., 我姓王)</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                            <div class="p-3 bg-[#f9f9f9] border border-[#e0e0e0] rounded">
+                                <div class="zh font-semibold text-[#6A2C3C]">很高兴认识你/您。</div>
+                                <div class="text-xs text-[#777777]">Hěn gāoxìng rènshi nǐ / nín. — Nice to meet you (formal/informal).</div>
+                            </div>
+                            <div class="p-3 bg-[#f9f9f9] border border-[#e0e0e0] rounded">
+                                <div class="zh font-semibold text-[#6A2C3C]">认识你我也很高兴。</div>
+                                <div class="text-xs text-[#777777]">Rènshi nǐ wǒ yě hěn gāoxìng. — Meeting you, I am also very happy (uses 也).</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            // Slide 10: Chinese Names
+            {
+                title: 'Chinese Name Logic',
+                subtitle: 'Surname First, Then Given',
+                number: '09',
+                html: `
+                    <div class="space-y-6">
+                        <p class="text-[#666666]">Order matters: Family name first, then personal name. This underpins quiz items about ordering and titles.</p>
+                        <div class="flex items-center gap-6">
+                            <div class="text-center border border-[#e0e0e0] rounded p-4 bg-white flex-1">
+                                <div class="text-[10px] uppercase tracking-widest text-[#999999]">Family</div>
+                                <div class="zh text-3xl font-bold text-[#6A2C3C]">王</div>
+                                <div class="text-xs text-[#C0945E] mt-1">Wáng (Surname)</div>
+                            </div>
+                            <div class="text-center border border-[#e0e0e0] rounded p-4 bg-white flex-1">
+                                <div class="text-[10px] uppercase tracking-widest text-[#999999]">Individual</div>
+                                <div class="zh text-3xl font-bold text-[#333333]">佩</div>
+                                <div class="text-xs text-[#999999] mt-1">Pèi (Given)</div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-[#fff7ed] border border-[#f3d8b0] rounded text-sm text-[#8a5a32]">
+                            <strong class="text-[#6A2C3C]">Professional address:</strong> Say 姓 + Title → e.g., 王老师 (Wáng Lǎoshī). Do not reverse.
+                        </div>
+                        <div class="text-xs text-[#777777]">Common surnames: 李, 刘, 王, 张. You will see these patterns in matching / ordering questions.</div>
+                    </div>
+                `
+            },
+
+            // Slide 11: Dialogue & Practice
+            {
+                title: 'Dialogue Practice',
+                subtitle: 'First Meeting Script',
+                number: '10',
+                html: `
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-[#6A2C3C] pl-4">
+                            <p class="zh text-lg font-semibold text-[#6A2C3C]">您好！</p>
+                            <p class="text-xs text-[#777777] mb-2">Nín hǎo — Hello (polite)</p>
+                            <p class="zh text-lg font-semibold text-[#6A2C3C]">请问，您贵姓？</p>
+                            <p class="text-xs text-[#777777] mb-2">Qǐngwèn, nín guì xìng? — May I ask your honorable surname?</p>
+                            <p class="zh text-lg font-semibold text-[#6A2C3C]">我姓潘。你叫什么名字？</p>
+                            <p class="text-xs text-[#777777] mb-2">Wǒ xìng Pān. Nǐ jiào shénme míngzi? — My surname is Pan. What is your name?</p>
+                            <p class="zh text-lg font-semibold text-[#6A2C3C]">我叫咖喱。潘老师，很高兴认识您！</p>
+                            <p class="text-xs text-[#777777]">Wǒ jiào Gālí. Pān lǎoshī, hěn gāoxìng rènshi nín! — I am called Gali. Nice to meet you!</p>
+                        </div>
+                        <div class="p-4 bg-[#f9f9f9] border border-[#e0e0e0] rounded text-sm">
+                            <strong class="text-[#6A2C3C]">Try it:</strong> Introduce yourself with 我叫 + Name, then reply politely with 认识你我也很高兴 using 也 to show reciprocity.
+                        </div>
+                    </div>
+                `
+            },
+
+            // Slide 12: Pre-Quiz 1
+            {
+                type: 'mini-quiz',
+                title: 'Pre-Quiz: Forms of Address',
+                question: 'Pick the correct formal opener when asking a teacher their surname.',
+                number: 'Q2',
+                options: [
+                    { text: 'Nǐ jiào shénme míngzi?', correct: false },
+                    { text: 'Qǐngwèn, nín guì xìng?', correct: true },
+                    { text: 'Nǐ hǎo ma?', correct: false }
+                ],
+                feedback: 'Use 请问 to open politely and 贵姓 to show respect. This matches the assessment item on honorable surname.'
+            },
+
+            // Slide 13: Pre-Quiz 2
+            {
+                type: 'mini-quiz',
+                title: 'Pre-Quiz: Order & Adverbs',
+                question: 'Which sentence correctly uses 也 (also) and preserves S-V-O order?',
+                number: 'Q3',
+                options: [
+                    { text: '我很也高兴', correct: false },
+                    { text: '我也很高兴', correct: true },
+                    { text: '也我很高兴', correct: false }
+                ],
+                feedback: 'Adverbs like 也 and 很 come before the adjective/verb. This maps to the quiz item about word order.'
             }
         ];
 
