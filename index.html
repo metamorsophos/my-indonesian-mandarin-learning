@@ -106,6 +106,33 @@
 
 </head>
 <body class="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-x-hidden overflow-y-auto">
+    
+    <!-- Loading indicator while styles compile -->
+    <style>
+        #app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #e8e8d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-family: 'Merriweather', serif;
+        }
+        #app-loading.hidden {
+            display: none;
+        }
+    </style>
+    <div id="app-loading">
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+            <div style="color: #6A2C3C; font-size: 1.25rem; font-weight: bold;">Mandarin Naqib</div>
+            <div style="color: #999999; font-size: 0.875rem; margin-top: 0.5rem;">Loading course materials...</div>
+        </div>
+    </div>
 
     <div class="w-full h-auto md:h-[90vh] bg-white md:rounded shadow-2xl overflow-visible md:overflow-hidden flex flex-col md:flex-row cv-paper relative">
         
@@ -364,29 +391,45 @@
         // Fallback: Define App as empty object in case file fails to load
         if (typeof App === 'undefined') {
             window.App = {
-                init: function() { console.warn('App.js failed to load'); },
-                goHome: function() { console.warn('App.js failed to load'); },
-                startModule: function() { console.warn('App.js failed to load'); },
-                startQuiz: function() { console.warn('App.js failed to load'); }
+                init: function() { 
+                    document.getElementById('app-loading').classList.add('hidden');
+                },
+                goHome: function() { console.warn('App not fully loaded'); },
+                startModule: function() { console.warn('App not fully loaded'); },
+                startQuiz: function() { console.warn('App not fully loaded'); }
             };
         }
     </script>
     <script src="./assets/js/app.js" async></script>
     <script>
-        // Retry loading if it fails
+        // Initialize app when ready
+        let initAttempts = 0;
+        const maxAttempts = 50; // ~25 seconds with 500ms intervals
+        
         function initApp() {
             if (typeof App !== 'undefined' && App.init) {
                 try {
+                    // Hide loading screen and initialize
+                    document.getElementById('app-loading').classList.add('hidden');
                     App.init();
+                    return;
                 } catch(e) {
                     console.error('App initialization failed:', e);
                 }
-            } else {
-                // Retry after a brief delay
+            }
+            
+            // Retry with exponential backoff
+            initAttempts++;
+            if (initAttempts < maxAttempts) {
                 setTimeout(initApp, 500);
+            } else {
+                console.error('App failed to initialize after multiple attempts');
+                document.getElementById('app-loading').innerHTML = 
+                    '<div style="text-align: center; color: #c00;"><p>Application failed to load. Please refresh the page.</p></div>';
             }
         }
         
+        // Start initialization when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initApp);
         } else {

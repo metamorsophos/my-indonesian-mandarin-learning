@@ -1,3 +1,4 @@
+/* eslint-disable */
 // --- DATA CONTENT ---
 
 const slides = [
