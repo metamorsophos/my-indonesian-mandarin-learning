@@ -157,7 +157,7 @@
             </div>
         </aside>
 
-        <main class="flex-1 bg-white relative flex flex-col h-full overflow-hidden">
+        <main class="flex-1 bg-white relative flex flex-col h-full overflow-visible">
             
             <div id="view-dashboard" class="absolute inset-0 bg-white p-8 md:p-16 flex flex-col justify-center overflow-y-auto fade-in">
                 <div class="max-w-3xl mx-auto w-full relative z-10">
@@ -174,6 +174,18 @@
                             </div>
                             <h3 class="text-xl font-bold text-[#333333] mb-2 font-serif group-hover:text-[#6A2C3C]">Didactic Phase</h3>
                             <p class="text-sm text-[#666666] mb-4">Interactive slides covering etymology, vocabulary, grammar logic, and titles.</p>
+                            <div class="space-y-2 text-sm mb-4">
+                                <label class="flex flex-col gap-1">
+                                    <span class="text-[#333333] font-semibold">Learning Focus</span>
+                                    <select id="learning-mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-2 text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="full">Comprehensive (all slides)</option>
+                                        <option value="vocab">Vocabulary & Characters</option>
+                                        <option value="grammar">Grammar & Word Order</option>
+                                        <option value="fasttrack">Fast Track (review)</option>
+                                    </select>
+                                </label>
+                                <div class="text-xs text-[#777777]">Pick a focus to reorder the lesson path. Comprehensive covers everything; Fast Track hits highlights before quizzes.</div>
+                            </div>
                             <span class="text-xs font-bold text-[#C0945E] uppercase tracking-widest flex items-center gap-2">
                                 Start Learning <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </span>
@@ -869,7 +881,9 @@
                 mode: 'practice',
                 hearts: Infinity,
                 streak: 0,
-                questions: []
+                questions: [],
+                learningMode: 'full',
+                slideOrder: slides.map((_, i) => i)
             },
 
             init() {
@@ -882,9 +896,16 @@
                 this.switchView('view-dashboard');
                 this.updateSidebar('sb-home');
                 this.state.slideIdx = 0;
+                this.state.learningMode = 'full';
+                this.state.slideOrder = slides.map((_, i) => i);
             },
 
             startModule() {
+                const sel = document.getElementById('learning-mode-select');
+                const mode = sel ? sel.value : 'full';
+                this.state.learningMode = mode;
+                this.state.slideOrder = this.getLearningPath(mode);
+                this.state.slideIdx = 0;
                 this.switchView('view-learning');
                 this.updateSidebar('sb-learning');
                 this.renderSlide();
@@ -994,14 +1015,25 @@
                 if (qc) qc.textContent = `${this.state.qIdx + 1} / ${this.state.questions.length}`;
             },
 
+            getLearningPath(mode) {
+                const full = slides.map((_, i) => i);
+                const vocab = [0,1,2,7,8,10];
+                const grammar = [3,4,5,8,9,10];
+                const fasttrack = [0,2,8,9,11,12];
+                const map = { full, vocab, grammar, fasttrack };
+                return map[mode] || full;
+            },
+
             // --- LEARNING LOGIC ---
             renderSlide() {
-                const slide = slides[this.state.slideIdx];
+                const order = this.state.slideOrder || slides.map((_, i) => i);
+                const slideIdx = order[this.state.slideIdx] ?? 0;
+                const slide = slides[slideIdx];
                 
                 // Content Injection
                 document.getElementById('slide-title').innerText = slide.title || "Module";
                 document.getElementById('slide-subtitle').innerText = slide.subtitle || "";
-                document.getElementById('slide-number').innerText = slide.number || "00";
+                document.getElementById('slide-number').innerText = slide.number || String(slideIdx + 1).padStart(2, '0');
                 
                 const contentDiv = document.getElementById('slide-content');
                 
@@ -1033,7 +1065,8 @@
 
                 // Sidebar Updates
                 document.getElementById('current-module-text').innerText = slide.title;
-                const pct = Math.round(((this.state.slideIdx + 1) / slides.length) * 100);
+                const total = (this.state.slideOrder || slides).length;
+                const pct = Math.round(((this.state.slideIdx + 1) / total) * 100);
                 document.getElementById('progress-bar').style.width = `${pct}%`;
                 document.getElementById('progress-text').innerText = `${pct}%`;
 
@@ -1078,7 +1111,8 @@
             },
 
             nextSlide() {
-                if (this.state.slideIdx < slides.length - 1) {
+                const total = (this.state.slideOrder || slides).length;
+                if (this.state.slideIdx < total - 1) {
                     this.state.slideIdx++;
                     this.renderSlide();
                 } else {
