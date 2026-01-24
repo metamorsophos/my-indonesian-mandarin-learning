@@ -612,7 +612,71 @@ const quizBank = [
     { type: 'drag-order', category: 'grammar', q: 'Arrange: "My surname is Wang."', items: ['我', '姓', '王', '。'], answer: ['我', '姓', '王', '。'] },
     
     // DRAG-ORDER: Polite Greeting Reply
-    { type: 'drag-order', category: 'grammar', q: 'Arrange: "Meeting you, I am also very happy."', items: ['认识', '你', '我', '也', '很', '高兴', '。'], answer: ['认识', '你', '我', '也', '很', '高兴', '。'] }
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "Meeting you, I am also very happy."', items: ['认识', '你', '我', '也', '很', '高兴', '。'], answer: ['认识', '你', '我', '也', '很', '高兴', '。'] },
+    
+    // Additional VOCAB questions
+    { type: 'multi', category: 'vocab', q: 'What does "礼貌" (Lǐmào) mean?', opts: ['Friend', 'Politeness/Manner', 'Knowledge', 'Respect'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which word means "colleague"?', opts: ['同事 (Tóngshì)', '朋友 (Péngyou)', '家人 (Jiārén)', '同学 (Tóngxué)'], ans: 0 },
+    { type: 'multi', category: 'vocab', q: 'What is "朋友" (Péngyou)?', opts: ['Colleague', 'Family', 'Friend', 'Stranger'], ans: 2 },
+    { type: 'multi', category: 'vocab', q: 'The word "家人" (Jiārén) refers to:', opts: ['Friends', 'Colleagues', 'Family', 'Teachers'], ans: 2 },
+    { type: 'multi', category: 'vocab', q: 'What does "谢谢" (Xièxiè) mean?', opts: ['Sorry', 'Thank you', 'Please', 'You\'re welcome'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which term means "you\'re welcome"?', opts: ['不客气 (Búkèqi)', '谢谢 (Xièxiè)', '请 (Qǐng)', '不 (Búi)'], ans: 0 },
+    { type: 'multi', category: 'vocab', q: 'What does "对不起" (Duìbùqǐ) mean?', opts: ['Thank you', 'I\'m sorry', 'Good morning', 'Goodbye'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'The term "哥哥" (Gēge) means:', opts: ['Sister', 'Older brother', 'Younger brother', 'Father'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'What is "妹妹" (Mèimei)?', opts: ['Older sister', 'Older brother', 'Younger sister', 'Mother'], ans: 2 },
+    { type: 'multi', category: 'vocab', q: 'Which kinship term means "mother"?', opts: ['妈妈 (Māma)', '爸爸 (Bàba)', '哥哥 (Gēge)', '弟弟 (Dìdi)'], ans: 0 },
+    
+    // Additional GRAMMAR questions
+    { type: 'multi', category: 'grammar', q: 'Complete: "你好吗?" The correct response is:', opts: ['我是学生', '我很好，谢谢', '你叫什么?', '很高兴认识你'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'In "我叫李伟", the verb 叫 means:', opts: ['To meet', 'To be called', 'To ask', 'To know'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Correct sentence: "She is very happy."', opts: ['她很高兴', '很她高兴', '高兴她很', '很高兴她'], ans: 0 },
+    { type: 'multi', category: 'grammar', q: 'Which response fits "你是谁?"', opts: ['我很好', '我是王老师', '我叫什么?', '谢谢你'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'To make a yes-no question, where does "吗" (ma) go?', opts: ['At the beginning', 'Before the verb', 'At the end', 'After the object'], ans: 2 },
+    { type: 'multi', category: 'grammar', q: 'The phrase "非常感谢" (Fēicháng gǎnxiè) means:', opts: ['Very polite', 'Very grateful/thankful', 'Very formal', 'Very kind'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Complete: "你是学生吗?" Response options:', opts: ['我很高兴', '是的，我是学生', '我叫李明', '谢谢你'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'In "我也是", the adverb 也 means:', opts: ['Too', 'Also', 'Even', 'Too/Also'], ans: 3 },
+    { type: 'multi', category: 'grammar', q: 'When should you use the formal 您 instead of 你?', opts: ['With close friends', 'With children', 'With strangers/superiors', 'With family'], ans: 2 },
+    { type: 'multi', category: 'grammar', q: 'Construct: "My surname is Li and given name is Wei"', opts: ['我李魏', '我是李伟', '我叫李伟', '李伟是我'], ans: 2 },
+    
+    // Additional MATCHING questions
+    { type: 'match', category: 'vocab', q: 'Match Mandarin to English.', pairs: [
+        { left: '妈妈', right: 'Mother' },
+        { left: '爸爸', right: 'Father' },
+        { left: '哥哥', right: 'Older brother' },
+        { left: '妹妹', right: 'Younger sister' }
+    ]},
+    
+    { type: 'match', category: 'vocab', q: 'Match common expressions.', pairs: [
+        { left: '谢谢', right: 'Thank you' },
+        { left: '不客气', right: 'You\'re welcome' },
+        { left: '对不起', right: 'I\'m sorry' },
+        { left: '没关系', right: 'No worries' }
+    ]},
+    
+    { type: 'match', category: 'vocab', q: 'Match occupations and roles.', pairs: [
+        { left: '学生', right: 'Student' },
+        { left: '医生', right: 'Doctor' },
+        { left: '工程师', right: 'Engineer' },
+        { left: '律师', right: 'Lawyer' }
+    ]},
+    
+    { type: 'match', category: 'grammar', q: 'Match questions to appropriate responses.', pairs: [
+        { left: '你好吗?', right: '我很好，谢谢' },
+        { left: '你叫什么?', right: '我叫李伟' },
+        { left: '很高兴认识你', right: '我也是' },
+        { left: '你是学生吗?', right: '是的，我是' }
+    ]},
+    
+    // Additional DRAG-ORDER questions
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "You are also a teacher."', items: ['你', '也', '是', '老师', '。'], answer: ['你', '也', '是', '老师', '。'] },
+    
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "May I ask your name?"', items: ['请', '问，', '你', '的', '名字', '是', '？'], answer: ['请', '问，', '你', '的', '名字', '是', '？'] },
+    
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "I am very sorry."', items: ['我', '很', '对不起', '。'], answer: ['我', '很', '对不起', '。'] },
+    
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "Thank you very much."', items: ['非常', '感谢', '你', '。'], answer: ['非常', '感谢', '你', '。'] },
+    
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "My friend is a doctor."', items: ['我', '的', '朋友', '是', '医生', '。'], answer: ['我', '的', '朋友', '是', '医生', '。'] }
 ];
 
 // --- ENGINE ---
