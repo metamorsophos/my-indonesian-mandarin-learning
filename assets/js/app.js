@@ -763,16 +763,16 @@ const App = {
             const el = document.getElementById(id);
             if (el) {
                 el.classList.add('hidden');
-                el.style.pointerEvents = 'none';
-                el.style.visibility = 'hidden';
+                el.style.pointerEvents = '';
+                el.style.visibility = '';
             }
         });
         
         const activeView = document.getElementById(viewId);
         if (activeView) {
             activeView.classList.remove('hidden');
-            activeView.style.pointerEvents = 'auto';
-            activeView.style.visibility = 'visible';
+            activeView.style.pointerEvents = '';
+            activeView.style.visibility = '';
         }
         window.scrollTo(0,0);
     },
@@ -782,13 +782,13 @@ const App = {
             const el = document.getElementById(id);
             if (el) {
                 el.classList.add('hidden');
-                el.style.pointerEvents = 'none';
+                el.style.pointerEvents = '';
             }
         });
         const activeElement = document.getElementById(activeId);
         if (activeElement) {
             activeElement.classList.remove('hidden');
-            activeElement.style.pointerEvents = 'auto';
+            activeElement.style.pointerEvents = '';
         }
     },
 

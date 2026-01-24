@@ -14,8 +14,15 @@ h1, h2, h3, h4, .font-serif { font-family: 'Merriweather', serif; }
 
 /* Critical Fix for Visibility */
 .hidden { 
-    display: none;
-    visibility: hidden;
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Make non-hidden elements clickable */
+#view-dashboard, #view-learning, #view-quiz, #view-result,
+#sb-home, #sb-learning, #sb-quiz {
+    pointer-events: auto;
 }
 
 /* Allow visible elements to be clickable */
