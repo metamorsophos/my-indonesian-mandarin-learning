@@ -742,11 +742,9 @@ const App = {
 
     startModule() {
         const selMode = document.getElementById('learning-mode-select');
-        const selPinyin = document.getElementById('pinyin-mode-select');
         const mode = selMode ? selMode.value : 'full';
-        const pinyin = selPinyin ? selPinyin.value : 'full';
         this.state.learningMode = mode;
-        this.state.pinyin = pinyin;
+        this.state.pinyin = 'full'; // Always show pinyin in learning materials
         this.state.slideOrder = this.getLearningPath(mode);
         this.state.slideIdx = 0;
         this.switchView('view-learning');
@@ -1241,11 +1239,12 @@ const App = {
     }
 };
 
+// Initialize the app
 if (typeof document !== 'undefined') {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             try {
-                if (App && App.init) {
+                if (typeof App !== 'undefined' && App && App.init) {
                     App.init();
                 }
             } catch(e) {
@@ -1254,7 +1253,7 @@ if (typeof document !== 'undefined') {
         });
     } else {
         try {
-            if (App && App.init) {
+            if (typeof App !== 'undefined' && App && App.init) {
                 App.init();
             }
         } catch(e) {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
     <title>Mandarin Professional Course 1.2</title>
     
     <style>
@@ -203,15 +203,7 @@
                                         <option value="fasttrack">Fast Track (review)</option>
                                     </select>
                                 </label>
-                                <label class="flex flex-col gap-1">
-                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Pinyin Display</span>
-                                    <select id="pinyin-mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
-                                        <option value="full">All (with pinyin)</option>
-                                        <option value="some">Some (mixed)</option>
-                                        <option value="none">Challenge (no pinyin)</option>
-                                    </select>
-                                </label>
-                                <div class="text-[10px] sm:text-xs text-[#777777]">Choose your learning path and difficulty. Challenge mode tests character recognition.</div>
+                                <div class="text-[10px] sm:text-xs text-[#777777]">Choose your learning path. All learning materials display with pinyin for reference.</div>
                             </div>
                             <button onclick="App.startModule()" class="w-full inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm shadow hover:bg-[#52212e] transition-all">
                                 Start Learning <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
