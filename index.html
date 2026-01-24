@@ -6,8 +6,8 @@
     <title>Mandarin Professional Course 1.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js" crossorigin="anonymous"></script>
     <style>
         :root {
             --primary: #6A2C3C;   /* Deep Burgundy */
@@ -104,7 +104,7 @@
                 <div id="sb-home" class="fade-in">
                     <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Course Overview</h3>
                     <p class="text-white/80 text-sm leading-relaxed mb-4">
-                        [cite_start]Master the art of formal introductions, analyzing the etymology of respect and the structure of Chinese names[cite: 1, 2].
+                        Master the art of formal introductions, analyzing the etymology of respect and the structure of Chinese names.
                     </p>
                     <div class="flex gap-2 text-xs text-white/60">
                         <span class="bg-black/20 px-2 py-1 rounded">Beginner</span>
@@ -272,7 +272,7 @@
         // --- DATA CONTENT ---
         
         const slides = [
-            [cite_start]// Slide 1: Etymology of You/Nin [cite: 55-65]
+            // Slide 1: Etymology of You/Nin
             {
                 title: 'The Philosophy of Respect',
                 subtitle: 'Pronoun Etymology',
@@ -281,7 +281,7 @@
                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center h-full">
                         <div>
                             <p class="text-[#666666] mb-6 leading-relaxed">
-                                In Mandarin, hierarchy is embedded in the script itself. [cite_start]To address a superior, a client, or a teacher, we transform the standard "You" into something more profound [cite: 63-65].
+                                In Mandarin, hierarchy is embedded in the script itself. To address a superior, a client, or a teacher, we transform the standard "You" into something more profound.
                             </p>
                             
                             <div class="bg-[#fffbf0] border border-[#e0e0e0] p-8 text-center relative rounded shadow-sm">
@@ -388,7 +388,7 @@
                 `
             },
 
-            [cite_start]// Slide 3: Vocabulary Matrix (New) [cite: 51-123]
+            // Slide 3: Vocabulary Matrix
             {
                 title: 'Core Vocabulary',
                 subtitle: 'Essential Terminology',
@@ -519,7 +519,7 @@
                 `
             },
 
-            [cite_start]// Slide 5: Formal Inquiry [cite: 27-29]
+            // Slide 5: Formal Inquiry
             {
                 title: 'The "Honorable" Inquiry',
                 subtitle: 'Formal Protocols',
@@ -569,7 +569,7 @@
                 `
             },
 
-            [cite_start]// Slide 6: Titles & Names [cite: 199-200]
+            // Slide 6: Titles & Names
             {
                 title: 'Nomenclature Logic',
                 subtitle: 'Order of Operations',
@@ -578,7 +578,7 @@
                     <div>
                         <h4 class="font-serif font-bold text-[#333333] mb-6">The "Big to Small" Rule</h4>
                         <p class="text-[#666666] text-sm mb-8">
-                            Chinese culture places the group (Family) before the individual. [cite_start]Therefore, the Surname always precedes the Given Name[cite: 199].
+                            Chinese culture places the group (Family) before the individual. Therefore, the Surname always precedes the Given Name.
                         </p>
 
                         <div class="flex items-center justify-center mb-10 font-serif">
@@ -917,7 +917,12 @@
             }
         };
 
-        App.init();
+        // Initialize app after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', App.init);
+        } else {
+            App.init();
+        }
     </script>
 </body>
 </html>
