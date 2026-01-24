@@ -49,13 +49,24 @@
             transition: all 0.2s;
         }
         .btn-primary:hover { background-color: #52212e; transform: translateY(-1px); }
-        .btn-outline {
-            border: 1px solid var(--border); color: var(--text-sec);
-            background: white; transition: all 0.2s;
+        .vocab-card {
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
         }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .vocab-card:hover {
+            border-left-color: var(--accent);
+            background-color: #fffbf0;
+            transform: translateX(4px);
+        }
 
-        /* Character Breakdown Visuals */
+        /* Grammar Blocks */
+        .g-block {
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
         .char-component {
             border: 1px dashed var(--accent);
             background: #fffbf0;
@@ -114,7 +125,7 @@
                     <ul class="space-y-4 text-sm">
                         <li class="flex justify-between border-b border-white/10 pb-2">
                             <span class="text-white/70">Question</span>
-                            <span class="font-mono text-white"><span id="q-current-side">1</span>/10</span>
+                            <span class="font-mono text-white"><span id="q-current-side">1</span>/12</span>
                         </li>
                         <li class="flex justify-between border-b border-white/10 pb-2">
                             <span class="text-white/70">Time Remaining</span>
@@ -139,10 +150,10 @@
             
             <div id="view-dashboard" class="absolute inset-0 z-30 bg-white p-8 md:p-16 flex flex-col justify-center overflow-y-auto fade-in">
                 <div class="max-w-3xl mx-auto w-full">
-                    <span class="text-[#C0945E] font-bold tracking-widest uppercase text-xs mb-2 block">Professional Course 1.1</span>
+                    <span class="text-[#C0945E] font-bold tracking-widest uppercase text-xs mb-2 block">Professional Course 1.2</span>
                     <h2 class="text-4xl md:text-5xl font-serif font-black text-[#333333] mb-6">Introduction & <br>Asking Names</h2>
                     <p class="text-[#666666] text-lg leading-relaxed mb-10 max-w-xl">
-                        A structured approach to Mandarin etiquette. Learn the philosophy behind formal pronouns, the anatomy of characters, and the hierarchy of introductions.
+                        A structured approach to Mandarin etiquette. Learn the philosophy behind formal pronouns, essential vocabulary, sentence structure, and the hierarchy of introductions.
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -151,7 +162,7 @@
                                 <i data-lucide="book-open" class="w-6 h-6"></i>
                             </div>
                             <h3 class="text-xl font-bold text-[#333333] mb-2 font-serif group-hover:text-[#6A2C3C]">Didactic Phase</h3>
-                            <p class="text-sm text-[#666666] mb-4">Interactive slides covering etymology, grammar logic, and vocabulary.</p>
+                            <p class="text-sm text-[#666666] mb-4">Interactive slides covering etymology, vocabulary, grammar logic, and titles.</p>
                             <span class="text-xs font-bold text-[#C0945E] uppercase tracking-widest flex items-center gap-2">
                                 Start Learning <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </span>
@@ -250,7 +261,7 @@
         // --- DATA CONTENT ---
         
         const slides = [
-            // Slide 1: Etymology of You/Nin
+            [cite_start]// Slide 1: Etymology of You/Nin [cite: 55-65]
             {
                 title: 'The Philosophy of Respect',
                 subtitle: 'Pronoun Etymology',
@@ -259,7 +270,7 @@
                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center h-full">
                         <div>
                             <p class="text-[#666666] mb-6 leading-relaxed">
-                                In Mandarin, hierarchy is embedded in the script itself. To address a superior, a client, or a teacher, we transform the standard "You" into something more profound.
+                                In Mandarin, hierarchy is embedded in the script itself. [cite_start]To address a superior, a client, or a teacher, we transform the standard "You" into something more profound [cite: 63-65].
                             </p>
                             
                             <div class="bg-[#fffbf0] border border-[#e0e0e0] p-8 text-center relative rounded">
@@ -293,7 +304,7 @@
                                 Notice that <strong>Nín (您)</strong> is literally <strong>Nǐ (你)</strong> placed on top of <strong>Heart (心)</strong>. 
                             </p>
                             <p class="text-[#666666] text-justify">
-                                This symbolizes "putting the other person above your own heart." It is the requisite form of address for professional settings[cite: 65, 120].
+                                This symbolizes "putting the other person above your own heart." [cite_start]It is the requisite form of address for professional settings[cite: 65].
                             </p>
                             <div class="mt-6 p-4 bg-[#f9f9f9] border-l-2 border-[#C0945E] text-xs text-[#555]">
                                 <strong>Usage Rule:</strong> Never use "Nín" for children or close friends. It creates awkward distance.
@@ -325,7 +336,7 @@
                                     <span class="char-component px-2 rounded">子 (Child)</span>
                                 </div>
                                 <p class="text-xs text-[#666666] leading-relaxed">
-                                    A woman holding a child represents well-being and goodness. Used in greetings like <em>Nǐ hǎo</em>[cite: 60].
+                                    A woman holding a child represents well-being and goodness. [cite_start]Used in greetings like <em>Nǐ hǎo</em>[cite: 57].
                                 </p>
                             </div>
 
@@ -340,7 +351,7 @@
                                     <span class="char-component px-2 rounded">生 (Born)</span>
                                 </div>
                                 <p class="text-xs text-[#666666] leading-relaxed">
-                                    Historically, surnames were matrilineal ("born of woman"). Now used to state one's family name[cite: 79].
+                                    Historically, surnames were matrilineal ("born of woman"). Now used to state one's family name.
                                 </p>
                             </div>
 
@@ -366,11 +377,142 @@
                 `
             },
 
-            // Slide 3: Formal Inquiry (From PDF)
+            [cite_start]// Slide 3: Vocabulary Matrix (New) [cite: 51-123]
+            {
+                title: 'Core Vocabulary',
+                subtitle: 'Essential Terminology',
+                number: '03',
+                html: `
+                    <div class="space-y-6">
+                        <p class="text-[#666666] text-sm">Review these key terms before constructing sentences. Hover over items for details.</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            
+                            <div class="bg-white border border-[#e0e0e0] p-4">
+                                <h4 class="text-xs font-bold text-[#6A2C3C] uppercase tracking-widest mb-3 border-b pb-2">Persons</h4>
+                                <ul class="space-y-2">
+                                    <li class="vocab-card flex justify-between p-2 rounded cursor-default">
+                                        <span class="zh font-bold text-[#333333] text-lg">你 / 您</span>
+                                        [cite_start]<span class="text-[#666666] text-sm">Nǐ / Nín <span class="text-xs text-[#C0945E] ml-1">(You / Formal You)</span> [cite: 55, 63]</span>
+                                    </li>
+                                    <li class="vocab-card flex justify-between p-2 rounded cursor-default">
+                                        <span class="zh font-bold text-[#333333] text-lg">我</span>
+                                        [cite_start]<span class="text-[#666666] text-sm">Wǒ <span class="text-xs text-[#999999] ml-1">(I, Me)</span> [cite: 86]</span>
+                                    </li>
+                                    <li class="vocab-card flex justify-between p-2 rounded cursor-default">
+                                        <span class="zh font-bold text-[#333333] text-lg">老师</span>
+                                        [cite_start]<span class="text-[#666666] text-sm">Lǎoshī <span class="text-xs text-[#999999] ml-1">(Teacher)</span> [cite: 105]</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white border border-[#e0e0e0] p-4">
+                                <h4 class="text-xs font-bold text-[#6A2C3C] uppercase tracking-widest mb-3 border-b pb-2">Actions</h4>
+                                <ul class="space-y-2">
+                                    <li class="vocab-card flex justify-between p-2 rounded cursor-default">
+                                        <span class="zh font-bold text-[#333333] text-lg">叫</span>
+                                        [cite_start]<span class="text-[#666666] text-sm">Jiào <span class="text-xs text-[#999999] ml-1">(To be called)</span> [cite: 92]</span>
+                                    </li>
+                                    <li class="vocab-card flex justify-between p-2 rounded cursor-default">
+                                        <span class="zh font-bold text-[#333333] text-lg">姓</span>
+                                        [cite_start]<span class="text-[#666666] text-sm">Xìng <span class="text-xs text-[#999999] ml-1">(Surname is...)</span> [cite: 79]</span>
+                                    </li>
+                                    <li class="vocab-card flex justify-between p-2 rounded cursor-default">
+                                        <span class="zh font-bold text-[#333333] text-lg">认识</span>
+                                        [cite_start]<span class="text-[#666666] text-sm">Rènshi <span class="text-xs text-[#999999] ml-1">(To know/meet)</span> [cite: 118]</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white border border-[#e0e0e0] p-4 md:col-span-2">
+                                <h4 class="text-xs font-bold text-[#6A2C3C] uppercase tracking-widest mb-3 border-b pb-2">Modifiers & Essentials</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="vocab-card p-2">
+                                        <div class="zh font-bold text-[#333333] text-lg">很</div>
+                                        [cite_start]<div class="text-xs text-[#666666]">Hěn (Very) [cite: 106]</div>
+                                    </div>
+                                    <div class="vocab-card p-2">
+                                        <div class="zh font-bold text-[#333333] text-lg">也</div>
+                                        [cite_start]<div class="text-xs text-[#666666]">Yě (Also) [cite: 121]</div>
+                                    </div>
+                                    <div class="vocab-card p-2">
+                                        <div class="zh font-bold text-[#333333] text-lg">什么</div>
+                                        [cite_start]<div class="text-xs text-[#666666]">Shénme (What) [cite: 95]</div>
+                                    </div>
+                                    <div class="vocab-card p-2">
+                                        <div class="zh font-bold text-[#333333] text-lg">高兴</div>
+                                        [cite_start]<div class="text-xs text-[#666666]">Gāoxìng (Happy) [cite: 109]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+
+            [cite_start]// Slide 4: Grammar Logic (New) [cite: 31, 116, 121]
+            {
+                title: 'Grammar Logic',
+                subtitle: 'Structure & Placement',
+                number: '04',
+                html: `
+                    <div class="flex flex-col h-full space-y-8">
+                        
+                        <div>
+                            <h4 class="font-serif font-bold text-[#333333] mb-3">1. Basic Sentence Order</h4>
+                            <p class="text-sm text-[#666666] mb-3">Unlike some languages, Chinese follows a strict S-V-O (Subject + Verb + Object) order, even for questions.</p>
+                            
+                            <div class="bg-[#f9f9f9] p-4 border border-[#e0e0e0] rounded">
+                                <div class="flex flex-wrap items-center gap-2 text-center text-sm font-mono mb-2">
+                                    <div class="g-block bg-blue-100 text-blue-800">Nǐ (Subj)</div>
+                                    <div class="text-[#999]">+</div>
+                                    <div class="g-block bg-red-100 text-red-800">Jiào (Verb)</div>
+                                    <div class="text-[#999]">+</div>
+                                    <div class="g-block bg-green-100 text-green-800">Shénme míngzi? (Obj)</div>
+                                </div>
+                                [cite_start]<div class="text-xs text-[#666666] italic">"You are called what name?" [cite: 31]</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-serif font-bold text-[#333333] mb-3">2. Modifier Placement</h4>
+                            <p class="text-sm text-[#666666] mb-3">Adverbs like <strong>Hěn (Very)</strong> and <strong>Yě (Also)</strong> must be placed <em>before</em> the verb or adjective.</p>
+                            
+                            <div class="mb-4">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="zh font-bold text-lg text-[#333333]">我很高兴</span>
+                                    <span class="text-xs text-[#999]">(I very happy)</span>
+                                </div>
+                                <div class="flex gap-1 text-xs">
+                                    <span class="bg-[#e0e0e0] px-2 py-1 rounded">Wǒ (Subj)</span>
+                                    <span class="bg-[#C0945E] text-white px-2 py-1 rounded">Hěn (Adv)</span>
+                                    <span class="bg-white border border-[#e0e0e0] px-2 py-1 rounded">Gāoxìng (Adj)</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="zh font-bold text-lg text-[#333333]">我也很高兴</span>
+                                    <span class="text-xs text-[#999]">(I also very happy)</span>
+                                </div>
+                                <div class="flex gap-1 text-xs">
+                                    <span class="bg-[#e0e0e0] px-2 py-1 rounded">Wǒ (Subj)</span>
+                                    <span class="bg-[#6A2C3C] text-white px-2 py-1 rounded">Yě (Adv)</span>
+                                    <span class="bg-[#C0945E] text-white px-2 py-1 rounded">Hěn (Adv)</span>
+                                    <span class="bg-white border border-[#e0e0e0] px-2 py-1 rounded">Gāoxìng (Adj)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                `
+            },
+
+            [cite_start]// Slide 5: Formal Inquiry (Previously Slide 3) [cite: 27-29]
             {
                 title: 'The "Honorable" Inquiry',
                 subtitle: 'Formal Protocols',
-                number: '03',
+                number: '05',
                 html: `
                     <div class="flex flex-col h-full justify-center max-w-2xl mx-auto">
                         <div class="border-l-4 border-[#6A2C3C] pl-6 py-2 mb-8">
@@ -383,9 +525,9 @@
                             <div class="pl-4">
                                 <span class="text-[10px] font-bold uppercase tracking-widest text-[#C0945E] mb-1 block">The Gold Standard (Formal)</span>
                                 <div class="zh text-3xl font-bold text-[#333333] mb-2">请问，您贵姓？</div>
-                                <div class="font-mono text-sm text-[#666666] mb-2">Qǐngwèn, nín guì xìng?</div>
+                                [cite_start]<div class="font-mono text-sm text-[#666666] mb-2">Qǐngwèn, nín guì xìng? [cite: 27]</div>
                                 <p class="text-xs text-[#999999] italic">
-                                    Lit: "Please ask, [what is] your honorable surname?" [cite: 28, 81]
+                                    [cite_start]Lit: "Please ask, [what is] your honorable surname?" [cite: 29]
                                 </p>
                             </div>
                         </div>
@@ -393,15 +535,15 @@
                         <div class="grid grid-cols-3 gap-2 mb-8">
                             <div class="bg-[#f9f9f9] p-3 text-center border border-[#e0e0e0]">
                                 <div class="zh font-bold text-[#6A2C3C]">请 (Qǐng)</div>
-                                <div class="text-[10px] text-[#666666]">Please [cite: 68]</div>
+                                [cite_start]<div class="text-[10px] text-[#666666]">Please [cite: 68]</div>
                             </div>
                             <div class="bg-[#f9f9f9] p-3 text-center border border-[#e0e0e0]">
                                 <div class="zh font-bold text-[#6A2C3C]">问 (Wèn)</div>
-                                <div class="text-[10px] text-[#666666]">To Ask [cite: 71]</div>
+                                [cite_start]<div class="text-[10px] text-[#666666]">To Ask [cite: 71]</div>
                             </div>
                             <div class="bg-[#fffbf0] p-3 text-center border border-[#C0945E]">
                                 <div class="zh font-bold text-[#C0945E]">贵 (Guì)</div>
-                                <div class="text-[10px] text-[#666666]">Honorable [cite: 80]</div>
+                                [cite_start]<div class="text-[10px] text-[#666666]">Honorable [cite: 80]</div>
                             </div>
                         </div>
 
@@ -409,23 +551,23 @@
                             <i data-lucide="alert-triangle" class="w-5 h-5 text-red-500 shrink-0"></i>
                             <div class="text-xs text-red-800">
                                 <strong>Cultural Trap:</strong> Never use <em>Guì</em> (Honorable) to refer to yourself.
-                                <br>Correct Reply: "Wǒ xìng Pān" (My surname is Pan)[cite: 82].
+                                [cite_start]<br>Correct Reply: "Wǒ xìng Pān" (My surname is Pan)[cite: 84].
                             </div>
                         </div>
                     </div>
                 `
             },
 
-            // Slide 4: Titles & Names
+            [cite_start]// Slide 6: Titles & Names (Previously Slide 4) [cite: 113, 199]
             {
                 title: 'Nomenclature Logic',
                 subtitle: 'Order of Operations',
-                number: '04',
+                number: '06',
                 html: `
                     <div>
                         <h4 class="font-serif font-bold text-[#333333] mb-6">The "Big to Small" Rule</h4>
                         <p class="text-[#666666] text-sm mb-8">
-                            Chinese culture places the group (Family) before the individual. Therefore, the Surname always precedes the Given Name[cite: 199].
+                            Chinese culture places the group (Family) before the individual. [cite_start]Therefore, the Surname always precedes the Given Name[cite: 199].
                         </p>
 
                         <div class="flex items-center justify-center mb-10 font-serif">
@@ -454,7 +596,7 @@
                                 <div class="flex-1 text-center">
                                     <span class="text-[#6A2C3C] font-bold">Pān</span> 
                                     <span class="text-[#333333]">Lǎoshī</span>
-                                    <div class="text-[10px] text-[#999999] mt-1">Surname + Teacher [cite: 153]</div>
+                                    [cite_start]<div class="text-[10px] text-[#999999] mt-1">Surname + Teacher [cite: 113]</div>
                                 </div>
                                 <div class="text-xl text-[#C0945E]">✔</div>
                             </div>
@@ -471,7 +613,7 @@
                 `
             },
 
-            // Slide 5: Mini Quiz
+            // Slide 7: Mini Quiz
             {
                 type: 'mini-quiz',
                 title: 'Checkpoint',
@@ -489,14 +631,16 @@
         const quizQuestions = [
             { q: 'What is the formal way to say "You"?', opts: ['Nǐ (你)', 'Nín (您)', 'Tā (他)', 'Wǒ (我)'], ans: 1 },
             { q: 'Which phrase means "May I ask your honorable surname?"', opts: ['Nǐ jiào shénme?', 'Qǐngwèn, nín guì xìng?', 'Nǐ hǎo ma?', 'Hěn gāoxìng.'], ans: 1 },
-            { q: 'The character "Hǎo" (Good) combines Woman and...', opts: ['Sun', 'Moon', 'Child', 'Heart'], ans: 2 },
+            { q: 'What is the correct order? "I am also very happy."', opts: ['Wǒ hěn gāoxìng yě.', 'Wǒ yě hěn gāoxìng.', 'Yě wǒ hěn gāoxìng.', 'Wǒ hěn yě gāoxìng.'], ans: 1 },
             { q: 'What does "Guì" (贵) mean literally?', opts: ['Expensive/Honorable', 'Name', 'Teacher', 'Please'], ans: 0 },
             { q: 'How do you say "Teacher Pan"?', opts: ['Lǎoshī Pān', 'Pān Lǎoshī', 'Teacher Pān', 'Mr. Pān'], ans: 1 },
             { q: 'Which word indicates a question or "to ask"?', opts: ['Qǐng (请)', 'Wèn (问)', 'Jiào (叫)', 'Xìng (姓)'], ans: 1 },
             { q: 'Translate: "Hěn gāoxìng rènshi nín."', opts: ['What is your name?', 'Nice to meet you (formal)', 'Are you a teacher?', 'My surname is Pan'], ans: 1 },
+            { q: 'What is the verb "to be called"?', opts: ['Xìng', 'Jiào', 'Míngzi', 'Shénme'], ans: 1 },
             { q: 'Can you use "Guì" (Honorable) for your own surname?', opts: ['Yes', 'No', 'Only on Sundays', 'Only to subordinates'], ans: 1 },
             { q: 'What comes first in a Chinese name?', opts: ['Given Name', 'Middle Name', 'Surname', 'Title'], ans: 2 },
-            { q: 'The character Nín (您) contains which radical?', opts: ['Water', 'Fire', 'Heart', 'Wood'], ans: 2 }
+            { q: 'The character Nín (您) contains which radical?', opts: ['Water', 'Fire', 'Heart', 'Wood'], ans: 2 },
+            { q: 'Translate: "Wǒ hěn gāoxìng"', opts: ['I am happy', 'You are happy', 'He is happy', 'We are happy'], ans: 0 }
         ];
 
         // --- ENGINE ---
