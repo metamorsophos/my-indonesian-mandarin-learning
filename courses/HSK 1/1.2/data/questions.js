@@ -1,142 +1,109 @@
-/* HSK 1 - Module 1.2: Greetings & Introductions
-   Quiz Questions Bank - 70+ Questions */
-
 const quizBank = [
-    /* ===== VOCABULARY QUESTIONS ===== */
+    // VOCAB: Greetings
+    { type: 'multi', category: 'vocab', q: 'What does "好久不见" (hǎo jiǔ bú jiàn) mean?', opts: ['Long time no see', 'How are you?', 'Very good', 'I am happy'], ans: 0 },
+    { type: 'multi', category: 'vocab', q: 'Which phrase asks "How have you been recently?"', opts: ['你好吗?', '最近怎么样?', '不错', '很好'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'What is the best response to "最近怎么样?"', opts: ['你好', '不错', '最近', '学生'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'What does "不错" literally mean?', opts: ['Bad', 'Not bad/No mistake', 'Very good', 'Student'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which response is appropriate for saying "I\'m doing well"?', opts: ['最近', '不错', '很好', '吗'], ans: 2 },
     
-    // Word meaning - Greetings
-    { type: 'multi', category: 'vocab', q: 'What does "好久不见" mean?', opts: ['Long time no see', 'See you later', 'Nice to meet you', 'How are you?'], ans: 0 },
-    { type: 'multi', category: 'vocab', q: 'Which word means "recently"?', opts: ['最近', '最后', '最好', '最大'], ans: 0 },
-    { type: 'multi', category: 'vocab', q: '"怎么样" translates to:', opts: ['How about...? / How are you?', 'Where?', 'When?', 'Why?'], ans: 0 },
-    { type: 'multi', category: 'vocab', q: '"不错" literally means:', opts: ['Not bad', 'Very good', 'Bad', 'No mistake'], ans: 3 },
-
-    // Professions
-    { type: 'multi', category: 'vocab', q: 'Which word means "student"?', opts: ['老师', '学生', '医生', '警察'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: '"警察" means:', opts: ['Teacher', 'Doctor', 'Policeman', 'Lawyer'], ans: 2 },
-    { type: 'multi', category: 'vocab', q: 'What does "老师" mean?', opts: ['Student', 'Teacher', 'Doctor', 'Policeman'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: '"医生" refers to a:', opts: ['Teacher', 'Policeman', 'Doctor', 'Lawyer'], ans: 2 },
-
-    // Question particles
-    { type: 'multi', category: 'vocab', q: 'Which particle turns a statement into a Yes/No question?', opts: ['呢', '吗', '了', '啊'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: 'The particle "呢" is used to ask:', opts: ['What?', 'Where?', 'And you?', 'How many?'], ans: 2 },
-    { type: 'multi', category: 'vocab', q: '"是" (shì) means:', opts: ['Have', 'To be', 'Go', 'Do'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: '"不是" means:', opts: ['Is', 'Is not', 'Are', 'Are not'], ans: 1 },
-
-    // Negation
-    { type: 'multi', category: 'vocab', q: 'How do you negate a verb in this module?', opts: ['Put 没 before it', 'Put 不 before it', 'Change the verb', 'Use the word 否'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: '"不" means:', opts: ['Good', 'Not', 'Yes', 'Also'], ans: 1 },
-
-    // Formal you (from 1.1, reinforcement)
-    { type: 'multi', category: 'vocab', q: 'Which is the formal/respectful "you"?', opts: ['我', '你', '您', '他'], ans: 2 },
-
-    // Additional professions
-    { type: 'multi', category: 'vocab', q: '"医生" means:', opts: ['Engineer', 'Doctor', 'Lawyer', 'Artist'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: '"工程师" means:', opts: ['Teacher', 'Engineer', 'Doctor', 'Accountant'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: 'Which means "boy/male student"?', opts: ['女生', '男生', '女', '男'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: '"女生" means:', opts: ['Woman', 'Girl/Female student', 'Female', 'Daughter'], ans: 1 },
-
-    /* ===== GRAMMAR QUESTIONS ===== */
-
-    // 是 (shì) verb
-    { type: 'multi', category: 'grammar', q: 'Complete: 我 _____ 老师', opts: ['有', '做', '是', '去'], ans: 2 },
-    { type: 'multi', category: 'grammar', q: 'Which is correct? (I am a student)', opts: ['我有学生', '我是学生', '我做学生', '我去学生'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'Does 是 change based on the subject?', opts: ['Yes, always', 'Yes, sometimes', 'No, never', 'Only for plural'], ans: 2 },
-    { type: 'multi', category: 'grammar', q: 'Which is correct? (He is a policeman)', opts: ['他是警察', '他有警察', '他做警察', '他去警察'], ans: 0 },
-
-    // Negation with 不是
-    { type: 'multi', category: 'grammar', q: 'How do you negate "我是学生"?', opts: ['我有不学生', '我做不学生', '我不是学生', '不我是学生'], ans: 2 },
-    { type: 'multi', category: 'grammar', q: 'Which is correct? (I am not a teacher)', opts: ['我不老师', '我不是老师', '我没是老师', '我不有老师'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'In "不是", what tone does 不 have?', opts: ['1st tone (high)', '2nd tone (rising)', '3rd tone (low)', '4th tone (falling)'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'Why does 不 change tone in "不是"?', opts: ['It always changes', 'Before 4th tone words', 'Before 1st tone words', 'In questions only'], ans: 1 },
-
-    // 吗 questions
-    { type: 'multi', category: 'grammar', q: 'To make a Yes/No question, you add what to the end?', opts: ['呢', '吗', '啊', '的'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'Which is correct? (Are you a student?)', opts: ['你学生吗?', '你是学生吗?', '你有学生吗?', '吗你是学生?'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'How do you answer "你是老师吗?" affirmatively?', opts: ['不', '不是', '是 or 是的', '有'], ans: 2 },
-    { type: 'multi', category: 'grammar', q: 'How do you answer "你是老师吗?" negatively?', opts: ['是', '是的', '不 or 我不是', '有'], ans: 2 },
-
-    // 呢 questions
-    { type: 'multi', category: 'grammar', q: 'The particle 呢 is used when:', opts: ['Starting a conversation', 'Context is already clear', 'Asking for something', 'Giving orders'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'In dialogue, A says "我是学生", then asks "你呢?". This means:', opts: ['You are a student too', 'Are you a student?', 'What about you?', 'Do you like students?'], ans: 2 },
-    { type: 'multi', category: 'grammar', q: 'Which is correct use of 呢?', opts: ['我是老师呢?', '你呢?', '他呢吗?', '是呢老师'], ans: 1 },
-
-    // Tone sandhi
-    { type: 'multi', category: 'grammar', q: '"不错" is pronounced as:', opts: ['bù cuò', 'bú cuò', 'bu cuò', 'bù cuò'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'The tone change of 不 happens before which tone?', opts: ['1st', '2nd', '3rd', '4th'], ans: 3 },
-
-    // Sentence structure
-    { type: 'multi', category: 'grammar', q: 'What is the basic word order?', opts: ['Verb-Subject-Object', 'Subject-Object-Verb', 'Subject-Verb-Object', 'Object-Subject-Verb'], ans: 2 },
-
-    /* ===== VOCABULARY + CONTEXT ===== */
-
-    { type: 'multi', category: 'dialogue', q: 'If someone says "好久不见", they are:', opts: ['Greeting a stranger', 'Greeting an old acquaintance', 'Saying goodbye', 'Asking for help'], ans: 1 },
-    { type: 'multi', category: 'dialogue', q: '"最近怎么样?" is most appropriate when:', opts: ['Meeting for the first time', 'Seeing someone you know recently', 'Formal presentation', 'Emergency situation'], ans: 1 },
-    { type: 'multi', category: 'dialogue', q: 'After someone says "我是学生", you ask "你呢?" to:', opts: ['Confirm they are a student', 'Ask them to introduce themselves', 'Ask about their profession', 'Ask them to sit down'], ans: 2 },
-
-    /* ===== MATCHING QUESTIONS ===== */
-
-    { type: 'match', category: 'vocab', q: 'Match Chinese to English', pairs: [
-        { cn: '学生', en: 'Student' },
-        { cn: '警察', en: 'Policeman' },
-        { cn: '老师', en: 'Teacher' },
-        { cn: '医生', en: 'Doctor' }
-    ], answer: [0, 1, 2, 3] },
-
-    { type: 'match', category: 'vocab', q: 'Match phrases to meanings', pairs: [
-        { cn: '好久不见', en: 'Long time no see' },
-        { cn: '最近怎么样', en: 'How are you recently?' },
-        { cn: '不错', en: 'Not bad / Good' },
-        { cn: '最近', en: 'Recently' }
-    ], answer: [0, 1, 2, 3] },
-
-    { type: 'match', category: 'grammar', q: 'Match sentences to their meanings', pairs: [
-        { cn: '我是老师', en: 'I am a teacher' },
-        { cn: '我不是学生', en: 'I am not a student' },
-        { cn: '你是医生吗?', en: 'Are you a doctor?' },
-        { cn: '你呢?', en: 'And you?' }
-    ], answer: [0, 1, 2, 3] },
-
-    /* ===== DRAG-ORDER QUESTIONS (Sentence Construction) ===== */
-
-    { type: 'drag-order', category: 'grammar', q: 'Put words in correct order: I / am / student / a', items: ['我', '是', '学生'], answer: [0, 1, 2] },
-    { type: 'drag-order', category: 'grammar', q: 'Arrange to make: Are you a teacher?', items: ['你', '是', '老师', '吗?'], answer: [0, 1, 2, 3] },
-    { type: 'drag-order', category: 'grammar', q: 'Arrange correctly: He is not a policeman', items: ['他', '不是', '警察'], answer: [0, 1, 2] },
-    { type: 'drag-order', category: 'dialogue', q: 'Complete dialogue: A: "你是学生吗?" B: ___', items: ['是的', '你呢?'], answer: [0, 1] },
-    { type: 'drag-order', category: 'dialogue', q: 'Arrange greeting: Teacher / long time / no see / Pan', items: ['潘老师', '好久', '不见'], answer: [0, 2, 1] },
-
-    /* ===== MORE VOCAB QUESTIONS ===== */
-
-    { type: 'multi', category: 'vocab', q: 'What is the formal way to say "yes" to a question?', opts: ['是', '对', '是的', '好'], ans: 2 },
-    { type: 'multi', category: 'vocab', q: 'When listing professions, "工程师" means:', opts: ['Engineer', 'Programmer', 'Architect', 'Scientist'], ans: 0 },
-    { type: 'multi', category: 'vocab', q: '"律师" is:', opts: ['Lawyer', 'Doctor', 'Teacher', 'Police'], ans: 0 },
-    { type: 'multi', category: 'vocab', q: '"会计" means:', opts: ['Teacher', 'Accountant', 'Doctor', 'Engineer'], ans: 1 },
-
-    /* ===== LISTENING/COMPREHENSION ===== */
-
-    { type: 'multi', category: 'dialogue', q: 'In the dialogue, when Gali asks "你是学生吗?", she is:', opts: ['Greeting', 'Asking about Fan Er\'s profession', 'Saying goodbye', 'Apologizing'], ans: 1 },
-    { type: 'multi', category: 'dialogue', q: 'Fan Er responds "我不是学生，我是警察" to indicate:', opts: ['He has two jobs', 'He used to be a student', 'He is a policeman, not a student', 'He doesn\'t like students'], ans: 2 },
-    { type: 'multi', category: 'dialogue', q: 'Teacher Pan\'s response "不错!" to "最近怎么样?" means:', opts: ['I\'m bad', 'I\'m okay', 'I\'m not okay', 'I don\'t know'], ans: 1 },
-
-    /* ===== ADVANCED GRAMMAR ===== */
-
-    { type: 'multi', category: 'grammar', q: 'Which statement is grammatically correct?', opts: ['我有是老师', '我很是老师', '我就是老师', '我是很老师'], ans: 2 },
-    { type: 'multi', category: 'grammar', q: 'Complete with correct tone: 我不___是学生。(I am not a student)', opts: ['bù shì', 'bú shì', 'bu shi', 'ba shi'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'In "他是医生吗?", the 吗 is:', opts: ['A verb', 'A question particle', 'An adverb', 'A classifier'], ans: 1 },
-
-    /* ===== VOCABULARY IN CONTEXT ===== */
-
-    { type: 'multi', category: 'vocab', q: 'If you haven\'t seen someone for 2 years, you say:', opts: ['你好', '再见', '好久不见', '最近怎么样'], ans: 2 },
-    { type: 'multi', category: 'vocab', q: 'To ask about someone\'s current state informally:', opts: ['你是谁?', '最近怎么样?', '你是老师吗?', '你叫什么'], ans: 1 },
-    { type: 'multi', category: 'vocab', q: 'When responding positively to a question, which is most polite?', opts: ['是', '对', '是的', '好的'], ans: 2 },
-
-    /* ===== CHARACTER RADICALS (BONUS) ===== */
-
-    { type: 'multi', category: 'vocab', q: 'The character 学 appears in:', opts: ['警察', '老师', '学生', '医生'], ans: 2 },
-    { type: 'multi', category: 'vocab', q: '"女" means female, so "女生" means:', opts: ['Woman', 'Girl/Female student', 'Female teacher', 'Daughter'], ans: 1 },
-
-    /* ===== FINAL REVIEW ===== */
-
-    { type: 'multi', category: 'grammar', q: 'Choose the correct greeting for a friend you saw 5 days ago:', opts: ['好久不见', '最近怎么样?', '再见', '谢谢'], ans: 1 },
-    { type: 'multi', category: 'grammar', q: 'How would you tell someone you\'re a lawyer?', opts: ['我有律师', '我做律师', '我是律师', '我去律师'], ans: 2 },
-    { type: 'multi', category: 'dialogue', q: 'If someone says "你呢?", they are asking:', opts: ['Who are you?', 'Where are you?', 'And you? (about your profession)', 'Do you have...?'], ans: 2 }
+    // VOCAB: Professions
+    { type: 'multi', category: 'vocab', q: 'What does "学生 (xuésheng)" mean?', opts: ['Teacher', 'Doctor', 'Student', 'Police Officer'], ans: 2 },
+    { type: 'multi', category: 'vocab', q: 'Which word means "Teacher"?', opts: ['学生', '老师', '医生', '警察'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'What profession is "医生 (yīshēng)"?', opts: ['Teacher', 'Doctor', 'Police Officer', 'Student'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: '"警察 (jǐngchá)" refers to:', opts: ['Teacher', 'Doctor', 'Police Officer', 'Student'], ans: 2 },
+    { type: 'multi', category: 'vocab', q: 'Which profession group includes 学生, 老师, 医生, 警察?', opts: ['Family', 'Sports', 'Occupations/Professions', 'Animals'], ans: 2 },
+    
+    // VOCAB: Core Verbs
+    { type: 'multi', category: 'vocab', q: 'What does the verb "是 (shì)" mean?', opts: ['To do', 'To be/am/is/are', 'To go', 'To like'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which verb means "to be called"?', opts: ['是', '叫', '认识', '最近'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'What does "认识 (rènshi)" mean?', opts: ['To go', 'To know/to meet', 'To be', 'To call'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which word is a question particle for yes/no questions?', opts: ['呢', '吗', '不', '什么'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: '"呢 (ne)" is used to ask:', opts: ['What?', 'How?', 'What about you?', 'Yes or no?'], ans: 2 },
+    
+    // VOCAB: Modifiers
+    { type: 'multi', category: 'vocab', q: 'What does "很 (hěn)" mean?', opts: ['Good', 'Very', 'Not', 'And'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which word means "also" or "too"?', opts: ['很', '也', '不', '吗'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'What is the negation word in Mandarin?', opts: ['很', '也', '不', '吗'], ans: 2 },
+    { type: 'multi', category: 'vocab', q: 'What does "什么 (shénme)" mean?', opts: ['Where', 'What', 'When', 'Who'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which word means "happy"?', opts: ['好', '高兴', '不错', '最近'], ans: 1 },
+    
+    // GRAMMAR: The 是 Verb
+    { type: 'multi', category: 'grammar', q: 'Complete: "我 ___ 老师" (I am a teacher)', opts: ['好', '是', '不', '最近'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Which sentence correctly uses 是?', opts: ['我是很高兴', '我是学生', '我是你呢', '我很是好'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'What is the correct structure with 是?', opts: ['是 + Subject + Profession', 'Subject + Profession + 是', 'Subject + 是 + Profession', 'Profession + Subject + 是'], ans: 2 },
+    { type: 'multi', category: 'grammar', q: 'Which statement is grammatically correct?', opts: ['她是不医生', '她不是医生', '她医生是不', '她是医生不'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: '是 can only connect to:', opts: ['Adjectives', 'Nouns (professions/identities)', 'Verbs', 'Adverbs'], ans: 1 },
+    
+    // GRAMMAR: Negation with 不
+    { type: 'multi', category: 'grammar', q: 'How do you negate "我是学生"?', opts: ['学生不是我', '我不是学生', '不我是学生', '我是不学生'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Which is the correct negative statement?', opts: ['最近不好', '不最近好', '好最近不', '不好最近'], ans: 0 },
+    { type: 'multi', category: 'grammar', q: 'What happens when 不 comes before a 4th tone?', opts: ['It stays 4th tone', 'It changes to 2nd tone', 'It becomes silent', 'It doubles'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: '不是 is pronounced:', opts: ['Bù shì', 'Bú shì', 'Buo shi', 'Bu she'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Complete: "他 ___ 是警察" (He is not a police officer)', opts: ['很', '最近', '不', '吗'], ans: 2 },
+    
+    // GRAMMAR: Questions with 吗
+    { type: 'multi', category: 'grammar', q: 'How do you turn "你是学生" into a question?', opts: ['学生是你吗', '你是学生吗', '你吗是学生', '是学生你吗'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'What is the pattern for yes/no questions?', opts: ['吗 + Statement', 'Statement + 吗', '吗 at the beginning', 'Two 吗s in the sentence'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Which question is correctly formed?', opts: ['学生吗你是?', '你学生吗是?', '你是学生吗?', '是你学生吗?'], ans: 2 },
+    { type: 'multi', category: 'grammar', q: 'What does adding 吗 to a statement do?', opts: ['Makes it negative', 'Turns it into a yes/no question', 'Makes it plural', 'Changes the tense'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Respond to "你最近怎么样吗?" - which is appropriate?', opts: ['学生', '好久不见', '不错', '什么'], ans: 2 },
+    
+    // GRAMMAR: Reciprocal Questions with 呢
+    { type: 'multi', category: 'grammar', q: 'Complete the dialogue: A: "我是老师。" B: "___ ?"', opts: ['你吗', '你呢', '你是', '你什么'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'What is the function of 呢 in conversation?', opts: ['To negate', 'To ask a reciprocal question', 'To confirm', 'To ask for permission'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: 'Which example correctly uses 呢?', opts: ['很好呢', '你呢?', '呢好很', '呢吗你'], ans: 1 },
+    { type: 'multi', category: 'grammar', q: '呢 differs from 吗 because:', opts: ['呢 is more formal', '吗 is reciprocal', '呢 is conversational/reciprocal', '呢 only works with nouns'], ans: 2 },
+    { type: 'multi', category: 'grammar', q: 'In "最近怎么样？你呢？" the 呢 means:', opts: ['Is it?', 'And you?/How about you?', 'What?', 'When?'], ans: 1 },
+    
+    // MATCHING: Greetings & Responses
+    { type: 'match', category: 'vocab', q: 'Match the greeting to its appropriate response.', pairs: [
+        { left: '好久不见！', right: '好久不见！/ 不错，你呢？' },
+        { left: '最近怎么样？', right: '不错！/很好，你呢？' },
+        { left: '你好！', right: '你好！很高兴认识你。' },
+        { left: '你是老师吗？', right: '是的，我是老师。/不，我是学生。' }
+    ]},
+    
+    // MATCHING: Professions
+    { type: 'match', category: 'vocab', q: 'Match the Chinese profession to English.', pairs: [
+        { left: '学生', right: 'Student' },
+        { left: '老师', right: 'Teacher' },
+        { left: '医生', right: 'Doctor' },
+        { left: '警察', right: 'Police Officer' }
+    ]},
+    
+    // MATCHING: Verbs & Actions
+    { type: 'match', category: 'vocab', q: 'Match the verb to its meaning.', pairs: [
+        { left: '是', right: 'To be (identity/profession)' },
+        { left: '叫', right: 'To be called' },
+        { left: '认识', right: 'To know/to meet' },
+        { left: '最近', right: 'Recently (time word)' }
+    ]},
+    
+    // DRAG-ORDER: Greeting Exchange
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "好久不见！最近怎么样？" (Long time no see! How have you been?)', items: ['好久', '不见', '！最近', '怎么', '样', '？'], answer: ['好久', '不见', '！最近', '怎么', '样', '？'] },
+    
+    // DRAG-ORDER: Professional Introduction
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "我是老师。" (I am a teacher.)', items: ['我', '是', '老师', '。'], answer: ['我', '是', '老师', '。'] },
+    
+    // DRAG-ORDER: Greeting & Reciprocal
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "你最近怎么样？我不错。你呢？" (How have you been? I\'m not bad. How about you?)', items: ['你', '最近', '怎么', '样', '？我', '不错', '。你', '呢', '？'], answer: ['你', '最近', '怎么', '样', '？我', '不错', '。你', '呢', '？'] },
+    
+    // DRAG-ORDER: Question Formation
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "你是医生吗？" (Are you a doctor?)', items: ['你', '是', '医生', '吗', '？'], answer: ['你', '是', '医生', '吗', '？'] },
+    
+    // DRAG-ORDER: Negative Statement
+    { type: 'drag-order', category: 'grammar', q: 'Arrange: "她不是学生。" (She is not a student.)', items: ['她', '不是', '学生', '。'], answer: ['她', '不是', '学生', '。'] },
+    
+    // Additional VOCAB questions
+    { type: 'multi', category: 'vocab', q: 'What is the HSK 1 level classification for these words?', opts: ['Advanced', 'Beginner/Elementary', 'Intermediate', 'Professional'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which is NOT a profession in this module?', opts: ['医生', '老师', '警察', '最近'], ans: 3 },
+    { type: 'multi', category: 'vocab', q: 'The phrase "很高兴认识你 (hěn gāoxìng rènshi nǐ)" means:', opts: ['How are you?', 'Nice to meet you / I\'m very happy to meet you', 'Long time no see', 'I am a teacher'], ans: 1 },
+    { type: 'multi', category: 'vocab', q: 'Which word can replace "吗" in some contexts?', opts: ['呢', '不', '什么', '很'], ans: 0 },
+    
+    // DIALOGUE: Context Based
+    { type: 'multi', category: 'dialogue', q: 'In a workplace meeting, A says "你好！你是新员工吗?" The most professional response is:', opts: ['不错', '很好', '是的，我是新员工', '好久不见'], ans: 2 },
+    { type: 'multi', category: 'dialogue', q: 'At a school reunion, old friends would most naturally use:', opts: ['最近怎么样', '你好吗', '你是学生吗', '认识你'], ans: 0 },
+    { type: 'multi', category: 'dialogue', q: 'If someone asks "你是警察吗？" and the answer is "no," the response is:', opts: ['不，我是医生', '不错', '吗？', '是的'], ans: 0 },
+    { type: 'multi', category: 'dialogue', q: 'To continue a conversation after introducing your profession, you would use:', opts: ['吗', '呢', '不', '什么'], ans: 1 },
+    { type: 'multi', category: 'dialogue', q: 'Which exchange shows proper use of question particles?', opts: ['A: 你呢? B: 我是学生。', 'A: 我是老师呢。 B: 很好。', 'A: 你是学生吗呢? B: 是的', 'A: 最近怎么样不? B: 很好吗'], ans: 0 }
 ];
