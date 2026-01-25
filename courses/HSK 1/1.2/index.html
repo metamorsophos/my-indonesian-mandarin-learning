@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+    <title>HSK 1 - 1.2 | Roufan's Mandarin</title>
+    
+    <style>
+        :root {
+            --primary: #6A2C3C;   /* Deep Burgundy */
+            --accent: #C0945E;    /* Warm Gold */
+            --bg-body: #e8e8d8;   /* Cream */
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-sec: #666666;
+            --border: #e0e0e0;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); }
+        h1, h2, h3, h4, .font-serif { font-family: 'Merriweather', serif; }
+        .zh { font-family: 'Noto Sans SC', sans-serif; }
+
+        /* Critical Fix for Visibility */
+        .hidden { 
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* Make non-hidden elements clickable */
+        #view-dashboard, #view-learning, #view-quiz, #view-result,
+        #sb-home, #sb-learning, #sb-quiz {
+            pointer-events: auto;
+        }
+
+        /* Allow visible elements to be clickable */
+        button {
+            cursor: pointer;
+        }
+
+        /* Paper Effect */
+        .cv-paper {
+            background-color: var(--bg-card);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        /* Animations */
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Layout Structure */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-nav li {
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .sidebar-nav button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .sidebar-nav button:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .sidebar-nav button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Progress Indicator */
+        .progress-tracker {
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 6px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .progress-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-sec);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: width 0.3s ease;
+        }
+
+        /* Main Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .content-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-subtitle {
+            font-size: 1rem;
+            color: var(--text-sec);
+        }
+
+        .content-body {
+            flex: 1;
+        }
+
+        /* Dashboard View */
+        .dashboard-intro {
+            background: linear-gradient(135deg, var(--primary), #52212e);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-intro h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-intro p {
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(106, 44, 60, 0.1);
+        }
+
+        .option-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .select-group {
+            margin-bottom: 1rem;
+        }
+
+        .select-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            background: white;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        select:hover, select:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateX(2px);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Learning View */
+        .slide-number {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-container {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .slide-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .slide-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+
+        .zh-text {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .pinyin {
+            font-size: 0.85rem;
+            color: var(--text-sec);
+            font-style: italic;
+        }
+
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .vocab-table th {
+            background: linear-gradient(135deg, var(--primary), #52212e);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .vocab-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .vocab-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* Quiz View */
+        .quiz-container {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .quiz-progress {
+            font-size: 0.9rem;
+            color: var(--text-sec);
+        }
+
+        .quiz-timer {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            background: var(--bg-body);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .option:hover {
+            border-color: var(--accent);
+            background: #f5f5f0;
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .option.incorrect {
+            border-color: #ef4444;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Results View */
+        .result-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .result-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .result-message {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .result-details {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .result-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--text-sec);
+        }
+
+        .result-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .sidebar-section {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                padding: 1rem;
+            }
+
+            .sidebar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-title {
+                font-size: 1.5rem;
+            }
+
+            .slide-container {
+                padding: 1.5rem;
+            }
+
+            .vocab-table {
+                font-size: 0.8rem;
+            }
+
+            .vocab-table th, .vocab-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+</head>
+<body>
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Navigation Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Navigation</div>
+                <ul class="sidebar-nav">
+                    <li><button id="sb-home" class="active">Home</button></li>
+                    <li><button id="sb-learning">Learning</button></li>
+                    <li><button id="sb-quiz">Assessment</button></li>
+                </ul>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Your Progress</div>
+                <div class="progress-tracker">
+                    <div class="progress-label">Completion</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div id="progress-text" style="font-size: 0.8rem; color: var(--text-sec); margin-top: 0.5rem;">0%</div>
+                </div>
+            </div>
+
+            <!-- Module Info -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Module Info</div>
+                <div style="font-size: 0.9rem; color: var(--text-sec); line-height: 1.6;">
+                    <strong>HSK 1 - 1.2</strong><br>
+                    Greetings & Introductions<br><br>
+                    <span style="font-size: 0.8rem;">13 Learning Slides<br>70+ Quiz Questions</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Dashboard View -->
+            <div id="view-dashboard">
+                <div class="content-header">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Module 1.2</div>
+                    <h1 class="content-title">Greetings & Introductions</h1>
+                    <p class="content-subtitle">Learn how to greet friends, ask about their well-being, and introduce yourself in formal and informal contexts</p>
+                </div>
+
+                <div class="content-body">
+                    <div class="dashboard-intro">
+                        <h2>Welcome! 欢迎!</h2>
+                        <p>In this module, you'll master the essential phrases for greeting acquaintances you haven't seen in a while and learn how to ask about someone's well-being using natural, conversational Mandarin.</p>
+                        <p>You'll explore the core grammar structure "是" (shì - to be), the question particles "吗" (ma) and "呢" (ne), and practice real-world dialogues with professional and student contexts.</p>
+                    </div>
+
+                    <div class="options-grid">
+                        <!-- Learning Option -->
+                        <div class="option-card">
+                            <h3>📖 Start Learning</h3>
+                            <div class="select-group">
+                                <label class="select-label">Learning Path:</label>
+                                <select id="learning-mode-select">
+                                    <option value="full">Full Module (13 slides)</option>
+                                    <option value="vocab">Vocabulary Focus (5 slides)</option>
+                                    <option value="grammar">Grammar Focus (5 slides)</option>
+                                    <option value="fasttrack">Fast Track (3 slides)</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-block" onclick="App.startModule()">Begin Learning</button>
+                        </div>
+
+                        <!-- Assessment Option -->
+                        <div class="option-card">
+                            <h3>✏️ Take Assessment</h3>
+                            <div class="select-group">
+                                <label class="select-label">Difficulty:</label>
+                                <select id="mode-select">
+                                    <option value="practice">Practice (No penalty)</option>
+                                    <option value="review">Review (Relaxed)</option>
+                                    <option value="challenge">Challenge (Strict)</option>
+                                </select>
+                            </div>
+                            <div class="select-group">
+                                <label class="select-label">Focus Area:</label>
+                                <select id="assessment-focus-select">
+                                    <option value="balanced">Balanced</option>
+                                    <option value="vocab">Vocabulary</option>
+                                    <option value="grammar">Grammar</option>
+                                    <option value="dialogue">Dialogue</option>
+                                </select>
+                            </div>
+                            <div class="select-group">
+                                <label class="select-label">Pinyin Display:</label>
+                                <select id="quiz-pinyin-select">
+                                    <option value="full">Full Pinyin</option>
+                                    <option value="tones">Tones Only</option>
+                                    <option value="none">No Pinyin</option>
+                                </select>
+                            </div>
+                            <div class="select-group">
+                                <label class="select-label">Questions:</label>
+                                <select id="question-count-select">
+                                    <option value="10">10 Questions</option>
+                                    <option value="20">20 Questions</option>
+                                    <option value="30">30 Questions</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-block" onclick="App.startQuiz()">Start Quiz</button>
+                        </div>
+                    </div>
+
+                    <!-- Module Overview -->
+                    <div style="background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Module Overview</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                            <div>
+                                <strong style="color: var(--accent);">Key Learning Goals:</strong>
+                                <ul style="margin-top: 0.75rem; padding-left: 1.5rem; line-height: 1.8; color: var(--text-sec);">
+                                    <li>Greet acquaintances and friends</li>
+                                    <li>Use "是" (shì) for identity and profession</li>
+                                    <li>Ask Yes/No questions with "吗" (ma)</li>
+                                    <li>Ask reciprocal questions with "呢" (ne)</li>
+                                    <li>Master tone sandhi of "不" (bú)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="color: var(--accent);">Content Structure:</strong>
+                                <ul style="margin-top: 0.75rem; padding-left: 1.5rem; line-height: 1.8; color: var(--text-sec);">
+                                    <li>Vocabulary & Phrases (2 slides)</li>
+                                    <li>Grammar Rules (4 slides)</li>
+                                    <li>Real Dialogues (4 slides)</li>
+                                    <li>Practice Scenarios (3 slides)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning View -->
+            <div id="view-learning" class="hidden">
+                <div class="content-header">
+                    <div class="slide-number">Slide <span id="slide-num">1</span> of <span id="slide-total">13</span></div>
+                    <h1 class="content-title" id="slide-title">Learning</h1>
+                </div>
+
+                <div class="content-body">
+                    <div id="slide-content" class="slide-container"></div>
+
+                    <div style="display: flex; justify-content: space-between; gap: 1rem;">
+                        <button class="btn" onclick="App.prevSlide()" id="btn-prev">← Previous</button>
+                        <button class="btn" onclick="App.nextSlide()" id="btn-next">Next →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz View -->
+            <div id="view-quiz" class="hidden">
+                <div class="content-header">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Assessment</div>
+                    <h1 class="content-title">Knowledge Check</h1>
+                </div>
+
+                <div class="content-body">
+                    <div class="quiz-container">
+                        <div class="quiz-header">
+                            <div class="quiz-progress">Question <span id="q-num">1</span> of <span id="q-total">20</span></div>
+                            <div class="quiz-timer">⏱️ <span id="timer">15</span>s</div>
+                        </div>
+
+                        <div id="quiz-content"></div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button class="btn" onclick="App.skipQuestion()">Skip</button>
+                            <button class="btn" onclick="App.submitAnswer()" style="flex: 1;">Submit Answer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results View -->
+            <div id="view-result" class="hidden">
+                <div class="content-header">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Results</div>
+                    <h1 class="content-title">Your Performance</h1>
+                </div>
+
+                <div class="content-body">
+                    <div class="result-container">
+                        <div class="result-score" id="result-score">0%</div>
+                        <div class="result-message" id="result-message">Great effort!</div>
+
+                        <div class="result-details">
+                            <div class="result-detail-row">
+                                <span class="result-label">Questions Answered:</span>
+                                <span class="result-value" id="result-answered">0</span>
+                            </div>
+                            <div class="result-detail-row">
+                                <span class="result-label">Correct:</span>
+                                <span class="result-value" id="result-correct">0</span>
+                            </div>
+                            <div class="result-detail-row">
+                                <span class="result-label">Accuracy:</span>
+                                <span class="result-value" id="result-accuracy">0%</span>
+                            </div>
+                            <div class="result-detail-row">
+                                <span class="result-label">Time Taken:</span>
+                                <span class="result-value" id="result-time">0m 0s</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-block" onclick="App.goHome()">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="data/slides.js"></script>
+    <script src="data/questions.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            App.init();
+        });
+
+        // Sidebar navigation
+        document.getElementById('sb-home').addEventListener('click', () => App.goHome());
+        document.getElementById('sb-learning').addEventListener('click', () => {
+            document.getElementById('learning-mode-select').value = 'full';
+            App.startModule();
+        });
+        document.getElementById('sb-quiz').addEventListener('click', () => {
+            document.getElementById('mode-select').value = 'practice';
+            App.startQuiz();
+        });
+    </script>
+</body>
+</html>
