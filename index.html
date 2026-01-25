@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
     <title>Roufan's Mandarin Learning Journey</title>
     
     <style>
         :root {
             --primary: #6A2C3C;
             --accent: #C0945E;
-            --bg-body: #e8e8d8;
-            --bg-card: #ffffff;
-            --text-main: #333333;
-            --text-sec: #666666;
-            --border: #e0e0e0;
+            --light: #f5f3f0;
+            --text-dark: #2c2c2c;
+            --text-light: #6b6b6b;
+            --border: #e8e8e8;
         }
 
         * {
@@ -23,131 +22,168 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fafafa;
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Merriweather', Georgia, serif;
-            line-height: 1.2;
+        h1, h2, h3 {
+            font-weight: 600;
+            line-height: 1.3;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
         }
 
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header */
         header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 1rem;
             text-align: center;
-            padding: 3rem 1rem;
-            background: linear-gradient(135deg, var(--primary) 0%, #52212e 100%);
-            color: white;
-            margin-bottom: 3rem;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .header-icon {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            color: var(--primary);
-            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0 auto 1.25rem;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
-            font-weight: 900;
         }
 
-        header p {
+        header > p {
+            color: var(--text-light);
             font-size: 1rem;
-            opacity: 0.9;
-            font-weight: 300;
+            margin-top: 0.75rem;
         }
 
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        /* Intro Section */
         .intro-section {
             background: white;
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 2.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid var(--accent);
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
         }
 
         .intro-section h2 {
             color: var(--primary);
             margin-bottom: 1rem;
-            font-size: 1.75rem;
         }
 
         .intro-section p {
-            color: var(--text-sec);
+            color: var(--text-light);
             margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Courses Section */
+        .courses-heading {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-weight: 600;
         }
 
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
+        /* Course Card */
         .course-card {
             background: white;
+            border: 1px solid var(--border);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
             display: flex;
             flex-direction: column;
+            transition: all 0.2s ease;
+            position: relative;
         }
 
         .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(192, 148, 94, 0.1);
         }
 
-        .course-header {
-            background: linear-gradient(135deg, var(--primary) 0%, #52212e 100%);
-            color: white;
+        .course-card-header {
+            background: var(--light);
             padding: 1.5rem;
-            position: relative;
+            border-bottom: 1px solid var(--border);
         }
 
         .course-level {
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            letter-spacing: 0.8px;
+            color: var(--accent);
             margin-bottom: 0.5rem;
         }
 
         .course-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
         }
 
         .course-subtitle {
             font-size: 0.875rem;
-            opacity: 0.85;
-            font-weight: 300;
+            color: var(--text-light);
         }
 
+        /* Course Body */
         .course-body {
             padding: 1.5rem;
             flex-grow: 1;
@@ -155,81 +191,88 @@
             flex-direction: column;
         }
 
-        .course-description {
-            color: var(--text-sec);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
-
-        .course-meta {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .meta-badge {
-            background: var(--bg-body);
-            padding: 0.35rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-sec);
-            border: 1px solid var(--border);
-        }
-
         .course-status {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            color: var(--accent);
         }
 
-        .status-active {
-            background: #dcfce7;
-            color: #166534;
+        .course-status.active {
+            color: #059669;
         }
 
-        .status-coming-soon {
-            background: #fef3c7;
-            color: #92400e;
+        .course-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
         }
 
+        .course-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: var(--light);
+            color: var(--text-light);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .progress-bar-container {
+            background: var(--border);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Buttons */
         .course-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
             background: var(--primary);
             color: white;
-            padding: 0.875rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
             border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
 
-        .course-button:hover {
+        .course-button:hover:not(:disabled) {
             background: #52212e;
-            transform: translateX(3px);
+            transform: translateX(2px);
         }
 
         .course-button:disabled,
         .course-button.disabled {
             background: #d1d5db;
-            color: #6b7280;
+            color: #9ca3af;
             cursor: not-allowed;
-            transform: none;
         }
 
         .course-button svg {
@@ -237,56 +280,50 @@
             height: 16px;
         }
 
+        /* Coming Soon State */
+        .course-card.coming-soon .course-body {
+            opacity: 0.65;
+        }
+
+        .coming-soon-label {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.35rem 0.85rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: var(--text-sec);
-            font-size: 0.875rem;
-            border-top: 1px solid var(--border);
             background: white;
+            border-top: 1px solid var(--border);
+            padding: 2rem 1rem;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.875rem;
             margin-top: 3rem;
         }
 
-        .coming-soon-overlay {
-            position: relative;
+        footer p {
+            margin: 0.5rem 0;
         }
 
-        .coming-soon-overlay::after {
-            content: 'Coming Soon';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--accent);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        footer p:first-child {
+            font-weight: 500;
+            color: var(--text-dark);
         }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
+        /* Animations */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -294,77 +331,126 @@
             }
         }
 
+        header {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .intro-section {
+            animation: fadeInUp 0.5s ease-out 0.1s both;
+        }
+
         .course-card {
-            animation: fadeIn 0.6s ease-out forwards;
+            animation: fadeInUp 0.5s ease-out both;
         }
 
-        .course-card:nth-child(1) { animation-delay: 0.1s; }
-        .course-card:nth-child(2) { animation-delay: 0.2s; }
+        .course-card:nth-child(1) { animation-delay: 0.2s; }
+        .course-card:nth-child(2) { animation-delay: 0.25s; }
         .course-card:nth-child(3) { animation-delay: 0.3s; }
-        .course-card:nth-child(4) { animation-delay: 0.4s; }
-        .course-card:nth-child(5) { animation-delay: 0.5s; }
-        .course-card:nth-child(6) { animation-delay: 0.6s; }
+        .course-card:nth-child(4) { animation-delay: 0.35s; }
 
-        /* Progress bar */
-        .progress-container {
-            background: var(--bg-body);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 1rem;
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 2rem 1rem;
+            }
+
+            .intro-section {
+                padding: 1.75rem;
+            }
+
+            .course-card-header {
+                padding: 1.25rem;
+            }
+
+            .course-body {
+                padding: 1.25rem;
+            }
         }
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--primary));
-            transition: width 0.3s ease;
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .courses-heading {
+                font-size: 1.25rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .intro-section {
+                padding: 1.5rem;
+            }
+
+            .course-card-header {
+                padding: 1rem;
+            }
+
+            .course-body {
+                padding: 1rem;
+            }
+
+            .course-title {
+                font-size: 1.1rem;
+            }
         }
     </style>
     
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="header-icon">RM</div>
-        <h1>Roufan's Mandarin Learning Journey</h1>
-        <p>A personal repository to track and recap my Mandarin learning progress over time</p>
+        <div class="header-content">
+            <div class="header-icon">RM</div>
+            <h1>Roufan's Mandarin Learning</h1>
+            <p>Track and recap my Chinese learning progress</p>
+        </div>
     </header>
 
     <div class="container">
         <section class="intro-section">
-            <h2>Welcome to My Learning Hub</h2>
+            <h2>Welcome</h2>
             <p>
-                This is my personal space to document and review my Mandarin Chinese learning journey. As I progress through different levels and topics, I'll be adding interactive courses and exercises here to help consolidate my knowledge and track my improvement over time.
-            </p>
-            <p>
-                Each course module includes interactive learning materials, etymology breakdowns, vocabulary practice, and comprehensive assessments with various difficulty levels.
+                This is my personal space to document and review my Mandarin Chinese learning journey. Each course module includes interactive learning materials, etymology breakdowns, vocabulary practice, and comprehensive assessments.
             </p>
         </section>
 
-        <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary); text-align: center;">Available Courses</h2>
+        <h2 class="courses-heading">Available Courses</h2>
 
         <div class="courses-grid">
             <!-- HSK 1 - Module 1.1 -->
             <div class="course-card">
-                <div class="course-header">
+                <div class="course-card-header">
                     <div class="course-level">HSK Level 1</div>
                     <h3 class="course-title">Module 1.1</h3>
-                    <p class="course-subtitle">Introduction & Asking Names</p>
+                    <p class="course-subtitle">Introduction & Names</p>
                 </div>
                 <div class="course-body">
-                    <div class="course-status status-active">
-                        <span>●</span> Active
-                    </div>
+                    <div class="course-status active">● Active</div>
                     <p class="course-description">
-                        Master the art of formal introductions in Mandarin. Learn the philosophy behind respect pronouns (您), etymology of key characters, vocabulary for greetings, and the structure of Chinese names and titles.
+                        Master formal introductions in Mandarin. Learn respect pronouns (您), character etymology, greetings, and Chinese naming conventions.
                     </p>
-                    <div class="course-meta">
-                        <span class="meta-badge">Beginner</span>
-                        <span class="meta-badge">Etiquette</span>
-                        <span class="meta-badge">Vocabulary</span>
-                        <span class="meta-badge">Grammar</span>
+                    <div class="course-tags">
+                        <span class="tag">Beginner</span>
+                        <span class="tag">Etiquette</span>
+                        <span class="tag">Vocabulary</span>
                     </div>
-                    <div class="progress-container">
+                    <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 100%;"></div>
                     </div>
                     <a href="courses/HSK 1/1.1/" class="course-button">
@@ -376,113 +462,94 @@
                 </div>
             </div>
 
-            <!-- HSK 1 - Module 1.2 (Coming Soon) -->
-            <div class="course-card">
-                <div class="course-header">
+            <!-- HSK 1 - Module 1.2 -->
+            <div class="course-card coming-soon">
+                <div class="coming-soon-label">Coming Soon</div>
+                <div class="course-card-header">
                     <div class="course-level">HSK Level 1</div>
                     <h3 class="course-title">Module 1.2</h3>
-                    <p class="course-subtitle">Numbers & Basic Counting</p>
+                    <p class="course-subtitle">Numbers & Counting</p>
                 </div>
-                <div class="course-body coming-soon-overlay">
-                    <div class="course-status status-coming-soon">
-                        <span>○</span> Coming Soon
-                    </div>
+                <div class="course-body">
+                    <div class="course-status">○ Upcoming</div>
                     <p class="course-description">
-                        Learn Chinese numbers from 1-100, counting systems, dates, time expressions, and age. Practice with interactive exercises and real-world scenarios.
+                        Learn Chinese numbers 1-100, counting systems, dates, time expressions, and age. Practice with interactive exercises.
                     </p>
-                    <div class="course-meta">
-                        <span class="meta-badge">Beginner</span>
-                        <span class="meta-badge">Numbers</span>
-                        <span class="meta-badge">Time</span>
+                    <div class="course-tags">
+                        <span class="tag">Beginner</span>
+                        <span class="tag">Numbers</span>
+                        <span class="tag">Time</span>
                     </div>
-                    <div class="progress-container">
+                    <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 0%;"></div>
                     </div>
-                    <button class="course-button disabled" disabled>
-                        Coming Soon
-                    </button>
+                    <button class="course-button disabled" disabled>Coming Soon</button>
                 </div>
             </div>
 
-            <!-- HSK 1 - Module 1.3 (Coming Soon) -->
-            <div class="course-card">
-                <div class="course-header">
+            <!-- HSK 1 - Module 1.3 -->
+            <div class="course-card coming-soon">
+                <div class="coming-soon-label">Coming Soon</div>
+                <div class="course-card-header">
                     <div class="course-level">HSK Level 1</div>
                     <h3 class="course-title">Module 1.3</h3>
-                    <p class="course-subtitle">Family & Relationships</p>
+                    <p class="course-subtitle">Family & Relations</p>
                 </div>
-                <div class="course-body coming-soon-overlay">
-                    <div class="course-status status-coming-soon">
-                        <span>○</span> Coming Soon
-                    </div>
+                <div class="course-body">
+                    <div class="course-status">○ Upcoming</div>
                     <p class="course-description">
-                        Explore family terms, relationship vocabulary, possessive particles, and how to talk about your family members in Mandarin.
+                        Explore family terms, relationship vocabulary, possessive particles, and how to describe family members in Mandarin.
                     </p>
-                    <div class="course-meta">
-                        <span class="meta-badge">Beginner</span>
-                        <span class="meta-badge">Family</span>
-                        <span class="meta-badge">Culture</span>
+                    <div class="course-tags">
+                        <span class="tag">Beginner</span>
+                        <span class="tag">Family</span>
+                        <span class="tag">Culture</span>
                     </div>
-                    <div class="progress-container">
+                    <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 0%;"></div>
                     </div>
-                    <button class="course-button disabled" disabled>
-                        Coming Soon
-                    </button>
+                    <button class="course-button disabled" disabled>Coming Soon</button>
                 </div>
             </div>
 
-            <!-- HSK 2 - Placeholder -->
-            <div class="course-card">
-                <div class="course-header">
+            <!-- HSK 2 - Module 2.1 -->
+            <div class="course-card coming-soon">
+                <div class="coming-soon-label">Coming Soon</div>
+                <div class="course-card-header">
                     <div class="course-level">HSK Level 2</div>
                     <h3 class="course-title">Module 2.1</h3>
-                    <p class="course-subtitle">Daily Activities & Routines</p>
+                    <p class="course-subtitle">Daily Activities</p>
                 </div>
-                <div class="course-body coming-soon-overlay">
-                    <div class="course-status status-coming-soon">
-                        <span>○</span> Coming Soon
-                    </div>
+                <div class="course-body">
+                    <div class="course-status">○ Upcoming</div>
                     <p class="course-description">
-                        Express daily activities, time sequences, and routines. Learn action verbs, time expressions, and how to describe your typical day.
+                        Express daily activities, time sequences, and routines. Learn action verbs, time expressions, and describe your typical day.
                     </p>
-                    <div class="course-meta">
-                        <span class="meta-badge">Intermediate</span>
-                        <span class="meta-badge">Daily Life</span>
-                        <span class="meta-badge">Verbs</span>
+                    <div class="course-tags">
+                        <span class="tag">Intermediate</span>
+                        <span class="tag">Daily Life</span>
+                        <span class="tag">Verbs</span>
                     </div>
-                    <div class="progress-container">
+                    <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 0%;"></div>
                     </div>
-                    <button class="course-button disabled" disabled>
-                        Coming Soon
-                    </button>
+                    <button class="course-button disabled" disabled>Coming Soon</button>
                 </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Roufan's Mandarin Learning Journey</p>
-        <p style="margin-top: 0.5rem; opacity: 0.7;">A personal project for tracking Mandarin progress</p>
+        <p>&copy; 2026 Roufan's Mandarin Learning</p>
+        <p>A personal project tracking Chinese learning progress</p>
     </footer>
 
     <script>
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
         // Log course access
         document.querySelectorAll('.course-button:not(.disabled)').forEach(button => {
             button.addEventListener('click', function(e) {
-                console.log('Accessing course:', this.closest('.course-card').querySelector('.course-title').textContent);
+                const courseTitle = this.closest('.course-card').querySelector('.course-title').textContent;
+                console.log('Accessing course:', courseTitle);
             });
         });
     </script>
