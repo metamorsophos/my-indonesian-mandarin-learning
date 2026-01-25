@@ -10,10 +10,10 @@
         :root {
             --primary: #6A2C3C;
             --accent: #C0945E;
-            --light: #f5f3f0;
+            --bg-light: #faf6f3;
             --text-dark: #2c2c2c;
             --text-light: #6b6b6b;
-            --border: #e8e8e8;
+            --border: #e8dcd5;
         }
 
         * {
@@ -25,7 +25,7 @@
         html, body {
             height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #fafafa;
+            background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
         }
@@ -55,8 +55,8 @@
 
         /* Header */
         header {
-            background: white;
-            border-bottom: 1px solid var(--border);
+            background: var(--primary);
+            color: white;
             padding: 2.5rem 1rem;
             text-align: center;
         }
@@ -69,7 +69,7 @@
         .header-icon {
             width: 56px;
             height: 56px;
-            background: var(--primary);
+            background: var(--accent);
             color: white;
             border-radius: 8px;
             display: flex;
@@ -81,14 +81,15 @@
         }
 
         header h1 {
-            color: var(--text-dark);
+            color: white;
             margin-bottom: 0.5rem;
         }
 
         header > p {
-            color: var(--text-light);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1rem;
             margin-top: 0.75rem;
+            font-weight: 300;
         }
 
         /* Main Container */
@@ -104,7 +105,8 @@
             padding: 2.5rem;
             border-radius: 8px;
             margin-bottom: 3rem;
-            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(106, 44, 60, 0.08);
         }
 
         .intro-section h2 {
@@ -126,7 +128,7 @@
         /* Courses Section */
         .courses-heading {
             font-size: 1.5rem;
-            color: var(--text-dark);
+            color: var(--primary);
             text-align: center;
             margin-bottom: 2.5rem;
             font-weight: 600;
@@ -142,24 +144,27 @@
         /* Course Card */
         .course-card {
             background: white;
-            border: 1px solid var(--border);
+            border: 2px solid var(--accent);
             border-radius: 8px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             position: relative;
+            box-shadow: 0 2px 6px rgba(106, 44, 60, 0.06);
         }
 
         .course-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(192, 148, 94, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 8px 16px rgba(106, 44, 60, 0.15);
+            transform: translateY(-3px);
         }
 
         .course-card-header {
-            background: var(--light);
+            background: linear-gradient(135deg, var(--primary) 0%, #52212e 100%);
+            color: white;
             padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
+            border-bottom: none;
         }
 
         .course-level {
@@ -174,13 +179,13 @@
         .course-title {
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--text-dark);
+            color: white;
             margin-bottom: 0.25rem;
         }
 
         .course-subtitle {
             font-size: 0.875rem;
-            color: var(--text-light);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         /* Course Body */
@@ -222,16 +227,17 @@
         }
 
         .tag {
-            background: var(--light);
-            color: var(--text-light);
+            background: var(--bg-light);
+            color: var(--primary);
             padding: 0.35rem 0.75rem;
             border-radius: 4px;
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
+            border: 1px solid var(--accent);
         }
 
         .progress-bar-container {
-            background: var(--border);
+            background: #e0d0c8;
             height: 4px;
             border-radius: 2px;
             overflow: hidden;
@@ -240,7 +246,7 @@
 
         .progress-bar {
             height: 100%;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), var(--primary));
             border-radius: 2px;
             transition: width 0.3s ease;
         }
@@ -264,7 +270,7 @@
         }
 
         .course-button:hover:not(:disabled) {
-            background: #52212e;
+            background: var(--accent);
             transform: translateX(2px);
         }
 
@@ -282,7 +288,7 @@
 
         /* Coming Soon State */
         .course-card.coming-soon .course-body {
-            opacity: 0.65;
+            opacity: 0.7;
         }
 
         .coming-soon-label {
@@ -302,7 +308,7 @@
         /* Footer */
         footer {
             background: white;
-            border-top: 1px solid var(--border);
+            border-top: 2px solid var(--accent);
             padding: 2rem 1rem;
             text-align: center;
             color: var(--text-light);
@@ -315,8 +321,8 @@
         }
 
         footer p:first-child {
-            font-weight: 500;
-            color: var(--text-dark);
+            font-weight: 600;
+            color: var(--primary);
         }
 
         /* Animations */
