@@ -53,711 +53,394 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Layout Structure */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            min-height: 100vh;
+        .slide-up { animation: slideUp 0.3s ease-out forwards; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Sidebar */
-        .sidebar {
-            position: sticky;
-            top: 1.5rem;
-            height: fit-content;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
 
-        .sidebar-section {
-            margin-bottom: 1.5rem;
+        /* Interactive Elements */
+        .btn-primary {
+            background-color: var(--primary); color: white;
+            transition: all 0.2s;
         }
+        .btn-primary:hover { background-color: #52212e; transform: translateY(-1px); }
 
-        .sidebar-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.5px;
+        .vocab-card {
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
         }
-
-        .sidebar-nav {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .sidebar-nav li {
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .sidebar-nav button {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-        }
-
-        .sidebar-nav button:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .sidebar-nav button.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Progress Indicator */
-        .progress-tracker {
-            padding: 1rem;
-            background: var(--bg-card);
-            border-radius: 6px;
-            border-left: 4px solid var(--accent);
-        }
-
-        .progress-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-sec);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--primary));
-            transition: width 0.3s ease;
-        }
-
-        /* Main Content */
-        .content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content-header {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .content-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .content-subtitle {
-            font-size: 1rem;
-            color: var(--text-sec);
-        }
-
-        .content-body {
-            flex: 1;
-        }
-
-        /* Dashboard View */
-        .dashboard-intro {
-            background: linear-gradient(135deg, var(--primary), #52212e);
-            color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-intro h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .dashboard-intro p {
-            opacity: 0.95;
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .option-card {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 2px solid var(--border);
-            transition: all 0.2s ease;
-        }
-
-        .option-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(106, 44, 60, 0.1);
-        }
-
-        .option-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .select-group {
-            margin-bottom: 1rem;
-        }
-
-        .select-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        select {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 0.9rem;
-            background: white;
-            color: var(--text-main);
-            cursor: pointer;
-        }
-
-        select:hover, select:focus {
-            border-color: var(--accent);
-            outline: none;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            background: var(--accent);
-            transform: translateX(2px);
-        }
-
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-block {
-            width: 100%;
-        }
-
-        /* Learning View */
-        .slide-number {
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .slide-container {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            margin-bottom: 2rem;
-        }
-
-        .slide-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .slide-content {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--text-main);
-        }
-
-        .zh-text {
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 1.1rem;
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        .pinyin {
-            font-size: 0.85rem;
-            color: var(--text-sec);
-            font-style: italic;
-        }
-
-        .vocab-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-        }
-
-        .vocab-table th {
-            background: linear-gradient(135deg, var(--primary), #52212e);
-            color: white;
-            padding: 0.75rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .vocab-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .vocab-table tr:hover {
-            background: #f9f9f9;
-        }
-
-        /* Quiz View */
-        .quiz-container {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .quiz-progress {
-            font-size: 0.9rem;
-            color: var(--text-sec);
-        }
-
-        .quiz-timer {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .quiz-question {
-            margin-bottom: 2rem;
-        }
-
-        .question-text {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .option {
-            display: block;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            margin-bottom: 0.75rem;
-            background: var(--bg-body);
-            border: 2px solid var(--border);
-            border-radius: 6px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .option:hover {
-            border-color: var(--accent);
-            background: #f5f5f0;
+        .vocab-card:hover {
+            border-left-color: var(--accent);
+            background-color: #fffbf0;
+            transform: translateX(4px);
         }
-
-        .option.selected {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: white;
-        }
-
-        .option.correct {
-            border-color: #10b981;
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .option.incorrect {
-            border-color: #ef4444;
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        /* Results View */
-        .result-container {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .result-score {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .result-message {
-            font-size: 1.3rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-        }
-
-        .result-details {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--accent);
-        }
-
-        .result-detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .result-detail-row:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            font-weight: 600;
-            color: var(--text-sec);
-        }
-
-        .result-value {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: static;
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1rem;
-            }
-
-            .sidebar-section {
-                margin-bottom: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-layout {
-                padding: 1rem;
-            }
-
-            .sidebar {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .content-title {
-                font-size: 1.5rem;
-            }
-
-            .slide-container {
-                padding: 1.5rem;
-            }
-
-            .vocab-table {
-                font-size: 0.8rem;
-            }
 
-            .vocab-table th, .vocab-table td {
-                padding: 0.5rem;
-            }
+        /* Visuals */
+        .char-component {
+            border: 1px dashed var(--accent);
+            background: #fffbf0;
+            position: relative;
         }
+        .char-plus { color: var(--accent); font-weight: bold; }
+        .g-block { padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; }
     </style>
     
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Confetti fallback: we'll use CSS for celebration effect -->
+    <script>
+        // Minimal confetti alternative for Vercel environment
+        const confetti = {
+            create: function(options) {
+                try {
+                    if (window.confetti && window.confetti.create) {
+                        return window.confetti.create(options);
+                    }
+                } catch(e) {}
+                return Promise.resolve();
+            }
+        };
+        window.confetti = confetti;
+    </script>
+
 </head>
-<body>
-    <div class="main-layout">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <!-- Navigation Section -->
-            <div class="sidebar-section">
-                <div class="sidebar-title">Navigation</div>
-                <ul class="sidebar-nav">
-                    <li><button id="sb-home" class="active">Home</button></li>
-                    <li><button id="sb-learning">Learning</button></li>
-                    <li><button id="sb-quiz">Assessment</button></li>
-                </ul>
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-x-hidden overflow-y-auto">
+    
+    <!-- Loading indicator while styles compile -->
+    <style>
+        #app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #e8e8d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-family: 'Merriweather', serif;
+        }
+        #app-loading.hidden {
+            display: none;
+        }
+    </style>
+    <div id="app-loading">
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+            <div style="color: #6A2C3C; font-size: 1.25rem; font-weight: bold;">HSK 1 - 1.2</div>
+            <div style="color: #999999; font-size: 0.875rem; margin-top: 0.5rem;">Loading course materials...</div>
+        </div>
+    </div>
+
+    <div class="w-full h-auto md:h-[90vh] bg-white md:rounded shadow-2xl overflow-visible md:overflow-hidden flex flex-col md:flex-row cv-paper relative">
+        
+        <aside class="w-full md:w-1/3 bg-[#6A2C3C] text-white p-4 sm:p-6 md:p-8 flex flex-col shrink-0 z-50 shadow-lg relative max-h-[40vh] md:max-h-none">
+            <div class="mb-4 sm:mb-6 md:mb-8 border-b border-white/20 pb-4 sm:pb-6 md:pb-8">
+                <div class="w-12 sm:w-14 h-12 sm:h-14 md:w-16 md:h-16 bg-white text-[#6A2C3C] rounded-full flex items-center justify-center text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 shadow-lg font-bold font-serif cursor-pointer hover:scale-105 transition" onclick="App.goHome()">
+                    RM
+                </div>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-wide mb-1">Roufan's Mandarin</h1>
+                <p class="text-[#e8e8d8] text-[10px] sm:text-xs font-light uppercase tracking-widest opacity-80">HSK 1 - 1.2: Greetings & Introductions</p>
             </div>
 
-            <!-- Progress Section -->
-            <div class="sidebar-section">
-                <div class="sidebar-title">Your Progress</div>
-                <div class="progress-tracker">
-                    <div class="progress-label">Completion</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+            <div class="flex-1 space-y-8 overflow-y-auto pr-2 relative">
+                
+                <div id="sb-home" class="fade-in">
+                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Course Overview</h3>
+                    <p class="text-white/80 text-sm leading-relaxed mb-4">
+                        Master greetings, professional identity questions, and essential dialogue patterns with friends and colleagues.
+                    </p>
+                    <div class="flex gap-2 text-xs text-white/60">
+                        <span class="bg-black/20 px-2 py-1 rounded">Beginner</span>
+                        <span class="bg-black/20 px-2 py-1 rounded">Dialogue</span>
                     </div>
-                    <div id="progress-text" style="font-size: 0.8rem; color: var(--text-sec); margin-top: 0.5rem;">0%</div>
+                </div>
+
+                <div id="sb-learning" class="hidden fade-in">
+                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Current Module</h3>
+                    <div class="flex items-center gap-3 text-white/90 mb-6">
+                        <i data-lucide="book-open" class="w-5 h-5 text-[#C0945E]"></i>
+                        <span class="text-sm font-medium" id="current-module-text">Greetings</span>
+                    </div>
+
+                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Progression</h3>
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">
+                            <span class="text-xs font-semibold inline-block text-white/70">Topic Completion</span>
+                            <span class="text-xs font-semibold inline-block text-white/70" id="progress-text">0%</span>
+                        </div>
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-black/20">
+                            <div id="progress-bar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-[#C0945E] transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sb-quiz" class="hidden fade-in">
+                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Assessment Metrics</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex justify-between border-b border-white/10 pb-2">
+                            <span class="text-white/70">Question</span>
+                            <span class="font-mono text-white"><span id="q-current-side">1</span>/<span id="q-total-side">20</span></span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/10 pb-2">
+                            <span class="text-white/70">Time Remaining</span>
+                            <span class="font-mono text-[#C0945E]"><span id="timer-text-side">15</span>s</span>
+                        </li>
+                        <li class="pt-2">
+                            <div class="w-full bg-black/20 h-1 rounded overflow-hidden">
+                                <div id="quiz-timer-bar" class="h-full bg-[#C0945E] transition-all duration-1000 ease-linear" style="width: 100%"></div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Module Info -->
-            <div class="sidebar-section">
-                <div class="sidebar-title">Module Info</div>
-                <div style="font-size: 0.9rem; color: var(--text-sec); line-height: 1.6;">
-                    <strong>HSK 1 - 1.2</strong><br>
-                    Greetings & Introductions<br><br>
-                    <span style="font-size: 0.8rem;">13 Learning Slides<br>70+ Quiz Questions</span>
-                </div>
+            <div class="mt-auto pt-6 text-xs text-white/50 border-t border-white/10">
+                <p>&copy; 2026 Roufan's Mandarin Personal Project</p>
+                <button onclick="App.goHome()" class="mt-2 text-[#C0945E] hover:underline cursor-pointer">Return to Dashboard</button>
             </div>
         </aside>
 
-        <!-- Main Content -->
-        <main class="content">
-            <!-- Dashboard View -->
-            <div id="view-dashboard">
-                <div class="content-header">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Module 1.2</div>
-                    <h1 class="content-title">Greetings & Introductions</h1>
-                    <p class="content-subtitle">Learn how to greet friends, ask about their well-being, and introduce yourself in formal and informal contexts</p>
-                </div>
+        <main class="flex-1 bg-white relative flex flex-col h-full overflow-hidden">
+            
+            <div id="view-dashboard" class="flex-1 bg-white p-4 sm:p-6 md:p-8 lg:p-16 flex flex-col justify-start overflow-y-auto fade-in">
+                <div class="w-full relative z-10">
+                    <span class="text-[#C0945E] font-bold tracking-widest uppercase text-[10px] sm:text-xs mb-2 block">HSK Level 1 - Module 1.2</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-black text-[#333333] mb-4 sm:mb-6">Greetings & <br>Introductions</h2>
+                    <p class="text-[#666666] text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 md:mb-10">
+                        Learn how to greet friends you haven't seen in a while, ask about their well-being, discuss professions, and master the essential grammar for social interactions.
+                    </p>
 
-                <div class="content-body">
-                    <div class="dashboard-intro">
-                        <h2>Welcome! 欢迎!</h2>
-                        <p>In this module, you'll master the essential phrases for greeting acquaintances you haven't seen in a while and learn how to ask about someone's well-being using natural, conversational Mandarin.</p>
-                        <p>You'll explore the core grammar structure "是" (shì - to be), the question particles "吗" (ma) and "呢" (ne), and practice real-world dialogues with professional and student contexts.</p>
-                    </div>
-
-                    <div class="options-grid">
-                        <!-- Learning Option -->
-                        <div class="option-card">
-                            <h3>📖 Start Learning</h3>
-                            <div class="select-group">
-                                <label class="select-label">Learning Path:</label>
-                                <select id="learning-mode-select">
-                                    <option value="full">Full Module (13 slides)</option>
-                                    <option value="vocab">Vocabulary Focus (5 slides)</option>
-                                    <option value="grammar">Grammar Focus (5 slides)</option>
-                                    <option value="fasttrack">Fast Track (3 slides)</option>
-                                </select>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                        <div class="group border border-[#e0e0e0] p-4 sm:p-5 md:p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-[#fafafa] relative rounded-sm">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#6A2C3C] text-white flex items-center justify-center rounded-full mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="book-open" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                             </div>
-                            <button class="btn btn-block" onclick="App.startModule()">Begin Learning</button>
+                            <h3 class="text-lg sm:text-xl font-bold text-[#333333] mb-2 font-serif group-hover:text-[#6A2C3C]">Didactic Phase</h3>
+                            <p class="text-xs sm:text-sm text-[#666666] mb-3 sm:mb-4">Interactive slides covering greetings, vocabulary, grammar structures, and real-world dialogues.</p>
+                            <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm mb-3 sm:mb-4">
+                                <label class="flex flex-col gap-1">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Learning Focus</span>
+                                    <select id="learning-mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="full">Comprehensive (all slides)</option>
+                                        <option value="vocab">Vocabulary & Phrases</option>
+                                        <option value="grammar">Grammar & Structure</option>
+                                        <option value="fasttrack">Fast Track (review)</option>
+                                    </select>
+                                </label>
+                                <div class="text-[10px] sm:text-xs text-[#777777]">Choose your learning path. All materials display with pinyin for reference.</div>
+                            </div>
+                            <button onclick="App.startModule()" class="w-full inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm shadow hover:bg-[#52212e] transition-all">
+                                Start Learning <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                            </button>
                         </div>
 
-                        <!-- Assessment Option -->
-                        <div class="option-card">
-                            <h3>✏️ Take Assessment</h3>
-                            <div class="select-group">
-                                <label class="select-label">Difficulty:</label>
-                                <select id="mode-select">
-                                    <option value="practice">Practice (No penalty)</option>
-                                    <option value="review">Review (Relaxed)</option>
-                                    <option value="challenge">Challenge (Strict)</option>
-                                </select>
+                        <div class="group border border-[#e0e0e0] p-4 sm:p-5 md:p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-white relative rounded-sm">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white border-2 border-[#6A2C3C] text-[#6A2C3C] flex items-center justify-center rounded-full mb-3 sm:mb-4 group-hover:bg-[#6A2C3C] group-hover:text-white transition-colors">
+                                <i data-lucide="pen-tool" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                             </div>
-                            <div class="select-group">
-                                <label class="select-label">Focus Area:</label>
-                                <select id="assessment-focus-select">
-                                    <option value="balanced">Balanced</option>
-                                    <option value="vocab">Vocabulary</option>
-                                    <option value="grammar">Grammar</option>
-                                    <option value="dialogue">Dialogue</option>
-                                </select>
+                            <div class="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+                                <h3 class="text-lg sm:text-xl font-bold text-[#333333] font-serif group-hover:text-[#6A2C3C]">Assessment Arena</h3>
                             </div>
-                            <div class="select-group">
-                                <label class="select-label">Pinyin Display:</label>
-                                <select id="quiz-pinyin-select">
-                                    <option value="full">Full Pinyin</option>
-                                    <option value="tones">Tones Only</option>
-                                    <option value="none">No Pinyin</option>
-                                </select>
-                            </div>
-                            <div class="select-group">
-                                <label class="select-label">Questions:</label>
-                                <select id="question-count-select">
-                                    <option value="10">10 Questions</option>
-                                    <option value="20">20 Questions</option>
-                                    <option value="30">30 Questions</option>
-                                </select>
-                            </div>
-                            <button class="btn btn-block" onclick="App.startQuiz()">Start Quiz</button>
-                        </div>
-                    </div>
+                            <p class="text-xs sm:text-sm text-[#666666] mb-3 sm:mb-4">Pick a focus and difficulty level to test your knowledge with multiple choice, drag-and-drop, and matching questions.</p>
 
-                    <!-- Module Overview -->
-                    <div style="background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid var(--border);">
-                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Module Overview</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                            <div>
-                                <strong style="color: var(--accent);">Key Learning Goals:</strong>
-                                <ul style="margin-top: 0.75rem; padding-left: 1.5rem; line-height: 1.8; color: var(--text-sec);">
-                                    <li>Greet acquaintances and friends</li>
-                                    <li>Use "是" (shì) for identity and profession</li>
-                                    <li>Ask Yes/No questions with "吗" (ma)</li>
-                                    <li>Ask reciprocal questions with "呢" (ne)</li>
-                                    <li>Master tone sandhi of "不" (bú)</li>
-                                </ul>
+                            <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                                <label class="flex flex-col gap-1 sm:gap-2">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Assessment Focus</span>
+                                    <select id="assessment-focus-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="balanced">Balanced (all types)</option>
+                                        <option value="vocab">Vocabulary & Phrases</option>
+                                        <option value="grammar">Grammar & Structure</option>
+                                        <option value="dialogue">Dialogue & Context</option>
+                                    </select>
+                                </label>
+                                <label class="flex flex-col gap-1 sm:gap-2">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Pinyin Display</span>
+                                    <select id="quiz-pinyin-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="full">With pinyin (romanized)</option>
+                                        <option value="tones">Tones only</option>
+                                        <option value="none">No pinyin (character challenge)</option>
+                                    </select>
+                                </label>
+                                <label class="flex flex-col gap-1 sm:gap-2">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Question Count</span>
+                                    <select id="question-count-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="10">10 questions (Quick)</option>
+                                        <option value="15">15 questions</option>
+                                        <option value="20">20 questions (Standard)</option>
+                                        <option value="25">25 questions</option>
+                                        <option value="30">30 questions (Complete)</option>
+                                    </select>
+                                </label>
+                                <label class="flex flex-col gap-1 sm:gap-2">
+                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Difficulty</span>
+                                    <select id="mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
+                                        <option value="practice">Practice (infinite)</option>
+                                        <option value="review">Review (5 hearts)</option>
+                                        <option value="challenge">Challenge (3 hearts)</option>
+                                    </select>
+                                </label>
+                                <div class="text-[10px] sm:text-xs text-[#777777] leading-relaxed bg-[#fafafa] border border-[#e0e0e0] rounded p-2 sm:p-3">
+                                    <strong class="text-[#6A2C3C]">Hearts:</strong> Lose one on wrong answers (except Practice mode).
+                                </div>
                             </div>
-                            <div>
-                                <strong style="color: var(--accent);">Content Structure:</strong>
-                                <ul style="margin-top: 0.75rem; padding-left: 1.5rem; line-height: 1.8; color: var(--text-sec);">
-                                    <li>Vocabulary & Phrases (2 slides)</li>
-                                    <li>Grammar Rules (4 slides)</li>
-                                    <li>Real Dialogues (4 slides)</li>
-                                    <li>Practice Scenarios (3 slides)</li>
-                                </ul>
-                            </div>
+
+                            <button onclick="App.startQuiz()" class="mt-3 sm:mt-4 w-full inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm shadow hover:bg-[#52212e] transition-all">
+                                Start Assessment <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Learning View -->
-            <div id="view-learning" class="hidden">
-                <div class="content-header">
-                    <div class="slide-number">Slide <span id="slide-num">1</span> of <span id="slide-total">13</span></div>
-                    <h1 class="content-title" id="slide-title">Learning</h1>
-                </div>
+            <div id="view-learning" class="hidden flex-1 flex flex-col bg-white overflow-y-auto md:overflow-hidden">
+                <header class="px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 border-b border-[#e0e0e0] flex justify-between items-end bg-white/95 backdrop-blur z-10 sticky top-0">
+                    <div>
+                        <h2 class="text-lg sm:text-2xl font-serif font-bold text-[#333333]" id="slide-title">Module Title</h2>
+                            <p class="text-xs sm:text-sm text-[#666666] font-light italic" id="slide-subtitle">Subtitle placeholder</p>
+                    </div>
+                    <div class="text-5xl text-[#f0f0f0] font-serif font-bold absolute right-8 top-2 select-none pointer-events-none -z-10" id="slide-number">01</div>
+                </header>
 
-                <div class="content-body">
-                    <div id="slide-content" class="slide-container"></div>
+                <div id="slide-content" class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 lg:px-16 lg:py-10 fade-in text-[#333333] relative">
+                    </div>
 
-                    <div style="display: flex; justify-content: space-between; gap: 1rem;">
-                        <button class="btn" onclick="App.prevSlide()" id="btn-prev">← Previous</button>
-                        <button class="btn" onclick="App.nextSlide()" id="btn-next">Next →</button>
+                <footer class="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 border-t border-[#e0e0e0] flex justify-between items-center bg-[#f9f9f9] relative z-20">
+                    <button onclick="App.prevSlide()" id="btn-prev" class="text-[#999999] hover:text-[#333333] text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center gap-1 sm:gap-2 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+                        <i data-lucide="arrow-left" class="w-3 sm:w-4 h-3 sm:h-4"></i><span class="hidden sm:inline">Previous</span><span class="sm:hidden">Back</span>
+                    </button>
+                    <button onclick="App.nextSlide()" id="btn-next" class="bg-[#C0945E] hover:bg-[#a37c4d] text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm font-medium uppercase tracking-widest shadow-sm hover:shadow flex items-center gap-1 sm:gap-2 transition-all rounded-sm">
+                        <span class="hidden sm:inline">Next Phase</span><span class="sm:hidden">Next</span> <i data-lucide="chevron-right" class="w-3 sm:w-4 h-3 sm:h-4"></i>
+                    </button>
+                </footer>
+            </div>
+
+            <div id="view-quiz" class="hidden flex-1 flex flex-col justify-center items-center bg-[#f9f9f9] p-3 sm:p-4 md:p-6 overflow-y-auto">
+                <div class="w-full mx-auto max-w-2xl sm:max-w-3xl bg-white shadow-xl border border-[#e0e0e0] p-4 sm:p-6 md:p-8 lg:p-12 relative fade-in rounded-sm space-y-4 sm:space-y-5 md:space-y-6 flex flex-col max-h-[80vh] sm:max-h-[85vh]">
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-2 sm:gap-3 border-b border-[#f0f0f0] pb-3 sm:pb-4">
+                        <div class="flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-widest font-bold text-[#6A2C3C]">
+                            <span class="px-2 py-1 bg-[#fdf6f0] border border-[#f3e4d6] rounded text-[9px] sm:text-xs" id="mode-badge">Mode: Practice</span>
+                            <span class="px-2 py-1 bg-[#eef2ff] border border-[#dfe3ff] text-[#374151] rounded text-[9px] sm:text-xs"><span id="q-num">1</span> / <span id="q-total">20</span></span>
+                        </div>
+                        <div class="flex items-center gap-1 sm:gap-2" id="hearts-wrap">
+                            <span class="text-[10px] sm:text-xs font-semibold text-[#666666]\">Hearts:</span>
+                            <div class="flex items-center gap-0.5 sm:gap-1" id="hearts-container"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-h-0 overflow-y-auto pr-1 space-y-4 sm:space-y-5">
+                        <div class="mb-4 sm:mb-6">
+                            <span class="text-[10px] sm:text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-1 sm:mb-2 block">Question</span>
+                            <h3 id="quiz-question" class="text-lg sm:text-2xl md:text-3xl font-serif font-bold text-[#333333] leading-snug">
+                                Question text goes here?
+                            </h3>
+                        </div>
+
+                        <div id="quiz-content" class="grid grid-cols-1 gap-2 sm:gap-3">
+                            </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Quiz View -->
-            <div id="view-quiz" class="hidden">
-                <div class="content-header">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Assessment</div>
-                    <h1 class="content-title">Knowledge Check</h1>
-                </div>
+            <div id="view-result" class="hidden flex-1 flex flex-col justify-center items-center bg-white p-8 text-center fade-in overflow-y-auto">
+                <div class="max-w-lg w-full border-4 border-double border-[#e0e0e0] p-10 outline outline-1 outline-offset-4 outline-[#f0f0f0]">
+                    <div class="w-16 h-16 mx-auto bg-[#6A2C3C] text-white rounded-full flex items-center justify-center text-2xl mb-6 shadow-lg">
+                        <i data-lucide="award" class="w-8 h-8 text-[#C0945E]"></i>
+                    </div>
+                    
+                    <h2 class="text-3xl font-serif font-bold text-[#333333] mb-1">Proficiency Report</h2>
+                    <p class="text-[#666666] text-sm uppercase tracking-widest mb-8">HSK 1 - 1.2 Assessment</p>
 
-                <div class="content-body">
-                    <div class="quiz-container">
-                        <div class="quiz-header">
-                            <div class="quiz-progress">Question <span id="q-num">1</span> of <span id="q-total">20</span></div>
-                            <div class="quiz-timer">⏱️ <span id="timer">15</span>s</div>
+                    <div class="flex justify-center items-baseline gap-2 mb-8">
+                        <span id="result-score" class="text-6xl font-black text-[#6A2C3C]">0%</span>
+                    </div>
+
+                    <div class="mb-6 text-center">
+                        <p id="result-message" class="text-lg font-medium text-[#666666]">Great effort!</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 border-t border-b border-[#e0e0e0] py-6 mb-8 text-left">
+                        <div>
+                            <span class="block text-xs text-[#999999] uppercase">Questions</span>
+                            <span id="result-answered" class="text-xl font-bold text-[#6A2C3C]">0</span>
                         </div>
-
-                        <div id="quiz-content"></div>
-
-                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                            <button class="btn" onclick="App.skipQuestion()">Skip</button>
-                            <button class="btn" onclick="App.submitAnswer()" style="flex: 1;">Submit Answer</button>
+                        <div class="text-right">
+                            <span class="block text-xs text-[#999999] uppercase">Accuracy</span>
+                            <span id="result-accuracy" class="text-xl font-bold text-[#C0945E]">0%</span>
                         </div>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <button onclick="App.goHome()" class="w-full py-3 bg-[#6A2C3C] text-white hover:bg-[#52212e] font-medium uppercase text-xs tracking-widest transition-colors shadow-md">
+                            Return to Dashboard
+                        </button>
+                        <button onclick="App.startQuiz()" class="w-full py-3 border border-[#e0e0e0] text-[#666666] hover:bg-[#f9f9f9] hover:text-[#333333] font-medium uppercase text-xs tracking-widest transition-colors">
+                            Retake Assessment
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Results View -->
-            <div id="view-result" class="hidden">
-                <div class="content-header">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Results</div>
-                    <h1 class="content-title">Your Performance</h1>
-                </div>
-
-                <div class="content-body">
-                    <div class="result-container">
-                        <div class="result-score" id="result-score">0%</div>
-                        <div class="result-message" id="result-message">Great effort!</div>
-
-                        <div class="result-details">
-                            <div class="result-detail-row">
-                                <span class="result-label">Questions Answered:</span>
-                                <span class="result-value" id="result-answered">0</span>
-                            </div>
-                            <div class="result-detail-row">
-                                <span class="result-label">Correct:</span>
-                                <span class="result-value" id="result-correct">0</span>
-                            </div>
-                            <div class="result-detail-row">
-                                <span class="result-label">Accuracy:</span>
-                                <span class="result-value" id="result-accuracy">0%</span>
-                            </div>
-                            <div class="result-detail-row">
-                                <span class="result-label">Time Taken:</span>
-                                <span class="result-value" id="result-time">0m 0s</span>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-block" onclick="App.goHome()">Back to Home</button>
-                    </div>
-                </div>
-            </div>
         </main>
     </div>
 
+    <script>
+        // Fallback: Define App as empty object in case file fails to load
+        if (typeof App === 'undefined') {
+            window.App = {
+                init: function() { 
+                    document.getElementById('app-loading').classList.add('hidden');
+                },
+                goHome: function() { console.warn('App not fully loaded'); },
+                startModule: function() { console.warn('App not fully loaded'); },
+                startQuiz: function() { console.warn('App not fully loaded'); }
+            };
+        }
+    </script>
     <script src="data/slides.js"></script>
     <script src="data/questions.js"></script>
-    <script src="app.js"></script>
-
+    <script src="app.js" async></script>
     <script>
-        // Initialize the app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            App.init();
-        });
-
-        // Sidebar navigation
-        document.getElementById('sb-home').addEventListener('click', () => App.goHome());
-        document.getElementById('sb-learning').addEventListener('click', () => {
-            document.getElementById('learning-mode-select').value = 'full';
-            App.startModule();
-        });
-        document.getElementById('sb-quiz').addEventListener('click', () => {
-            document.getElementById('mode-select').value = 'practice';
-            App.startQuiz();
-        });
+        // Initialize app when ready
+        let initAttempts = 0;
+        const maxAttempts = 50; // ~25 seconds with 500ms intervals
+        
+        function initApp() {
+            if (typeof App !== 'undefined' && App.init) {
+                try {
+                    // Hide loading screen and initialize
+                    document.getElementById('app-loading').classList.add('hidden');
+                    App.init();
+                    return;
+                } catch(e) {
+                    console.error('App initialization failed:', e);
+                }
+            }
+            
+            // Retry with exponential backoff
+            initAttempts++;
+            if (initAttempts < maxAttempts) {
+                setTimeout(initApp, 500);
+            } else {
+                console.error('App failed to initialize after multiple attempts');
+                document.getElementById('app-loading').innerHTML = 
+                    '<div style="text-align: center; color: #c00;"><p>Application failed to load. Please refresh the page.</p></div>';
+            }
+        }
+        
+        // Start initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
     </script>
 </body>
 </html>
