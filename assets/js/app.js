@@ -1043,21 +1043,33 @@ const App = {
         if (q.type === 'match') {
             const rights = this.shuffle(q.pairs.map(p => p.right));
             optsDiv.innerHTML = `
-                <div class="text-sm text-[#666666] mb-3">Match each left term to its correct meaning on the right.</div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    ${q.pairs.map(pair => `
-                        <div class="p-3 border border-[#e0e0e0] rounded bg-[#fafafa] flex itemscenter justify-between gap-3">
-                            <span class="font-serif text-[#333333]">${pair.left}</span>
-                            <select class="match-select border border-[#d1d5db] rounded px-2 py-1 text-sm" data-left="${pair.left}">
-                                <option value="">Select</option>
-                                ${rights.map(r => `<option value="${r}">${r}</option>`).join('')}
-                            </select>
-                        </div>
-                    `).join('')}
+                <div class="text-sm text-[#666666] mb-4">Tap a card on the left, then tap a card on the right to match pairs.</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        ${q.pairs.map((pair, idx) => `
+                            <div class="match-card-left cursor-pointer p-4 border-2 border-[#d1d5db] rounded-lg bg-[#f0f9ff] hover:bg-[#e0f2fe] transition text-center font-serif text-sm text-[#333333]" data-left-idx="${idx}" data-left="${pair.left}">
+                                ${pair.left}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="space-y-2">
+                        ${rights.map((right, idx) => `
+                            <div class="match-card-right cursor-pointer p-4 border-2 border-[#d1d5db] rounded-lg bg-[#f0f0f0] hover:bg-[#e5e5e5] transition text-center text-sm text-[#333333]" data-right-idx="${idx}" data-right="${right}">
+                                ${right}
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
             `;
+            
+            this.state.matchPairs = q.pairs;
+            this.state.matchRights = rights;
+            this.state.selectedLeft = null;
+            this.state.matchedPairs = new Map();
+            
+            setTimeout(() => this.bindMatchCards(), 100);
             actions.classList.remove('hidden');
-            hint.textContent = 'Every left term must map to the correct right meaning.';
+            hint.textContent = 'Match all pairs correctly. Cards will turn green (correct) or red (incorrect).';
         }
 
         this.state.currentQuestion = q;
@@ -1142,6 +1154,70 @@ const App = {
         });
     },
 
+    bindMatchCards() {
+        const leftCards = document.querySelectorAll('.match-card-left');
+        const rightCards = document.querySelectorAll('.match-card-right');
+        
+        leftCards.forEach(card => {
+            card.addEventListener('click', () => {
+                leftCards.forEach(c => {
+                    c.classList.remove('border-[#3b82f6]', 'bg-[#dbeafe]');
+                    c.classList.add('border-[#d1d5db]', 'bg-[#f0f9ff]');
+                });
+                card.classList.remove('border-[#d1d5db]', 'bg-[#f0f9ff]');
+                card.classList.add('border-[#3b82f6]', 'bg-[#dbeafe]');
+                this.state.selectedLeft = {
+                    idx: card.dataset.leftIdx,
+                    left: card.dataset.left,
+                    card: card
+                };
+            });
+        });
+        
+        rightCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (!this.state.selectedLeft) return;
+                
+                const isCorrect = this.state.matchPairs[this.state.selectedLeft.idx].right === card.dataset.right;
+                
+                if (isCorrect) {
+                    card.classList.add('border-[#10b981]', 'bg-[#d1fae5]', 'font-semibold');
+                    card.classList.remove('border-[#d1d5db]', 'bg-[#f0f0f0]');
+                    card.style.pointerEvents = 'none';
+                    
+                    this.state.selectedLeft.card.classList.add('border-[#10b981]', 'bg-[#d1fae5]', 'font-semibold');
+                    this.state.selectedLeft.card.classList.remove('border-[#3b82f6]', 'bg-[#dbeafe]');
+                    this.state.selectedLeft.card.style.pointerEvents = 'none';
+                    
+                    this.state.matchedPairs.set(this.state.selectedLeft.idx, card.dataset.right);
+                    this.state.selectedLeft = null;
+                    
+                    if (this.state.matchedPairs.size === this.state.matchPairs.length) {
+                        setTimeout(() => this.applyAnswerResult(true), 500);
+                    }
+                } else {
+                    card.classList.add('border-[#ef4444]', 'bg-[#fee2e2]');
+                    card.classList.remove('border-[#d1d5db]', 'bg-[#f0f0f0]');
+                    card.style.animation = 'shake 0.4s';
+                    
+                    this.state.selectedLeft.card.classList.add('border-[#ef4444]', 'bg-[#fee2e2]');
+                    this.state.selectedLeft.card.classList.remove('border-[#3b82f6]', 'bg-[#dbeafe]');
+                    this.state.selectedLeft.card.style.animation = 'shake 0.4s';
+                    
+                    setTimeout(() => {
+                        card.classList.remove('border-[#ef4444]', 'bg-[#fee2e2]');
+                        card.classList.add('border-[#d1d5db]', 'bg-[#f0f0f0]');
+                        card.style.animation = '';
+                        
+                        this.state.selectedLeft.card.classList.remove('border-[#ef4444]', 'bg-[#fee2e2]');
+                        this.state.selectedLeft.card.classList.add('border-[#3b82f6]', 'bg-[#dbeafe]');
+                        this.state.selectedLeft.card.style.animation = '';
+                    }, 400);
+                }
+            });
+        });
+    },
+
     submitInteractiveAnswer() {
         clearInterval(this.state.timerInterval);
         const q = this.state.currentQuestion;
@@ -1160,11 +1236,10 @@ const App = {
         }
 
         if (q.type === 'match') {
-            const selects = document.querySelectorAll('.match-select');
             const map = new Map(q.pairs.map(p => [p.left, p.right]));
             let isCorrect = true;
-            selects.forEach(sel => {
-                if (sel.value !== map.get(sel.dataset.left)) isCorrect = false;
+            this.state.matchedPairs.forEach((right, leftIdx) => {
+                if (right !== map.get(q.pairs[leftIdx].left)) isCorrect = false;
             });
             this.applyAnswerResult(isCorrect);
         }

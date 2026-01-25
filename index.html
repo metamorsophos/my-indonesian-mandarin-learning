@@ -4,437 +4,487 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
-    <title>Mandarin Professional Course 1.2</title>
+    <title>Roufan's Mandarin Learning Journey</title>
     
     <style>
         :root {
-            --primary: #6A2C3C;   /* Deep Burgundy */
-            --accent: #C0945E;    /* Warm Gold */
-            --bg-body: #e8e8d8;   /* Cream */
+            --primary: #6A2C3C;
+            --accent: #C0945E;
+            --bg-body: #e8e8d8;
             --bg-card: #ffffff;
             --text-main: #333333;
             --text-sec: #666666;
             --border: #e0e0e0;
         }
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); }
-        h1, h2, h3, h4, .font-serif { font-family: 'Merriweather', serif; }
-        .zh { font-family: 'Noto Sans SC', sans-serif; }
-
-        /* Critical Fix for Visibility */
-        .hidden { 
-            display: none !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Make non-hidden elements clickable */
-        #view-dashboard, #view-learning, #view-quiz, #view-result,
-        #sb-home, #sb-learning, #sb-quiz {
-            pointer-events: auto;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        /* Allow visible elements to be clickable */
-        button {
-            cursor: pointer;
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', Georgia, serif;
+            line-height: 1.2;
         }
 
-        /* Paper Effect */
-        .cv-paper {
-            background-color: var(--bg-card);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
-        /* Animations */
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #52212e 100%);
+            color: white;
+            margin-bottom: 3rem;
         }
 
-        .slide-up { animation: slideUp 0.3s ease-out forwards; }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Interactive Elements */
-        .btn-primary {
-            background-color: var(--primary); color: white;
-            transition: all 0.2s;
-        }
-        .btn-primary:hover { background-color: #52212e; transform: translateY(-1px); }
-
-        .vocab-card {
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
-        .vocab-card:hover {
-            border-left-color: var(--accent);
-            background-color: #fffbf0;
-            transform: translateX(4px);
-        }
-
-        /* Visuals */
-        .char-component {
-            border: 1px dashed var(--accent);
-            background: #fffbf0;
-            position: relative;
-        }
-        .char-plus { color: var(--accent); font-weight: bold; }
-        .g-block { padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: 600; }
-    </style>
-    
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Confetti fallback: we'll use CSS for celebration effect -->
-    <script>
-        // Minimal confetti alternative for Vercel environment
-        const confetti = {
-            create: function(options) {
-                try {
-                    if (window.confetti && window.confetti.create) {
-                        return window.confetti.create(options);
-                    }
-                } catch(e) {}
-                return Promise.resolve();
-            }
-        };
-        window.confetti = confetti;
-    </script>
-
-</head>
-<body class="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-x-hidden overflow-y-auto">
-    
-    <!-- Loading indicator while styles compile -->
-    <style>
-        #app-loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #e8e8d8;
+        .header-icon {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            color: var(--primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
-            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-        #app-loading.hidden {
-            display: none;
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .intro-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+        }
+
+        .intro-section p {
+            color: var(--text-sec);
+            margin-bottom: 1rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent);
+        }
+
+        .course-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #52212e 100%);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .course-level {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-subtitle {
+            font-size: 0.875rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .course-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-description {
+            color: var(--text-sec);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-badge {
+            background: var(--bg-body);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-sec);
+            border: 1px solid var(--border);
+        }
+
+        .course-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-coming-soon {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .course-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .course-button:hover {
+            background: #52212e;
+            transform: translateX(3px);
+        }
+
+        .course-button:disabled,
+        .course-button.disabled {
+            background: #d1d5db;
+            color: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .course-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-sec);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            background: white;
+            margin-top: 3rem;
+        }
+
+        .coming-soon-overlay {
+            position: relative;
+        }
+
+        .coming-soon-overlay::after {
+            content: 'Coming Soon';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .course-card {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .course-card:nth-child(1) { animation-delay: 0.1s; }
+        .course-card:nth-child(2) { animation-delay: 0.2s; }
+        .course-card:nth-child(3) { animation-delay: 0.3s; }
+        .course-card:nth-child(4) { animation-delay: 0.4s; }
+        .course-card:nth-child(5) { animation-delay: 0.5s; }
+        .course-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Progress bar */
+        .progress-container {
+            background: var(--bg-body);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: width 0.3s ease;
         }
     </style>
-    <div id="app-loading">
-        <div style="text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
-            <div style="color: #6A2C3C; font-size: 1.25rem; font-weight: bold;">Mandarin Naqib</div>
-            <div style="color: #999999; font-size: 0.875rem; margin-top: 0.5rem;">Loading course materials...</div>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-icon">RM</div>
+        <h1>Roufan's Mandarin Learning Journey</h1>
+        <p>A personal repository to track and recap my Mandarin learning progress over time</p>
+    </header>
+
+    <div class="container">
+        <section class="intro-section">
+            <h2>Welcome to My Learning Hub</h2>
+            <p>
+                This is my personal space to document and review my Mandarin Chinese learning journey. As I progress through different levels and topics, I'll be adding interactive courses and exercises here to help consolidate my knowledge and track my improvement over time.
+            </p>
+            <p>
+                Each course module includes interactive learning materials, etymology breakdowns, vocabulary practice, and comprehensive assessments with various difficulty levels.
+            </p>
+        </section>
+
+        <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary); text-align: center;">Available Courses</h2>
+
+        <div class="courses-grid">
+            <!-- HSK 1 - Module 1.1 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-level">HSK Level 1</div>
+                    <h3 class="course-title">Module 1.1</h3>
+                    <p class="course-subtitle">Introduction & Asking Names</p>
+                </div>
+                <div class="course-body">
+                    <div class="course-status status-active">
+                        <span>●</span> Active
+                    </div>
+                    <p class="course-description">
+                        Master the art of formal introductions in Mandarin. Learn the philosophy behind respect pronouns (您), etymology of key characters, vocabulary for greetings, and the structure of Chinese names and titles.
+                    </p>
+                    <div class="course-meta">
+                        <span class="meta-badge">Beginner</span>
+                        <span class="meta-badge">Etiquette</span>
+                        <span class="meta-badge">Vocabulary</span>
+                        <span class="meta-badge">Grammar</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                    <a href="courses/HSK 1/1.1/" class="course-button">
+                        Start Learning
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- HSK 1 - Module 1.2 (Coming Soon) -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-level">HSK Level 1</div>
+                    <h3 class="course-title">Module 1.2</h3>
+                    <p class="course-subtitle">Numbers & Basic Counting</p>
+                </div>
+                <div class="course-body coming-soon-overlay">
+                    <div class="course-status status-coming-soon">
+                        <span>○</span> Coming Soon
+                    </div>
+                    <p class="course-description">
+                        Learn Chinese numbers from 1-100, counting systems, dates, time expressions, and age. Practice with interactive exercises and real-world scenarios.
+                    </p>
+                    <div class="course-meta">
+                        <span class="meta-badge">Beginner</span>
+                        <span class="meta-badge">Numbers</span>
+                        <span class="meta-badge">Time</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <button class="course-button disabled" disabled>
+                        Coming Soon
+                    </button>
+                </div>
+            </div>
+
+            <!-- HSK 1 - Module 1.3 (Coming Soon) -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-level">HSK Level 1</div>
+                    <h3 class="course-title">Module 1.3</h3>
+                    <p class="course-subtitle">Family & Relationships</p>
+                </div>
+                <div class="course-body coming-soon-overlay">
+                    <div class="course-status status-coming-soon">
+                        <span>○</span> Coming Soon
+                    </div>
+                    <p class="course-description">
+                        Explore family terms, relationship vocabulary, possessive particles, and how to talk about your family members in Mandarin.
+                    </p>
+                    <div class="course-meta">
+                        <span class="meta-badge">Beginner</span>
+                        <span class="meta-badge">Family</span>
+                        <span class="meta-badge">Culture</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <button class="course-button disabled" disabled>
+                        Coming Soon
+                    </button>
+                </div>
+            </div>
+
+            <!-- HSK 2 - Placeholder -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-level">HSK Level 2</div>
+                    <h3 class="course-title">Module 2.1</h3>
+                    <p class="course-subtitle">Daily Activities & Routines</p>
+                </div>
+                <div class="course-body coming-soon-overlay">
+                    <div class="course-status status-coming-soon">
+                        <span>○</span> Coming Soon
+                    </div>
+                    <p class="course-description">
+                        Express daily activities, time sequences, and routines. Learn action verbs, time expressions, and how to describe your typical day.
+                    </p>
+                    <div class="course-meta">
+                        <span class="meta-badge">Intermediate</span>
+                        <span class="meta-badge">Daily Life</span>
+                        <span class="meta-badge">Verbs</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <button class="course-button disabled" disabled>
+                        Coming Soon
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="w-full h-auto md:h-[90vh] bg-white md:rounded shadow-2xl overflow-visible md:overflow-hidden flex flex-col md:flex-row cv-paper relative">
-        
-        <aside class="w-full md:w-1/3 bg-[#6A2C3C] text-white p-4 sm:p-6 md:p-8 flex flex-col shrink-0 z-50 shadow-lg relative max-h-[40vh] md:max-h-none">
-            <div class="mb-4 sm:mb-6 md:mb-8 border-b border-white/20 pb-4 sm:pb-6 md:pb-8">
-                <div class="w-12 sm:w-14 h-12 sm:h-14 md:w-16 md:h-16 bg-white text-[#6A2C3C] rounded-full flex items-center justify-center text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 shadow-lg font-bold font-serif cursor-pointer hover:scale-105 transition" onclick="App.goHome()">
-                    MN
-                </div>
-                <h1 class="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-wide mb-1">Mandarin Naqib</h1>
-                <p class="text-[#e8e8d8] text-[10px] sm:text-xs font-light uppercase tracking-widest opacity-80">Module 1.2: Introduction</p>
-            </div>
-
-            <div class="flex-1 space-y-8 overflow-y-auto pr-2 relative">
-                
-                <div id="sb-home" class="fade-in">
-                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Course Overview</h3>
-                    <p class="text-white/80 text-sm leading-relaxed mb-4">
-                        Master the art of formal introductions, analyzing the etymology of respect and the structure of Chinese names.
-                    </p>
-                    <div class="flex gap-2 text-xs text-white/60">
-                        <span class="bg-black/20 px-2 py-1 rounded">Beginner</span>
-                        <span class="bg-black/20 px-2 py-1 rounded">Etiquette</span>
-                    </div>
-                </div>
-
-                <div id="sb-learning" class="hidden fade-in">
-                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Current Module</h3>
-                    <div class="flex items-center gap-3 text-white/90 mb-6">
-                        <i data-lucide="book-open" class="w-5 h-5 text-[#C0945E]"></i>
-                        <span class="text-sm font-medium" id="current-module-text">Etymology</span>
-                    </div>
-
-                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Progression</h3>
-                    <div class="relative pt-1">
-                        <div class="flex mb-2 items-center justify-between">
-                            <span class="text-xs font-semibold inline-block text-white/70">Topic Completion</span>
-                            <span class="text-xs font-semibold inline-block text-white/70" id="progress-text">0%</span>
-                        </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-black/20">
-                            <div id="progress-bar" style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-[#C0945E] transition-all duration-500"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="sb-quiz" class="hidden fade-in">
-                    <h3 class="text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-4">Assessment Metrics</h3>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-white/70">Question</span>
-                            <span class="font-mono text-white"><span id="q-current-side">1</span>/12</span>
-                        </li>
-                        <li class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-white/70">Time Remaining</span>
-                            <span class="font-mono text-[#C0945E]"><span id="timer-text-side">15</span>s</span>
-                        </li>
-                        <li class="pt-2">
-                            <div class="w-full bg-black/20 h-1 rounded overflow-hidden">
-                                <div id="quiz-timer-bar" class="h-full bg-[#C0945E] transition-all duration-1000 ease-linear" style="width: 100%"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="mt-auto pt-6 text-xs text-white/50 border-t border-white/10">
-                <p>&copy; 2026 Naqib Learning System</p>
-                <button onclick="App.goHome()" class="mt-2 text-[#C0945E] hover:underline cursor-pointer">Return to Dashboard</button>
-            </div>
-        </aside>
-
-        <main class="flex-1 bg-white relative flex flex-col h-full overflow-hidden">
-            
-            <div id="view-dashboard" class="flex-1 bg-white p-4 sm:p-6 md:p-8 lg:p-16 flex flex-col justify-start overflow-y-auto fade-in">
-                <div class="w-full relative z-10">
-                    <span class="text-[#C0945E] font-bold tracking-widest uppercase text-[10px] sm:text-xs mb-2 block">Professional Course 1.2</span>
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-black text-[#333333] mb-4 sm:mb-6">Introduction & <br>Asking Names</h2>
-                    <p class="text-[#666666] text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 md:mb-10">
-                        A structured approach to Mandarin etiquette. Learn the philosophy behind formal pronouns, essential vocabulary, sentence structure, and the hierarchy of introductions.
-                    </p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-                        <div class="group border border-[#e0e0e0] p-4 sm:p-5 md:p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-[#fafafa] relative rounded-sm">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#6A2C3C] text-white flex items-center justify-center rounded-full mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
-                                <i data-lucide="book-open" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[#333333] mb-2 font-serif group-hover:text-[#6A2C3C]">Didactic Phase</h3>
-                            <p class="text-xs sm:text-sm text-[#666666] mb-3 sm:mb-4">Interactive slides covering etymology, vocabulary, grammar logic, and titles.</p>
-                            <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm mb-3 sm:mb-4">
-                                <label class="flex flex-col gap-1">
-                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Learning Focus</span>
-                                    <select id="learning-mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
-                                        <option value="full">Comprehensive (all slides)</option>
-                                        <option value="vocab">Vocabulary & Characters</option>
-                                        <option value="grammar">Grammar & Word Order</option>
-                                        <option value="fasttrack">Fast Track (review)</option>
-                                    </select>
-                                </label>
-                                <div class="text-[10px] sm:text-xs text-[#777777]">Choose your learning path. All learning materials display with pinyin for reference.</div>
-                            </div>
-                            <button onclick="App.startModule()" class="w-full inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm shadow hover:bg-[#52212e] transition-all">
-                                Start Learning <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                            </button>
-                        </div>
-
-                        <div class="group border border-[#e0e0e0] p-4 sm:p-5 md:p-6 hover:border-[#6A2C3C] hover:shadow-lg transition-all bg-white relative rounded-sm">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white border-2 border-[#6A2C3C] text-[#6A2C3C] flex items-center justify-center rounded-full mb-3 sm:mb-4 group-hover:bg-[#6A2C3C] group-hover:text-white transition-colors">
-                                <i data-lucide="pen-tool" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-                            </div>
-                            <div class="flex items-center justify-between gap-2 mb-2 sm:mb-3">
-                                <h3 class="text-lg sm:text-xl font-bold text-[#333333] font-serif group-hover:text-[#6A2C3C]">Assessment Arena</h3>
-                            </div>
-                            <p class="text-xs sm:text-sm text-[#666666] mb-3 sm:mb-4">Pick a focus and difficulty level to test your knowledge with multiple choice, drag-and-drop, and matching questions.</p>
-
-                            <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
-                                <label class="flex flex-col gap-1 sm:gap-2">
-                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Assessment Focus</span>
-                                    <select id="assessment-focus-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
-                                        <option value="balanced">Balanced (all types)</option>
-                                        <option value="vocab">Vocabulary & Characters</option>
-                                        <option value="grammar">Grammar & Sentences</option>
-                                    </select>
-                                </label>
-                                <label class="flex flex-col gap-1 sm:gap-2">
-                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Pinyin Display</span>
-                                    <select id="quiz-pinyin-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
-                                        <option value="full">With pinyin (romanized)</option>
-                                        <option value="some">Some pinyin (mixed)</option>
-                                        <option value="none">No pinyin (character challenge)</option>
-                                    </select>
-                                </label>
-                                <label class="flex flex-col gap-1 sm:gap-2">
-                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Question Count</span>
-                                    <select id="question-count-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
-                                        <option value="10">10 questions (Quick)</option>
-                                        <option value="15">15 questions</option>
-                                        <option value="20">20 questions (Standard)</option>
-                                        <option value="25">25 questions</option>
-                                        <option value="30">30 questions (Complete)</option>
-                                    </select>
-                                </label>
-                                <label class="flex flex-col gap-1 sm:gap-2">
-                                    <span class="text-[#333333] font-semibold text-xs sm:text-sm">Difficulty</span>
-                                    <select id="mode-select" class="w-full border border-[#e0e0e0] rounded px-2 py-1.5 sm:py-2 text-xs sm:text-sm text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#6A2C3C]">
-                                        <option value="practice">Practice (infinite)</option>
-                                        <option value="easy">Easy (5 hearts)</option>
-                                        <option value="medium">Medium (3 hearts)</option>
-                                        <option value="hard">Hard (1 heart)</option>
-                                        <option value="deathmarch">Deathmarch (1 heart, 3x streak)</option>
-                                    </select>
-                                </label>
-                                <div class="text-[10px] sm:text-xs text-[#777777] leading-relaxed bg-[#fafafa] border border-[#e0e0e0] rounded p-2 sm:p-3">
-                                    <strong class="text-[#6A2C3C]">Hearts:</strong> Lose one on wrong answers (except Practice). Deathmarch requires a 3-correct streak to pass.
-                                </div>
-                            </div>
-
-                            <button onclick="App.startQuiz()" class="mt-3 sm:mt-4 w-full inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest bg-[#6A2C3C] px-3 sm:px-4 py-1.5 sm:py-2 rounded-sm shadow hover:bg-[#52212e] transition-all">
-                                Start Assessment <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="view-learning" class="hidden flex-1 flex flex-col bg-white overflow-y-auto md:overflow-hidden">
-                <header class="px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 border-b border-[#e0e0e0] flex justify-between items-end bg-white/95 backdrop-blur z-10 sticky top-0">
-                    <div>
-                        <h2 class="text-lg sm:text-2xl font-serif font-bold text-[#333333]" id="slide-title">Module Title</h2>
-                            <p class="text-xs sm:text-sm text-[#666666] font-light italic" id="slide-subtitle">Subtitle placeholder</p>
-                    </div>
-                    <div class="text-5xl text-[#f0f0f0] font-serif font-bold absolute right-8 top-2 select-none pointer-events-none -z-10" id="slide-number">01</div>
-                </header>
-
-                <div id="slide-content" class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 lg:px-16 lg:py-10 fade-in text-[#333333] relative">
-                    </div>
-
-                <footer class="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 border-t border-[#e0e0e0] flex justify-between items-center bg-[#f9f9f9] relative z-20">
-                    <button onclick="App.prevSlide()" id="btn-prev" class="text-[#999999] hover:text-[#333333] text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center gap-1 sm:gap-2 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
-                        <i data-lucide="arrow-left" class="w-3 sm:w-4 h-3 sm:h-4"></i><span class="hidden sm:inline">Previous</span><span class="sm:hidden">Back</span>
-                    </button>
-                    <button onclick="App.nextSlide()" id="btn-next" class="bg-[#C0945E] hover:bg-[#a37c4d] text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm font-medium uppercase tracking-widest shadow-sm hover:shadow flex items-center gap-1 sm:gap-2 transition-all rounded-sm">
-                        <span class="hidden sm:inline">Next Phase</span><span class="sm:hidden">Next</span> <i data-lucide="chevron-right" class="w-3 sm:w-4 h-3 sm:h-4"></i>
-                    </button>
-                </footer>
-            </div>
-
-            <div id="view-quiz" class="hidden flex-1 flex flex-col justify-center items-center bg-[#f9f9f9] p-3 sm:p-4 md:p-6 overflow-y-auto">
-                <div class="w-full mx-auto max-w-2xl sm:max-w-3xl bg-white shadow-xl border border-[#e0e0e0] p-4 sm:p-6 md:p-8 lg:p-12 relative fade-in rounded-sm space-y-4 sm:space-y-5 md:space-y-6 flex flex-col max-h-[80vh] sm:max-h-[85vh]">
-                    <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-2 sm:gap-3 border-b border-[#f0f0f0] pb-3 sm:pb-4">
-                        <div class="flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-widest font-bold text-[#6A2C3C]">
-                            <span class="px-2 py-1 bg-[#fdf6f0] border border-[#f3e4d6] rounded text-[9px] sm:text-xs" id="mode-badge">Mode: Practice</span>
-                            <span class="px-2 py-1 bg-[#eef2ff] border border-[#dfe3ff] text-[#374151] rounded text-[9px] sm:text-xs" id="question-count">0 / 0</span>
-                        </div>
-                        <div class="flex items-center gap-1 sm:gap-2" id="hearts-wrap">
-                            <span class="text-[10px] sm:text-xs font-semibold text-[#666666]\">Hearts:</span>
-                            <div class="flex items-center gap-0.5 sm:gap-1" id="hearts-container"></div>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-h-0 overflow-y-auto pr-1 space-y-4 sm:space-y-5">
-                        <div class="mb-4 sm:mb-6">
-                            <span class="text-[10px] sm:text-xs font-bold text-[#C0945E] uppercase tracking-widest mb-1 sm:mb-2 block">Question <span id="q-number-quiz">1</span></span>
-                            <h3 id="quiz-question" class="text-lg sm:text-2xl md:text-3xl font-serif font-bold text-[#333333] leading-snug">
-                                Question text goes here?
-                            </h3>
-                        </div>
-
-                        <div id="quiz-options" class="grid grid-cols-1 gap-2 sm:gap-3">
-                            </div>
-                    </div>
-                    <div id="interactive-actions" class="hidden mt-3 sm:mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3">
-                        <div class="text-xs text-[#666666] text-center sm:text-left" id="interactive-hint"></div>
-                        <button onclick="App.submitInteractiveAnswer()" class="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 bg-[#6A2C3C] text-white rounded text-xs uppercase tracking-widest hover:bg-[#52212e] transition shadow" id="interactive-submit">Submit</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="view-result" class="hidden flex-1 flex flex-col justify-center items-center bg-white p-8 text-center fade-in overflow-y-auto">
-                <div class="max-w-lg w-full border-4 border-double border-[#e0e0e0] p-10 outline outline-1 outline-offset-4 outline-[#f0f0f0]">
-                    <div class="w-16 h-16 mx-auto bg-[#6A2C3C] text-white rounded-full flex items-center justify-center text-2xl mb-6 shadow-lg">
-                        <i data-lucide="award" class="w-8 h-8 text-[#C0945E]"></i>
-                    </div>
-                    
-                    <h2 class="text-3xl font-serif font-bold text-[#333333] mb-1">Proficiency Report</h2>
-                    <p class="text-[#666666] text-sm uppercase tracking-widest mb-8">Mandarin 1.2 Assessment</p>
-
-                    <div class="flex justify-center items-baseline gap-2 mb-8">
-                        <span id="final-score" class="text-6xl font-black text-[#6A2C3C]">0</span>
-                        <span class="text-xl text-[#999999] font-serif">/ 100</span>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 border-t border-b border-[#e0e0e0] py-6 mb-8 text-left">
-                        <div>
-                            <span class="block text-xs text-[#999999] uppercase">Correct</span>
-                            <span id="correct-count" class="text-xl font-bold text-[#C0945E]">0</span>
-                        </div>
-                        <div class="text-right">
-                            <span class="block text-xs text-[#999999] uppercase">Incorrect</span>
-                            <span id="wrong-count" class="text-xl font-bold text-[#6A2C3C]">0</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-3">
-                        <button onclick="App.goHome()" class="w-full py-3 bg-[#6A2C3C] text-white hover:bg-[#52212e] font-medium uppercase text-xs tracking-widest transition-colors shadow-md">
-                            Return to Dashboard
-                        </button>
-                        <button onclick="App.startQuiz()" class="w-full py-3 border border-[#e0e0e0] text-[#666666] hover:bg-[#f9f9f9] hover:text-[#333333] font-medium uppercase text-xs tracking-widest transition-colors">
-                            Retake Assessment
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </main>
-    </div>
+    <footer>
+        <p>&copy; 2026 Roufan's Mandarin Learning Journey</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">A personal project for tracking Mandarin progress</p>
+    </footer>
 
     <script>
-        // Fallback: Define App as empty object in case file fails to load
-        if (typeof App === 'undefined') {
-            window.App = {
-                init: function() { 
-                    document.getElementById('app-loading').classList.add('hidden');
-                },
-                goHome: function() { console.warn('App not fully loaded'); },
-                startModule: function() { console.warn('App not fully loaded'); },
-                startQuiz: function() { console.warn('App not fully loaded'); }
-            };
-        }
-    </script>
-    <script src="./assets/js/app.js" async></script>
-    <script>
-        // Initialize app when ready
-        let initAttempts = 0;
-        const maxAttempts = 50; // ~25 seconds with 500ms intervals
-        
-        function initApp() {
-            if (typeof App !== 'undefined' && App.init) {
-                try {
-                    // Hide loading screen and initialize
-                    document.getElementById('app-loading').classList.add('hidden');
-                    App.init();
-                    return;
-                } catch(e) {
-                    console.error('App initialization failed:', e);
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
-            }
-            
-            // Retry with exponential backoff
-            initAttempts++;
-            if (initAttempts < maxAttempts) {
-                setTimeout(initApp, 500);
-            } else {
-                console.error('App failed to initialize after multiple attempts');
-                document.getElementById('app-loading').innerHTML = 
-                    '<div style="text-align: center; color: #c00;"><p>Application failed to load. Please refresh the page.</p></div>';
-            }
-        }
-        
-        // Start initialization when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initApp);
-        } else {
-            initApp();
-        }
+            });
+        });
+
+        // Log course access
+        document.querySelectorAll('.course-button:not(.disabled)').forEach(button => {
+            button.addEventListener('click', function(e) {
+                console.log('Accessing course:', this.closest('.course-card').querySelector('.course-title').textContent);
+            });
+        });
     </script>
 </body>
 </html>
