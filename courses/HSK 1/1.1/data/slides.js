@@ -517,31 +517,33 @@
     }
 ];
 
-const fixMojibake = (value) => {
-    if (typeof value !== 'string') return value;
-    if (!/[\u00C0-\u00FF]/.test(value)) return value;
-    if (/[\u3400-\u9FFF]/.test(value)) return value;
-    try {
-        return decodeURIComponent(escape(value));
-    } catch (err) {
-        return value;
-    }
-};
+(() => {
+    const fixMojibake = (value) => {
+        if (typeof value !== 'string') return value;
+        if (!/[\u00C0-\u00FF]/.test(value)) return value;
+        if (/[\u3400-\u9FFF]/.test(value)) return value;
+        try {
+            return decodeURIComponent(escape(value));
+        } catch (err) {
+            return value;
+        }
+    };
 
-const normalizeValue = (value) => {
-    if (typeof value === 'string') return fixMojibake(value);
-    if (Array.isArray(value)) {
-        for (let i = 0; i < value.length; i++) {
-            value[i] = normalizeValue(value[i]);
+    const normalizeValue = (value) => {
+        if (typeof value === 'string') return fixMojibake(value);
+        if (Array.isArray(value)) {
+            for (let i = 0; i < value.length; i++) {
+                value[i] = normalizeValue(value[i]);
+            }
+            return value;
+        }
+        if (value && typeof value === 'object') {
+            Object.keys(value).forEach((key) => {
+                value[key] = normalizeValue(value[key]);
+            });
         }
         return value;
-    }
-    if (value && typeof value === 'object') {
-        Object.keys(value).forEach((key) => {
-            value[key] = normalizeValue(value[key]);
-        });
-    }
-    return value;
-};
+    };
 
-slides.forEach((s) => normalizeValue(s));
+    slides.forEach((s) => normalizeValue(s));
+})();
