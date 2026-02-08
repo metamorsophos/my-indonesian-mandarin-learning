@@ -142,38 +142,11 @@
                                 <span class="text-[#666666] text-sm">LÇŽoshÄ« <span class="text-xs text-[#999999] ml-1">(Teacher)</span></span>
                             </li>
                         </ul>
-                    </div>
+                        ;
 
-                    <div class="bg-white border border-[#e0e0e0] p-4 rounded">
-                        <h4 class="text-xs font-bold text-[#6A2C3C] uppercase tracking-widest mb-3 border-b pb-2">Actions</h4>
-                        <ul class="space-y-2">
-                            <li class="vocab-card flex justify-between p-2 rounded cursor-default">
-                                <span class="zh font-bold text-[#333333] text-lg">å«</span>
-                                <span class="text-[#666666] text-sm">JiÃ o <span class="text-xs text-[#999999] ml-1">(Called)</span></span>
-                            </li>
-                            <li class="vocab-card flex justify-between p-2 rounded cursor-default">
-                                <span class="zh font-bold text-[#333333] text-lg">å§“</span>
-                                <span class="text-[#666666] text-sm">XÃ¬ng <span class="text-xs text-[#999999] ml-1">(Surname)</span></span>
-                            </li>
-                            <li class="vocab-card flex justify-between p-2 rounded cursor-default">
-                                <span class="zh font-bold text-[#333333] text-lg">è®¤è¯†</span>
-                                <span class="text-[#666666] text-sm">RÃ¨nshi <span class="text-xs text-[#999999] ml-1">(To meet)</span></span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white border border-[#e0e0e0] p-4 md:col-span-2 rounded">
-                        <h4 class="text-xs font-bold text-[#6A2C3C] uppercase tracking-widest mb-3 border-b pb-2">Modifiers & Essentials</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="vocab-card p-2 rounded">
-                                <div class="zh font-bold text-[#333333] text-lg">å¾ˆ</div>
-                                <div class="text-xs text-[#666666]">HÄ›n (Very)</div>
-                            </div>
-                            <div class="vocab-card p-2 rounded">
-                                <div class="zh font-bold text-[#333333] text-lg">ä¹Ÿ</div>
-                                <div class="text-xs text-[#666666]">YÄ› (Also)</div>
-                            </div>
-                            <div class="vocab-card p-2 rounded">
+                        if (typeof normalizeMandarinPayload === 'function') {
+                            normalizeMandarinPayload(slides);
+                        }
                                 <div class="zh font-bold text-[#333333] text-lg">ä»€ä¹ˆ</div>
                                 <div class="text-xs text-[#666666]">ShÃ©nme (What)</div>
                             </div>

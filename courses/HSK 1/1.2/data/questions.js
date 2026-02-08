@@ -107,3 +107,7 @@ const quizBank = [
     { type: 'multi', category: 'dialogue', q: 'To continue a conversation after introducing your profession, you would use:', opts: ['吗', '呢', '不', '什么'], ans: 1 },
     { type: 'multi', category: 'dialogue', q: 'Which exchange shows proper use of question particles?', opts: ['A: 你呢? B: 我是学生。', 'A: 我是老师呢。 B: 很好。', 'A: 你是学生吗呢? B: 是的', 'A: 最近怎么样不? B: 很好吗'], ans: 0 }
 ];
+
+if (typeof normalizeMandarinPayload === 'function') {
+    normalizeMandarinPayload(quizBank);
+}

@@ -158,33 +158,6 @@
     { type: 'drag-order', category: 'grammar', q: 'Arrange: "æˆ‘ çš„ æœ‹å‹ æ˜¯ åŒ»ç”Ÿ (wÇ’ de pÃ©ngyou shÃ¬ yÄ«shÄ“ng)" (My friend is a doctor)', items: ['æˆ‘', 'çš„', 'æœ‹å‹', 'æ˜¯', 'åŒ»ç”Ÿ', 'ã€‚'], answer: ['æˆ‘', 'çš„', 'æœ‹å‹', 'æ˜¯', 'åŒ»ç”Ÿ', 'ã€‚'] }
 ];
 
-(() => {
-    const fixMojibake = (value) => {
-        if (typeof value !== 'string') return value;
-        if (!/[\u00C0-\u00FF]/.test(value)) return value;
-        if (/[\u3400-\u9FFF]/.test(value)) return value;
-        try {
-            return decodeURIComponent(escape(value));
-        } catch (err) {
-            return value;
-        }
-    };
-
-    const normalizeValue = (value) => {
-        if (typeof value === 'string') return fixMojibake(value);
-        if (Array.isArray(value)) {
-            for (let i = 0; i < value.length; i++) {
-                value[i] = normalizeValue(value[i]);
-            }
-            return value;
-        }
-        if (value && typeof value === 'object') {
-            Object.keys(value).forEach((key) => {
-                value[key] = normalizeValue(value[key]);
-            });
-        }
-        return value;
-    };
-
-    quizBank.forEach((q) => normalizeValue(q));
-})();
+if (typeof normalizeMandarinPayload === 'function') {
+    normalizeMandarinPayload(quizBank);
+}
