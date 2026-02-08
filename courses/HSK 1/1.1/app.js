@@ -31,6 +31,10 @@ const normalizeValue = (value) => {
     return value;
 };
 
+if (typeof slides !== 'undefined') {
+    slides.forEach((s) => normalizeValue(s));
+}
+
 if (typeof quizBank !== 'undefined') {
     quizBank.forEach((q) => normalizeValue(q));
 }
