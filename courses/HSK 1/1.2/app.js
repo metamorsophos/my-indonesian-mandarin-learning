@@ -272,17 +272,19 @@ const App = {
             const rightDiv = document.getElementById('match-right');
             
             q.pairs.forEach((pair, idx) => {
+                const leftText = pair.cn ?? pair.left;
                 leftDiv.innerHTML += `
                     <button onclick="App.selectMatchLeft(${idx})" class="option match-left" data-idx="${idx}">
-                        ${pair.cn}
+                        ${leftText}
                     </button>
                 `;
             });
             
             rights.forEach((pair, idx) => {
+                const rightText = pair.en ?? pair.right;
                 rightDiv.innerHTML += `
-                    <button onclick="App.selectMatchRight('${pair.en}')" class="option match-right">
-                        ${pair.en}
+                    <button onclick="App.selectMatchRight('${rightText}')" class="option match-right">
+                        ${rightText}
                     </button>
                 `;
             });
@@ -344,7 +346,7 @@ const App = {
         if (this.state.selectedLeft === null) return;
         
         const q = this.state.questions[this.state.qIdx];
-        const correctAnswer = q.pairs[this.state.selectedLeft].en;
+        const correctAnswer = q.pairs[this.state.selectedLeft].en ?? q.pairs[this.state.selectedLeft].right;
         const isCorrect = answer === correctAnswer;
         
         this.applyAnswerResult(isCorrect);
