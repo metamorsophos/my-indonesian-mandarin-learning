@@ -265,38 +265,48 @@ const App = {
         const slideIdx = order[this.state.slideIdx] ?? 0;
         const slide = slides[slideIdx];
         
-        document.getElementById('slide-title').innerText = slide.title || "Module";
-        document.getElementById('slide-subtitle').innerText = slide.subtitle || "";
-        document.getElementById('slide-number').innerText = slide.number || String(slideIdx + 1).padStart(2, '0');
+        const slideTitle = fixMojibake(slide.title || "Module");
+        const slideSubtitle = fixMojibake(slide.subtitle || "");
+        const slideNumber = fixMojibake(slide.number || String(slideIdx + 1).padStart(2, '0'));
+
+        document.getElementById('slide-title').innerText = slideTitle;
+        document.getElementById('slide-subtitle').innerText = slideSubtitle;
+        document.getElementById('slide-number').innerText = slideNumber;
         
         const contentDiv = document.getElementById('slide-content');
         
         if (slide.type === 'mini-quiz') {
+            const questionText = fixMojibake(slide.question || '');
+            const feedbackText = fixMojibake(slide.feedback || '');
             contentDiv.innerHTML = `
                 <div class="h-full flex flex-col justify-center max-w-2xl mx-auto slide-up">
                     <div class="border-l-4 border-[#6A2C3C] pl-6 py-2 mb-8">
                         <span class="text-xs font-bold text-[#999999] uppercase tracking-widest">Knowledge Check</span>
-                        <h3 class="text-2xl font-serif font-bold text-[#333333] mt-2">${slide.question}</h3>
+                        <h3 class="text-2xl font-serif font-bold text-[#333333] mt-2">${questionText}</h3>
                     </div>
                     <div class="grid grid-cols-1 gap-3">
-                        ${slide.options.map((opt, idx) => `
+                        ${slide.options.map((opt, idx) => {
+                            const optText = fixMojibake(opt.text || '');
+                            return `
                             <button onclick="App.checkMiniQuiz(${idx})" class="group flex items-center justify-between w-full p-4 border border-[#e0e0e0] hover:border-[#6A2C3C] hover:bg-[#f9f9f9] transition text-left mq-btn rounded" data-correct="${opt.correct}">
-                                <span class="font-medium text-[#666666] group-hover:text-[#333333]">${opt.text}</span>
+                                <span class="font-medium text-[#666666] group-hover:text-[#333333]">${optText}</span>
                                 <i data-lucide="circle" class="w-4 h-4 text-[#d1d5db] group-hover:text-[#6A2C3C]"></i>
                             </button>
-                        `).join('')}
+                        `;
+                        }).join('')}
                     </div>
                     <div id="mq-feedback" class="hidden mt-6 p-4 bg-[#6A2C3C] text-white text-sm rounded shadow-lg slide-up">
                         <strong class="uppercase text-xs tracking-widest text-[#C0945E] block mb-1">Analysis</strong>
-                        ${slide.feedback}
+                        ${feedbackText}
                     </div>
                 </div>
             `;
         } else {
-            contentDiv.innerHTML = `<div class="slide-up">${slide.html}</div>`;
+            const slideHtml = fixMojibake(slide.html || '');
+            contentDiv.innerHTML = `<div class="slide-up">${slideHtml}</div>`;
         }
 
-        document.getElementById('current-module-text').innerText = slide.title;
+        document.getElementById('current-module-text').innerText = slideTitle;
         const total = (this.state.slideOrder || slides).length;
         const pct = Math.round(((this.state.slideIdx + 1) / total) * 100);
         document.getElementById('progress-bar').style.width = `${pct}%`;
